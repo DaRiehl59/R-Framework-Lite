@@ -1,9 +1,9 @@
 # Projet RPG
 
-##Sommaire
+## Sommaire
 
-* [Etapes](#Etapes)
-* [Roadmap](#Roadmap)
+* [Etapes](#etapes)
+* [Roadmap](#roadmap)
 
 ## Etapes
 
