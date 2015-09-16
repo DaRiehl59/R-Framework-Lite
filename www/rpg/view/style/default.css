@@ -1,0 +1,21 @@
+body{
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 10pt;
+    background: beige;
+}
+#bienvenue{
+    width:1000px;
+    height: 700px;
+    border:1px solid black;
+    margin:auto;
+    background: whitesmoke;
+    padding-left: 30px;
+}
+#error{
+    width:1000px;
+    height: 700px;
+    border:1px solid black;
+    margin:auto;
+    background: whitesmoke;
+    padding-left: 30px;
+}
