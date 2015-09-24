@@ -49,6 +49,7 @@ $PARAM['controler']['js']       = $PARAM['controler']['directory'].'/'."js";
  * Icons Parameters
  */
 $PARAM['icons']['directory']    = "./icons";
+$PARAM['icons']['theme']        = $PARAM['icons']['directory'] . '/' . "blueberry/PNG/32";
 
 /**
  * Plugins Parameters

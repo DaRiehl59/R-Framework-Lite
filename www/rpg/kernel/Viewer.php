@@ -2,90 +2,107 @@
 class Viewer
 {
     private static $smarty;
+    private static $error;
 
     public static function init()
     {
         global $PARAM;
-        self::$smarty = new Smarty;
-        //$smarty->force_compile = true;
-        self::$smarty->template_dir = $PARAM['view']['templates'];
-        self::$smarty->compile_dir = $PARAM['plugins']['smarty'].'/'.'templates_c';
-        self::$smarty->config_dir = $PARAM['plugins']['smarty'].'/'.'configs';
+        
+        if(is_null(self::$smarty)) {
+        
+            self::$smarty = new Smarty;
+            self::$error = array();
 
-        self::$smarty->caching = false;
-        self::$smarty->cache_lifetime = 0;
+            //$smarty->force_compile = true;
+            self::$smarty->template_dir = $PARAM['view']['templates'];
+            self::$smarty->compile_dir = $PARAM['plugins']['smarty'].'/'.'templates_c';
+            self::$smarty->config_dir = $PARAM['plugins']['smarty'].'/'.'configs';
 
-        self::$smarty->assign("head_title", $PARAM['html']['title']);
-        self::$smarty->assign("generator", 'D. [R]iehl Framework 1.1');
-        self::$smarty->assign("head_charset", $PARAM['html']['charset']);
+            self::$smarty->caching = false;
+            self::$smarty->cache_lifetime = 0;
 
-        foreach($PARAM['html']['meta'] as $name => $content)
-        {
-            $metas[] = array('name' => $name, 'content' => $content);
-        }
-        self::$smarty->assign("head_metas", $metas);
+            self::$smarty->assign("head_title", $PARAM['html']['title']);
+            self::$smarty->assign("generator", 'D. [R]iehl Framework 1.1');
+            self::$smarty->assign("head_charset", $PARAM['html']['charset']);
 
-        $folder = $PARAM['view']['style'];
-        $files = get_files($folder);
-        $styles = array();
-        foreach ($files as $file)
-        {
-            if(strtolower(substr($file,strlen($file)-4,4)) == ".css")
+            foreach($PARAM['html']['meta'] as $name => $content)
             {
-                $styles[] = $folder.'/'.$file;
+                $metas[] = array('name' => $name, 'content' => $content);
             }
-        }
-        self::$smarty->assign("head_styles", $styles);
+            self::$smarty->assign("head_metas", $metas);
 
-        $folder = $PARAM['controler']['js'];
-        $files = get_files($folder);
-        $scripts = array();
-        foreach ($files as $file)
-        {
-            if(strtolower(substr($file,strlen($file)-3,3)) == ".js")
+            $folder = $PARAM['view']['style'];
+            $files = get_files($folder);
+            $styles = array();
+            foreach ($files as $file)
             {
-                $scripts[] = $folder.'/'.$file;
+                if(strtolower(substr($file,strlen($file)-4,4)) == ".css")
+                {
+                    $styles[] = $folder.'/'.$file;
+                }
             }
-        }
-        self::$smarty->assign("head_scripts", $scripts);
+            self::$smarty->assign("head_styles", $styles);
 
-        self::$smarty->assign("head_favicon", is_file('favicon.ico'));
+            $folder = $PARAM['controler']['js'];
+            $files = get_files($folder);
+            $scripts = array();
+            foreach ($files as $file)
+            {
+                if(strtolower(substr($file,strlen($file)-3,3)) == ".js")
+                {
+                    $scripts[] = $folder.'/'.$file;
+                }
+            }
+            self::$smarty->assign("head_scripts", $scripts);
 
-        self::$smarty->assign("URI_root", get_URI_root());
+            self::$smarty->assign("head_favicon", is_file('favicon.ico'));
 
-        self::$smarty->assign("banner_title", $PARAM['application']['name']);
-        self::$smarty->assign("copyright", $PARAM['html']['meta']['copyright']);
+            self::$smarty->assign("URI_root", get_URI_root());
 
-        if(isset($_SESSION['droits']))
-        {
-            self::$smarty->assign("droits", $_SESSION['droits']);
-        }
-        if(isset($_SESSION['connected']))
-        {
-            self::$smarty->assign("connected", $_SESSION['connected']);
+            self::$smarty->assign("theme", $PARAM['icons']['theme']);
+            self::$smarty->assign("banner_title", $PARAM['application']['name']);
+            self::$smarty->assign("copyright", $PARAM['html']['meta']['copyright']);
+
+            if(isset($_SESSION['droits']))
+            {
+                self::$smarty->assign("droits", $_SESSION['droits']);
+            }
+            if(isset($_SESSION['connected']))
+            {
+                self::$smarty->assign("connected", $_SESSION['connected']);
+            }
         }
         return self::$smarty;
     }
-
-    public static function error($msg)
+    
+    public static function assign($var_name,$var_value)
     {
-        global $PARAM;
-        
-        self::$smarty = self::init();
-
-        self::$smarty->assign("application_name", $PARAM['application']['name']);
-        self::$smarty->assign("error_msg",$msg);
-        self::$smarty->display('error.tpl');
+        self::$smarty->assign($var_name,$var_value);
     }
     
-    public static function bienvenue($message)
+    public static function error($msg, $previous_url=".")
+    {
+        self::$error[] = $msg;
+        
+        self::$smarty->assign("error_msgs", self::$error);
+        self::$smarty->assign("previous_url", $previous_url);
+    }
+    
+    public static function bienvenue()
     {
         global $PARAM;
         
         self::$smarty = self::init();
 
         self::$smarty->assign("application_name", $PARAM['application']['name']);
-        self::$smarty->assign("message",$message);
+        
+        if(Session::get('connected'))
+        {
+            self::$smarty->assign('utilisateur', Session::get('utilisateur'));
+            self::$smarty->assign('personnages', array());
+        }
+        
+        
         self::$smarty->display('bienvenue.tpl');
     }
 }

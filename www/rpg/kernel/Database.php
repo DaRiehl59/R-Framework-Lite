@@ -36,6 +36,7 @@ class Database
      * Open database connection
      * @access public
      * @static
+     * @return PDO Object
      */
     public static function connect()
     {
@@ -80,7 +81,8 @@ class Database
     /**
      * Prepare a SQL Query
      * @access public
-     * @return PDOStatement
+     * @static
+     * @return PDO
      */
     public static function get_dbh()
     {
