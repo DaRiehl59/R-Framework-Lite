@@ -33,7 +33,8 @@
                                 </a>
                             </li>
 {/section}
-                            <li><a href="?c=personage&amp;a=creer">Créer un personage</a></li>
+                            <li><a href="?c=personage&amp;a=creer">Créer un personnage</a></li>
+                            <li><a href="?c=utilisateur&amp;a=mon_compte">Mon Compte</a></li>
                             <li><a href="?c=utilisateur&amp;a=deconnexion">Déconnecter</a></li>
                         </ul>
                     </li>
