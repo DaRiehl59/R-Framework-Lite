@@ -1,0 +1,22 @@
+#top_menu ul.main_menu{display: inline-block;}
+#top_menu ul.main_menu, ul.sub_menu{padding:0}
+#top_menu ul.main_menu{margin: 6px 0 6px 0;}
+#top_menu ul.sub_menu {display: none; position: absolute; left: -115px; top: 30px; margin: 0; border: 1px solid black}
+
+#top_menu ul.main_menu li, ul.sub_menu li {list-style: none; position: relative; background-color: #E0E0E0}
+#top_menu ul.main_menu li{float: left; height: 30px; margin-right: 10px;}
+#top_menu ul.main_menu li:hover ul.sub_menu {display: block;}
+
+#top_menu ul.main_menu li.profil {border-radius: 3px; height: 25px; line-height: 25px; padding: 0 3px 1px 2px;}
+#top_menu ul.main_menu li.accueil {border-radius: 3px; height: 25px; line-height: 25px; padding: 0 7px 1px 7px;}
+#top_menu ul.main_menu li.profil:hover, ul.main_menu li.accueil:hover {background: lightgray;}
+
+
+#top_menu ul.sub_menu li {width: 100%; line-height: 25px;}
+#top_menu ul.sub_menu li:hover {background: lightgrey;}
+
+#top_menu ul.main_menu a , ul.sub_menu a {display:block; text-decoration: none; color:inherit; text-align: center;}
+
+#top_menu ul.main_menu div{vertical-align: middle;}
+#top_menu ul.main_menu div.avatar{display:inline-block; width:20px; height: 20px; border-radius: 3px; border:1px solid black;}
+#top_menu ul.main_menu div.icon{display:inline-block; width:30px; height: 30px;}
