@@ -1,5 +1,4 @@
 {if isset($error_msgs)}
-                
                 <div id="error">
                     <h1>Erreur</h1>
 {section name=error_sec0 loop=$error_msgs}

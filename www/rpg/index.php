@@ -8,6 +8,7 @@
 
 require_once('parameters.php');
 require_once('functions.php');
+require_once('routes.php');
 
 import_directory($PARAM['kernel']['directory']);
 import_directory($PARAM['plugins']['directory']);
@@ -19,7 +20,6 @@ Session::init();
  * Routing
  */
 
-Router::parse_url();
 Router::call_controler();
 
 ?>

@@ -32,7 +32,7 @@ class UtilisateurControler {
             }
             else
             {
-                Viewer::bienvenue();
+                defaultViewer::defaultAction();
             }
         }
         else
@@ -48,7 +48,7 @@ class UtilisateurControler {
             {
                 Viewer::init();
                 Viewer::error("Erreur d'identifiant ou de mot de passe.");
-                Viewer::bienvenue();
+                defaultViewer::defaultAction();
             }
         }
     }
@@ -60,7 +60,7 @@ class UtilisateurControler {
         }
         else
         {
-            Viewer::bienvenue();
+            defaultViewer::defaultAction();
         }
     }
 }

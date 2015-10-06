@@ -1,7 +1,5 @@
-{include file="html_header.tpl"}
-{include file="logo.tpl"}
-{include file="menu_top.tpl"}
-{include file="menu_left.tpl"}
+{include file="html_header.tpl"}{include file="top.tpl"}
+{include file="left_menu.tpl"}
             <div id="main">
                     <h1>{$application_name}</h1>
                     <h2>Bienvenue</h2>
