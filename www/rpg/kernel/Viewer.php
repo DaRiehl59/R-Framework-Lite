@@ -80,30 +80,21 @@ class Viewer
         self::$smarty->assign($var_name,$var_value);
     }
     
-    public static function error($msg, $previous_url=".")
-    {
-        self::$error[] = $msg;
-        
-        self::$smarty->assign("error_msgs", self::$error);
-        self::$smarty->assign("previous_url", $previous_url);
-    }
-    
-    public static function bienvenue()
+    public static function display($template)
     {
         global $PARAM;
         
         self::$smarty = self::init();
-
-        self::$smarty->assign("application_name", $PARAM['application']['name']);
+        self::$smarty->display($template);
+    }
+    
+    public static function error($msg, $previous_url=".")
+    {
+        self::$smarty = self::init();
+        self::$error[] = $msg;
         
-        if(Session::get('connected'))
-        {
-            self::$smarty->assign('utilisateur', Session::get('utilisateur'));
-            self::$smarty->assign('personnages', array());
-        }
-        
-        
-        self::$smarty->display('bienvenue.tpl');
+        self::$smarty->assign("error_msgs", self::$error);
+        self::$smarty->assign("previous_url", $previous_url);
     }
 }
 ?>

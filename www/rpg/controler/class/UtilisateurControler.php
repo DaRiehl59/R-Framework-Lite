@@ -32,7 +32,7 @@ class UtilisateurControler {
             }
             else
             {
-                Viewer::bienvenue();
+                defaultViewer::defaultAction();
             }
         }
         else
@@ -48,10 +48,11 @@ class UtilisateurControler {
             {
                 Viewer::init();
                 Viewer::error("Erreur d'identifiant ou de mot de passe.");
-                Viewer::bienvenue();
+                defaultViewer::defaultAction();
             }
         }
     }
+    
     public static function deconnexion()
     {
         Session::close();
@@ -60,8 +61,22 @@ class UtilisateurControler {
         }
         else
         {
-            Viewer::bienvenue();
+            defaultViewer::defaultAction();
         }
+    }
+    
+    public static function profil()
+    {
+        $id_utilisateur = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        if(empty($id_utilisateur))
+        {
+            $id_utilisateur = Session::get('utilisateur')['id'];
+        }
+        
+        $utilisateur = UtilisateurTable::get_utilisateur_by_id($id_utilisateur);
+        $utilisateur['email_hash'] = md5($utilisateur['email']);
+        
+        UtilisateurViewer::profil($utilisateur);
     }
 }
 ?>

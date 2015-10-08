@@ -49,23 +49,48 @@ class Router {
     }
     
     public static function call_controler(){
-                
-        switch(self::$controler)
+        global $ROUTES;
+        
+        Router::parse_url();
+        
+        $error = false;
+        
+        if(!isset($ROUTES[self::$controler]))
         {
-            case 'utilisateur':
-                switch(self::$action){
-                    case 'connexion':
-                        UtilisateurControler::connexion();
-                        break;
-                    case 'deconnexion':
-                        UtilisateurControler::deconnexion();
-                        break;
-                    default:
-                        Viewer::bienvenue();
-                }
-                break;
-            default:
-                Viewer::bienvenue();
+            Viewer::error("Router Error : no route for `" . self::$controler . "` controler.");
+            $error = true;
         }
+        if(!isset($ROUTES[self::$controler][self::$action]))
+        {
+            Viewer::error("Router Error : no route for `" . self::$action ."` action " . " in `". self::$controler . "` controler.");
+            $error = true;
+        }
+        
+        if($error)
+        {
+            Viewer::display('empty.tpl');
+            die();
+        }
+
+        list($class,$method) = explode('::',$ROUTES[self::$controler][self::$action]);
+                
+        if(!class_exists($class))
+        {
+            Viewer::error("Router Error :  Controler class for `" . self::$controler . "` doesn't exist.");
+            $error = true;
+        }
+        if(!method_exists($class,$method))
+        {
+            Viewer::error("Router Error :  Method for action `". self::$action ."` is not defined in `" . self::$controler . "` Controler class.");
+            $error = true;
+        }
+        
+        if($error)
+        {
+            Viewer::display('empty.tpl');
+            die();
+        }
+        
+        call_user_func_array(array($class, $method),array());
     }
 }
