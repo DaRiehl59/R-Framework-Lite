@@ -1,6 +1,6 @@
 <?php
 
-class defaultViewer
+class DefaultViewer
 {
     public static function defaultAction()
     {
