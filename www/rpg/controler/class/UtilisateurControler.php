@@ -8,9 +8,12 @@
  * @copyright (c) 2015, D. [R]IEHL
  */
 
+require_once 'kernel/Database.php';
 require_once 'model/class/Utilisateur.php';
 require_once 'model/table/UtilisateurTable.php';
-require_once 'kernel/Database.php';
+require_once 'model/table/ConfidentialiteTable.php';
+require_once 'model/table/PaysTable.php';
+require_once 'view/class/UtilisateurViewer.php';
 
 class UtilisateurControler {
     public static function connexion()
@@ -74,9 +77,18 @@ class UtilisateurControler {
         }
         
         $utilisateur = UtilisateurTable::get_utilisateur_by_id($id_utilisateur);
-        $utilisateur['email_hash'] = md5($utilisateur['email']);
+        $confidentialite = ConfidentialiteTable::select();
+        $pays = PaysTable::select();
         
-        UtilisateurViewer::profil($utilisateur);
+        if(!is_null($utilisateur)){
+            $utilisateur['email_hash'] = md5(trim($utilisateur['email']));
+            UtilisateurViewer::profil($utilisateur, $confidentialite, $pays);
+        }
+        else
+        {
+            DefaultViewer::error("Utilisateur inconnu.");
+        }
+
     }
 }
 ?>

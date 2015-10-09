@@ -3,8 +3,9 @@
 $ROUTES=array(
     '' => array('' => 'DefaultControler::defaultAction'),
     'utilisateur' => array (
-            'connexion' => 'utilisateurControler::Connexion',
-            'deconnexion' => 'utilisateurControler::Deconnexion',
+            'connexion' => 'UtilisateurControler::connexion',
+            'deconnexion' => 'UtilisateurControler::deconnexion',
+            'profil' => 'UtilisateurControler::profil',
         ),
 );
 ?>
