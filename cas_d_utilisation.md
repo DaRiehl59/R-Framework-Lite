@@ -1,21 +1,22 @@
-## Cas d'utilisation
+# Cas d'utilisation
 
-# Maître
+## Maître
 
-# Maître de Jeu
+## Maître de Jeu
 
-# Juge
+## Juge
 
-# Boureau
+## Boureau
 
-# Veilleur
+## Veilleur
 
-# Scribe
+## Scribe
 
-# Utilisateur
+## Utilisateur
 
-Prérequis : être connecté
-Droits :    ceux lister ci-dessous
+** Prérequis : être connecté **
+
+** Droits :    ceux lister ci-dessous **
 
 * Se déconnecter            (utilisateur::deconnecter)
 * Inviter                   (utilisateur::inviter)
@@ -32,8 +33,9 @@ Droits :    ceux lister ci-dessous
 
 # Anonyme
 
-Prérequis : aucun
-Droits :    ceux lister ci-dessous
+** Prérequis : aucun **
+
+** Droits :    ceux lister ci-dessous **
 
 * S'inscrire            (utilisateur::creer)
 * Se connecter          (utilisateur::connecter)
