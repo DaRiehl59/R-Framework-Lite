@@ -19,4 +19,4 @@
     </head>
     <body>
         <div id="contener">
-{include file="error.tpl"}
+{include file="error.tpl"}{include file="confirm.tpl"}

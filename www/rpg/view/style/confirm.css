@@ -1,4 +1,4 @@
-#error{
+#confirm{
     position:absolute;
     top: 50%;
     left: 50%;
@@ -6,17 +6,17 @@
     margin-top: -100px;
     margin-left: -200px;
     border-radius: 5px;
-    background-color: #FAA;
+    background-color: #AFA;
     background-position: left top;
     background-repeat: repeat;
     padding: 5px;
-    border: 2px solid red;
+    border: 2px solid green;
 }
 
-#error h1{
+#confirm h1{
     margin-top:0px;
 }
 
-#error form{
+#confirm form{
     text-align: right;
 }
