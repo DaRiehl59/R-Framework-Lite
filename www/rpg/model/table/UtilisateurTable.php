@@ -73,5 +73,34 @@ class UtilisateurTable {
         
         return $utilisateur;
     }
+    
+    /**
+     * chargement des informations d'un utilisateur
+     * @param String $id
+     * @return Utilisateur Utilisateur correspondant à id
+     */
+    public static function insert($item){
+        $dbh = Database::connect();
+        
+        $query = "SELECT * FROM `utilisateur`" . "\r\n"
+                . "WHERE id = :id;";
+        
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
+        
+        $sth->execute();
+        if($sth->rowCount() == 1)
+        {
+            $utilisateur = $sth->fetch(PDO::FETCH_ASSOC);
+        }
+        else
+        {
+            $utilisateur = null;
+        }
+        
+        Database::disconnect();
+        
+        return $utilisateur;
+    }
 }
 ?>

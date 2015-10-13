@@ -33,4 +33,20 @@ class DefaultViewer
         
         Viewer::display('empty.tpl');
     }
+    
+    public static function confirm($message)
+    {
+        Viewer::init();
+
+        if(Session::get('connected'))
+        {
+            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('personnages', array());
+        }
+        
+        Viewer::assign('message', $message);
+
+        Viewer::confirm($message);
+        Viewer::display('empty.tpl');
+    }
 }

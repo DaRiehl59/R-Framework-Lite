@@ -72,7 +72,30 @@ class UtilisateurControler {
     {
         $pays = PaysTable::select();
         
-        UtilisateurViewer::inscription($pays);
+        if(!isset($_POST['btn_inscrire']))
+        {
+            UtilisateurViewer::inscription($pays);
+        }
+        else
+        {
+            $utilisateur['identifiant'] = filter_input(INPUT_POST, 'identifiant',FILTER_SANITIZE_STRING);
+            $utilisateur['motdepasse']  = filter_input(INPUT_POST, 'motdepasse' ,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $utilisateur['pseudo']      = filter_input(INPUT_POST, 'pseudo'     ,FILTER_SANITIZE_STRING);
+            $utilisateur['nom']         = filter_input(INPUT_POST, 'nom'        ,FILTER_SANITIZE_STRING);
+            $utilisateur['email']       = filter_input(INPUT_POST, 'email'      ,FILTER_SANITIZE_EMAIL);
+            $utilisateur['ville']       = filter_input(INPUT_POST, 'ville'      ,FILTER_SANITIZE_STRING);
+            $utilisateur['id_pays']     = filter_input(INPUT_POST, 'id_pays'    ,FILTER_SANITIZE_NUMBER_INT);
+            
+            $result = UtilisateurTable::insert($utilisateur);
+            if($result)
+            {
+                DefaultViewer::confirm("Votre compte a été créé.");
+            }
+            else
+            {
+                DefaultViewer::error("Une erreur c'est produite.");
+            }
+        }
     }
 
     public static function profil()

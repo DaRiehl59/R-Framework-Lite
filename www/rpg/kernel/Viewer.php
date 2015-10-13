@@ -96,5 +96,13 @@ class Viewer
         self::$smarty->assign("error_msgs", self::$error);
         self::$smarty->assign("previous_url", $previous_url);
     }
+    
+    public static function confirm($message, $previous_url=".")
+    {
+        self::$smarty = self::init();
+        
+        self::$smarty->assign("message", $message);
+        self::$smarty->assign("previous_url", $previous_url);
+    }
 }
 ?>
