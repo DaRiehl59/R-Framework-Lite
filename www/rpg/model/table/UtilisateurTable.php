@@ -14,6 +14,13 @@ require_once 'kernel/Database.php';
 class UtilisateurTable {
     
     /**
+     * nom de la table
+     * @var String $table
+     * @access private
+     */
+    private static $table = "utilisateur";
+    
+    /**
      * connexion de l'utilisateur
      * @param String $identifiant
      * @param String $motdepasse
@@ -82,25 +89,37 @@ class UtilisateurTable {
     public static function insert($item){
         $dbh = Database::connect();
         
-        $query = "SELECT * FROM `utilisateur`" . "\r\n"
-                . "WHERE id = :id;";
+        $query = "INSERT INTO " . self::$table . " (";
+        
+        $fields = array_keys($item);
+        
+        foreach($fields as $field)
+        {
+            $query .= $field . ", ";
+        }
+        $query  = substr($query, 0, strlen($query) -2);
+        $query .= ")\r\nVALUES\r\n(";
+        
+        foreach($fields as $field)
+        {
+            $query .= ":" . $field . ", ";
+        }
+        $query  = substr($query, 0, strlen($query) -2);
+        $query .= ");";
         
         $sth = $dbh->prepare($query);
-        $sth->bindParam(':id', $id, PDO::PARAM_INT);
         
-        $sth->execute();
-        if($sth->rowCount() == 1)
+        foreach($item as $field => $value)
         {
-            $utilisateur = $sth->fetch(PDO::FETCH_ASSOC);
+            
+            $sth->bindParam(':' . $field, $item[$field]);
         }
-        else
-        {
-            $utilisateur = null;
-        }
+        
+        $result = $sth->execute();
         
         Database::disconnect();
         
-        return $utilisateur;
+        return $result;
     }
 }
 ?>

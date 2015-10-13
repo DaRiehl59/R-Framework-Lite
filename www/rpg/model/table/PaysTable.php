@@ -12,6 +12,11 @@ require_once 'kernel/Database.php';
 
 class PaysTable {
     
+    /**
+     * nom de la table
+     * @var String $table
+     * @access private
+     */
     private static $table = "pays";
     
     /**
