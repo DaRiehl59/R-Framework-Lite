@@ -14,9 +14,9 @@
 
 ## Utilisateur
 
-** Prérequis : être connecté **
+**Pré-requis : être connecté**
 
-** Droits :    ceux lister ci-dessous **
+**Droits :    ceux lister ci-dessous**
 
 * Se déconnecter            (utilisateur::deconnecter)
 * Inviter                   (utilisateur::inviter)
@@ -33,9 +33,9 @@
 
 # Anonyme
 
-** Prérequis : aucun **
+**Pré-requis : aucun**
 
-** Droits :    ceux lister ci-dessous **
+**Droits :    ceux lister ci-dessous**
 
 * S'inscrire            (utilisateur::creer)
 * Se connecter          (utilisateur::connecter)
