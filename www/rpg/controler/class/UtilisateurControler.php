@@ -68,6 +68,13 @@ class UtilisateurControler {
         }
     }
     
+    public static function inscription()
+    {
+        $pays = PaysTable::select();
+        
+        UtilisateurViewer::inscription($pays);
+    }
+
     public static function profil()
     {
         $id_utilisateur = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
