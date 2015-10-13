@@ -5,6 +5,7 @@ $ROUTES=array(
     'utilisateur' => array (
             'connexion' => 'UtilisateurControler::connexion',
             'deconnexion' => 'UtilisateurControler::deconnexion',
+            'inscription' => 'UtilisateurControler::inscription',
             'profil' => 'UtilisateurControler::profil',
         ),
 );
