@@ -2,7 +2,22 @@
 
 ## Maître
 
+**Pré-requis** : 1 seul utilisateur (par défaut : *root*)
+
+**Description** : Utilisateur normal
+
+**Fonctionallités disponibles** :
+
+* Nommer un Maître de jeu
+* Destituer un Maître de jeu
+* **toutes les autres fonctionnalités**
+
 ## Maître de Jeu
+
+* Nommer un Juge
+* Nommer un Bourreau
+* Nommer un Veilleur
+* Nommer un Scribe
 
 ## Juge
 
@@ -14,9 +29,11 @@
 
 ## Utilisateur
 
-**Pré-requis : être connecté**
+**Pré-requis** : *être connecté*
 
-**Droits :    ceux lister ci-dessous**
+**Description** : Utilisateur normal
+
+**Fonctionallités disponibles** :
 
 * Se déconnecter            (utilisateur::deconnecter)
 * Inviter                   (utilisateur::inviter)
@@ -33,9 +50,11 @@
 
 # Anonyme
 
-**Pré-requis : aucun**
+**Pré-requis** : *aucun*
 
-**Droits :    ceux lister ci-dessous**
+**Description** : Internaute non connecté
+
+**Fonctionallités disponibles** :
 
 * S'inscrire            (utilisateur::creer)
 * Se connecter          (utilisateur::connecter)
