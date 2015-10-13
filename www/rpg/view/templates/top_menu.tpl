@@ -25,14 +25,14 @@
                         <li><a href="#">
                                 <div class="icon" style='background: url({$theme}/options_2.png) no-repeat center center / 30px;' alt="options" title="Options"></div>                        </a>
                             <ul class="sub_menu">
-    {section name=menu_sec0 loop=$personnages}
+{section name=menu_sec0 loop=$personnages}
                                 <li>
                                     <a href="?c=personnage&amp;a=controler&amp;id={$personnages[menu_sec0].id}">
                                         <span class="avatar" style='background: url({$personnages[menu_sec0].avatar});' alt="{$personnages[menu_sec0].nom}" title="{$personnages[menu_sec0].nom}"></span>
                                         Contrôler {$personnages[menu_sec0].nom}
                                     </a>
                                 </li>
-    {/section}
+{/section}
                                 <li><a href="?c=personage&amp;a=creer">Créer un personage</a></li>
                                 <li><a href="?c=utilisateur&amp;a=mon_compte">Mon Compte</a></li>
                                 <li><a href="?c=utilisateur&amp;a=deconnexion">Déconnecter</a></li>

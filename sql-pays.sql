@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 3.4.10.1deb1
 -- http://www.phpmyadmin.net
 --
--- Client: localhost
--- Généré le: Ven 09 Octobre 2015 à 12:31
--- Version du serveur: 5.5.44-0ubuntu0.14.04.1
--- Version de PHP: 5.5.9-1ubuntu4.13
+-- Host: localhost
+-- Generation Time: Jan 07, 2013 at 08:28 PM
+-- Server version: 5.5.28
+-- PHP Version: 5.3.10-1ubuntu3.4
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -16,36 +16,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Base de données: `rpg`
---
-
 -- --------------------------------------------------------
 
 --
--- Structure de la table `confidentialite`
---
-
-CREATE TABLE IF NOT EXISTS `confidentialite` (
-  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Contenu de la table `confidentialite`
---
-
-INSERT INTO `confidentialite` (`id`, `libelle`) VALUES
-(1, 'tout le monde'),
-(2, 'les contacts de mes contacts'),
-(3, 'mes contacts'),
-(4, 'seulement moi');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `pays`
+-- Table structure for table `pays`
 --
 
 CREATE TABLE IF NOT EXISTS `pays` (
@@ -59,10 +33,10 @@ CREATE TABLE IF NOT EXISTS `pays` (
   UNIQUE KEY `alpha2` (`alpha2`),
   UNIQUE KEY `alpha3` (`alpha3`),
   UNIQUE KEY `code_unique` (`code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=242 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=242 ;
 
 --
--- Contenu de la table `pays`
+-- Dumping data for table `pays`
 --
 
 INSERT INTO `pays` (`id`, `code`, `alpha2`, `alpha3`, `nom_en_gb`, `nom_fr_fr`) VALUES
@@ -307,55 +281,6 @@ INSERT INTO `pays` (`id`, `code`, `alpha2`, `alpha3`, `nom_en_gb`, `nom_fr_fr`) 
 (239, 887, 'YE', 'YEM', 'Yemen', 'Yémen'),
 (240, 891, 'CS', 'SCG', 'Serbia and Montenegro', 'Serbie-et-Monténégro'),
 (241, 894, 'ZM', 'ZMB', 'Zambia', 'Zambie');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `utilisateur`
---
-
-CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identifiant` varchar(20) NOT NULL,
-  `motdepasse` varchar(32) NOT NULL,
-  `pseudo` varchar(20) NOT NULL,
-  `nom` varchar(30) NOT NULL,
-  `id_confid_nom` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `email` varchar(255) NOT NULL,
-  `id_confid_email` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `ville` varchar(30) DEFAULT NULL,
-  `id_confid_ville` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `id_pays` smallint(5) unsigned DEFAULT '75',
-  `id_confid_pays` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `id_pays` (`id_pays`),
-  KEY `id_confid_nom` (`id_confid_nom`),
-  KEY `id_confid_email` (`id_confid_email`),
-  KEY `id_confid_ville` (`id_confid_ville`),
-  KEY `id_confid_pays` (`id_confid_pays`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Contenu de la table `utilisateur`
---
-
-INSERT INTO `utilisateur` (`id`, `identifiant`, `motdepasse`, `pseudo`, `nom`, `id_confid_nom`, `email`, `id_confid_email`, `ville`, `id_confid_ville`, `id_pays`, `id_confid_pays`) VALUES
-(1, 'root', '', 'Maître', 'Administrateur', 1, '', 1, NULL, 1, NULL, 1),
-(2, 'david.riehl', 'david', 'D.A.R.Y.L.', 'David RIEHL', 4, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 2, 75, 1);
-
---
--- Contraintes pour les tables exportées
---
-
---
--- Contraintes pour la table `utilisateur`
---
-ALTER TABLE `utilisateur`
-  ADD CONSTRAINT `utilisateur_ibfk_5` FOREIGN KEY (`id_confid_pays`) REFERENCES `confidentialite` (`id`),
-  ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_confid_nom`) REFERENCES `confidentialite` (`id`),
-  ADD CONSTRAINT `utilisateur_ibfk_2` FOREIGN KEY (`id_confid_email`) REFERENCES `confidentialite` (`id`),
-  ADD CONSTRAINT `utilisateur_ibfk_3` FOREIGN KEY (`id_confid_ville`) REFERENCES `confidentialite` (`id`),
-  ADD CONSTRAINT `utilisateur_ibfk_4` FOREIGN KEY (`id_pays`) REFERENCES `pays` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

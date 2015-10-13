@@ -88,10 +88,10 @@ class Viewer
         self::$smarty->display($template);
     }
     
-    public static function error($msg, $previous_url=".")
+    public static function error($message, $previous_url=".")
     {
         self::$smarty = self::init();
-        self::$error[] = $msg;
+        self::$error[] = $message;
         
         self::$smarty->assign("error_msgs", self::$error);
         self::$smarty->assign("previous_url", $previous_url);
