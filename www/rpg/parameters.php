@@ -7,6 +7,20 @@
  */
 
 /**
+ * Application Parameters
+ */
+$PARAM['application']['name']              = "Role Play Universe";
+$PARAM['application']['version']           = "1.0";
+$PARAM['application']['description']       = "Plongez dans les différents univers du Jeu de Rôle écrit. Créez vos personnages. Participez aux aventures. Proposez vos propres aventures. Partez à la découverte de nouvelles contrées.";
+$PARAM['application']['keywords']          = "RPG;Univers;Role Play;Jeu de Rôle;RP;Histoire;Aventure;Quête;Mission;Objectif;Niveau;Personnage;Clan;Guilde;Communauté;Royaumes";
+
+/**
+ * Icons Parameters
+ */
+$PARAM['icons']['directory']    = "./icons";
+$PARAM['icons']['theme']        = $PARAM['icons']['directory'] . '/' . "blueberry/PNG/32";
+
+/**
  * Kernel Paramaters
  */
 $PARAM['kernel']['directory']   = "./kernel";
@@ -46,28 +60,19 @@ $PARAM['controler']['ajax']     = $PARAM['controler']['directory'].'/'.'ajax';
 $PARAM['controler']['js']       = $PARAM['controler']['directory'].'/'."js";
 
 /**
- * Icons Parameters
- */
-$PARAM['icons']['directory']    = "./icons";
-$PARAM['icons']['theme']        = $PARAM['icons']['directory'] . '/' . "blueberry/PNG/32";
-
-/**
  * Plugins Parameters
  */
 $PARAM['plugins']['directory']  = "./plugins";
 
 /**
- * Application Parameters
+ * HTML Meta Tag
  */
-$PARAM['application']['name']              = "RPG-Project";
-$PARAM['application']['version']           = "1.0";
-
 $PARAM['html']['title']                    = $PARAM['application']['name']." ".$PARAM['application']['version'];
 $PARAM['html']['charset']                  = "UTF-8";
 $PARAM['html']['meta']['application-name'] = $PARAM['application']['name']." ".$PARAM['application']['version'];
 $PARAM['html']['meta']['author']           = "David RIEHL <david.riehl@gmail.com>";
-$PARAM['html']['meta']['description']      = "Projet RPG";
-$PARAM['html']['meta']['keywords']         = "RPG";
+$PARAM['html']['meta']['description']      = $PARAM['application']['description'];
+$PARAM['html']['meta']['keywords']         = $PARAM['application']['keywords'];
 $PARAM['html']['meta']['copyright']        = "2015-2016" . " " . $PARAM['application']['name'];
 $PARAM['html']['meta']['publisher']        = "Lycée Henri Wallon";
 $PARAM['html']['meta']['robots']           = "all";

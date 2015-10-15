@@ -4,6 +4,6 @@
                         <input type="password" name="motdepasse" placeholder="mot de passe">
                         <input type="submit" name="btn_connexion" value="Connexion">
                     </form>
-                    <a href="?c=utilisateur&amp;a=motdepasse">mot de passe perdu</a>
+                    <a href="?c=utilisateur&amp;a=motdepasse">mot de passe oublié</a>
                     <a href="?c=utilisateur&amp;a=inscription">inscription</a>
                 </div>

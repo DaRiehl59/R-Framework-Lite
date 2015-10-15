@@ -1,0 +1,1 @@
+                <div id="top_logo_mini"></div>
