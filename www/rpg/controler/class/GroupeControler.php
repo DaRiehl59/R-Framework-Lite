@@ -17,6 +17,7 @@ class GroupeControler {
     {
         $groupes = array(
           array('id' => 1, 'nom' => 'test', 'avatar' => 'test.png'),
+          array('id' => 2, 'nom' => 'test', 'avatar' => 'test.png'),
         );
         GroupeViewer::liste($groupes);
     }
