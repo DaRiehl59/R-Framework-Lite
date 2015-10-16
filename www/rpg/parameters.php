@@ -21,6 +21,11 @@ $PARAM['icons']['directory']    = "./icons";
 $PARAM['icons']['theme']        = $PARAM['icons']['directory'] . '/' . "blueberry/PNG/32";
 
 /**
+ * Avatars Parameters
+ */
+$PARAM['avatars']['directory']    = "./avatars";
+
+/**
  * Kernel Paramaters
  */
 $PARAM['kernel']['directory']   = "./kernel";

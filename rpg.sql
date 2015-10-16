@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 09 Octobre 2015 à 12:31
+-- Généré le: Ven 16 Octobre 2015 à 13:03
 -- Version du serveur: 5.5.44-0ubuntu0.14.04.1
 -- Version de PHP: 5.5.9-1ubuntu4.13
 
@@ -19,6 +19,32 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `rpg`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `affecter`
+--
+
+CREATE TABLE IF NOT EXISTS `affecter` (
+  `id_utilisateur` int(11) NOT NULL,
+  `id_groupe` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`id_utilisateur`,`id_groupe`),
+  KEY `id_groupe` (`id_groupe`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `attribuer`
+--
+
+CREATE TABLE IF NOT EXISTS `attribuer` (
+  `id_droit` smallint(5) unsigned NOT NULL,
+  `id_groupe` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`id_droit`,`id_groupe`),
+  KEY `id_groupe` (`id_groupe`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -41,6 +67,31 @@ INSERT INTO `confidentialite` (`id`, `libelle`) VALUES
 (2, 'les contacts de mes contacts'),
 (3, 'mes contacts'),
 (4, 'seulement moi');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `droit`
+--
+
+CREATE TABLE IF NOT EXISTS `droit` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `groupe`
+--
+
+CREATE TABLE IF NOT EXISTS `groupe` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(20) NOT NULL,
+  `avatar` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -319,6 +370,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `identifiant` varchar(20) NOT NULL,
   `motdepasse` varchar(32) NOT NULL,
   `pseudo` varchar(20) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
   `nom` varchar(30) NOT NULL,
   `id_confid_nom` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `email` varchar(255) NOT NULL,
@@ -327,35 +379,53 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_confid_ville` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `id_pays` smallint(5) unsigned DEFAULT '75',
   `id_confid_pays` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `description` varchar(200) NOT NULL,
+  `id_confid_description` tinyint(3) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `id_pays` (`id_pays`),
   KEY `id_confid_nom` (`id_confid_nom`),
   KEY `id_confid_email` (`id_confid_email`),
   KEY `id_confid_ville` (`id_confid_ville`),
-  KEY `id_confid_pays` (`id_confid_pays`)
+  KEY `id_confid_pays` (`id_confid_pays`),
+  KEY `id_confid_description` (`id_confid_description`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`id`, `identifiant`, `motdepasse`, `pseudo`, `nom`, `id_confid_nom`, `email`, `id_confid_email`, `ville`, `id_confid_ville`, `id_pays`, `id_confid_pays`) VALUES
-(1, 'root', '', 'Maître', 'Administrateur', 1, '', 1, NULL, 1, NULL, 1),
-(2, 'david.riehl', 'david', 'D.A.R.Y.L.', 'David RIEHL', 4, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 2, 75, 1);
+INSERT INTO `utilisateur` (`id`, `identifiant`, `motdepasse`, `pseudo`, `avatar`, `nom`, `id_confid_nom`, `email`, `id_confid_email`, `ville`, `id_confid_ville`, `id_pays`, `id_confid_pays`, `description`, `id_confid_description`) VALUES
+(1, 'root', '', 'Maître', NULL, 'Administrateur', 1, '', 1, NULL, 1, NULL, 1, '', 1),
+(2, 'david.riehl', 'david', 'D.A.R.Y.L.', NULL, 'David RIEHL', 4, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 2, 75, 1, '', 1);
 
 --
 -- Contraintes pour les tables exportées
 --
 
 --
+-- Contraintes pour la table `affecter`
+--
+ALTER TABLE `affecter`
+  ADD CONSTRAINT `affecter_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `affecter_ibfk_2` FOREIGN KEY (`id_groupe`) REFERENCES `groupe` (`id`);
+
+--
+-- Contraintes pour la table `attribuer`
+--
+ALTER TABLE `attribuer`
+  ADD CONSTRAINT `attribuer_ibfk_1` FOREIGN KEY (`id_groupe`) REFERENCES `groupe` (`id`),
+  ADD CONSTRAINT `attribuer_ibfk_2` FOREIGN KEY (`id_droit`) REFERENCES `droit` (`id`);
+
+--
 -- Contraintes pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  ADD CONSTRAINT `utilisateur_ibfk_5` FOREIGN KEY (`id_confid_pays`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_confid_nom`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_2` FOREIGN KEY (`id_confid_email`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_3` FOREIGN KEY (`id_confid_ville`) REFERENCES `confidentialite` (`id`),
-  ADD CONSTRAINT `utilisateur_ibfk_4` FOREIGN KEY (`id_pays`) REFERENCES `pays` (`id`);
+  ADD CONSTRAINT `utilisateur_ibfk_4` FOREIGN KEY (`id_pays`) REFERENCES `pays` (`id`),
+  ADD CONSTRAINT `utilisateur_ibfk_5` FOREIGN KEY (`id_confid_pays`) REFERENCES `confidentialite` (`id`),
+  ADD CONSTRAINT `utilisateur_ibfk_6` FOREIGN KEY (`id_confid_description`) REFERENCES `confidentialite` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

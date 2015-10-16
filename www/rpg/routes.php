@@ -8,5 +8,9 @@ $ROUTES=array(
             'inscription' => 'UtilisateurControler::inscription',
             'profil' => 'UtilisateurControler::profil',
         ),
+    'groupe' => array (
+            '' => 'GroupeControler::liste',
+            'liste' => 'GroupeControler::liste',
+        ),
 );
 ?>
