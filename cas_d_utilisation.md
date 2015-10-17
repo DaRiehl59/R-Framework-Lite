@@ -1,6 +1,6 @@
 # Cas d'utilisation
 
-## Maître
+## Architecte
 
 **Pré-requis** : 1 seul utilisateur (par défaut : *root*)
 
@@ -17,6 +17,7 @@
 * Nommer un Juge
 * Nommer un Bourreau
 * Nommer un Veilleur
+* Nommer un Diplomate
 * Nommer un Scribe
 
 ## Juge
@@ -24,6 +25,8 @@
 ## Boureau
 
 ## Veilleur
+
+## Diplomate
 
 ## Scribe
 

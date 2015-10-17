@@ -82,9 +82,9 @@ class UtilisateurTable {
     }
     
     /**
-     * chargement des informations d'un utilisateur
-     * @param String $id
-     * @return Utilisateur Utilisateur correspondant à id
+     * enregistrement des informations
+     * @param String $item
+     * @return boolean $result résultat de la requête SQL
      */
     public static function insert($item){
         $dbh = Database::connect();
