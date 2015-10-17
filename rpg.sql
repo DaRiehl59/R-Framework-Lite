@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 16 Octobre 2015 à 13:03
+-- Généré le: Sam 17 Octobre 2015 à 23:15
 -- Version du serveur: 5.5.44-0ubuntu0.14.04.1
 -- Version de PHP: 5.5.9-1ubuntu4.13
 
@@ -89,9 +89,18 @@ CREATE TABLE IF NOT EXISTS `droit` (
 CREATE TABLE IF NOT EXISTS `groupe` (
   `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   `nom` varchar(20) NOT NULL,
+  `description` text NOT NULL,
+  `maximum` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `avatar` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `groupe`
+--
+
+INSERT INTO `groupe` (`id`, `nom`, `description`, `maximum`, `avatar`) VALUES
+(1, 'Architectes', 'Respectés et craints de tous, les Architectes sont les Pères fondateurs des Univers.\r\nIls établissent les règles de chaque Univers et nomment les Maîtres de Jeu.', 3, '1.png');
 
 -- --------------------------------------------------------
 
