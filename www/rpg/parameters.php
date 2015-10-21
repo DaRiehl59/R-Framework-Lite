@@ -21,9 +21,26 @@ $PARAM['icons']['directory']    = "./icons";
 $PARAM['icons']['theme']        = $PARAM['icons']['directory'] . '/' . "blueberry/PNG/32";
 
 /**
- * Avatars Parameters
+ * Upload Parameters
  */
-$PARAM['avatars']['directory']    = "./avatars";
+$PARAM['uploads']['directory']              = "./uploads";
+
+/**
+ * Groupes Parameters
+ */
+$PARAM['groupes']['avatars']['directory']   = $PARAM['uploads']['directory']. '/' . "groupes";
+
+/**
+ * Users Parameters
+ */
+$PARAM['users']['directory']            = $PARAM['uploads']['directory']. '/' . "users";
+$PARAM['users']['avatars']['directory'] = '/' . "avatars";
+$PARAM['users']['gallery']['directory'] = '/' . "gallery";
+
+/**
+ * Pictures Parameters
+ */
+$PARAM['thumbnail']['width']  = "100px";
 
 /**
  * Kernel Paramaters

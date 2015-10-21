@@ -15,6 +15,7 @@ require_once 'view/class/GroupeViewer.php';
 class GroupeControler {
     public static function liste()
     {
+        global $PARAM;
         /*
         $groupes = array(
           array('id' => 1, 'nom' => 'test 1', 'avatar' => '1.png'),
@@ -30,6 +31,21 @@ class GroupeControler {
           array('id' => 11, 'nom' => 'test 11', 'avatar' => '2.png'),
         );
         */
+        
+        if(isset($_POST['btn_ajouter']))
+        {
+            $item['avatar'] = null;
+            if(isset($_FILES['userfile']))
+            {
+                $directory = $PARAM['groupes']['avatars']['directory'];
+                $item['avatar'] = upload_picture_to_dir($directory);
+            }
+            $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
+            $item['description'] = filter_input(INPUT_POST, 'description',FILTER_SANITIZE_STRING);
+            $item['maximum'] = filter_input(INPUT_POST, 'maximum',FILTER_SANITIZE_STRING);
+            
+            $result = GroupeTable::insert($item);
+        }
         $groupes = GroupeTable::select('*');
         GroupeViewer::liste($groupes);
     }
