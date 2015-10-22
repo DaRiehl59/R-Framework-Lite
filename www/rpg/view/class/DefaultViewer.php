@@ -19,7 +19,7 @@ class DefaultViewer
         Viewer::display('defaultViewer_defaultAction.tpl');
     }
     
-    public static function error($message)
+    public static function error($message, $previous_url=".")
     {
         Viewer::init();
 
@@ -29,7 +29,7 @@ class DefaultViewer
             Viewer::assign('personnages', array());
         }
 
-        Viewer::error($message);
+        Viewer::error($message, $previous_url);
         
         Viewer::display('empty.tpl');
     }

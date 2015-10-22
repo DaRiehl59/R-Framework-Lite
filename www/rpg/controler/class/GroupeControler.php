@@ -46,8 +46,39 @@ class GroupeControler {
             
             $result = GroupeTable::insert($item);
         }
+        
+        if(isset($_POST['btn_update']))
+        {
+            if(!empty($_FILES['userfile']['name']))
+            {
+                $directory = $PARAM['groupes']['avatars']['directory'];
+                $item['avatar'] = upload_picture_to_dir($directory);
+            }
+            $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
+            $item['description'] = filter_input(INPUT_POST, 'description',FILTER_SANITIZE_STRING);
+            $item['maximum'] = filter_input(INPUT_POST, 'maximum',FILTER_SANITIZE_STRING);
+            
+            $result = GroupeTable::update($item);
+        }
+        
         $groupes = GroupeTable::select('*');
         GroupeViewer::liste($groupes);
+    }
+    
+    public static function editer()
+    {
+        $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        
+        $item = GroupeTable::select_by_id($id);
+        if(is_null($item))
+        {
+            $previous_url = "?c=groupe";
+            DefaultViewer::error("Groupe inconnu." , $previous_url);
+        }
+        else
+        {
+            GroupeViewer::editer($item);
+        }
     }
 }
 ?>

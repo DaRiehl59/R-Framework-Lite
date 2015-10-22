@@ -8,6 +8,7 @@ and open the template in the editor.
     Author     : david
 */
 
+#main.groupe{height: 677px;}
 
 #main.groupe fieldset{width: 361px; margin: auto; padding: 10px;}
 
@@ -51,6 +52,11 @@ and open the template in the editor.
 
 #main.groupe fieldset.ajouter th{text-align: left; vertical-align: top; line-height: 20px;}
 #main.groupe fieldset.ajouter th.submit{text-align: right;}
+
+#main.groupe fieldset.editer{margin-top: 60px;}
+#main.groupe fieldset.editer th{text-align: left; vertical-align: top; line-height: 20px;}
+#main.groupe fieldset.editer th.submit{text-align: right;}
+#main.groupe fieldset.editer img{width: 100px; border: 1px solid #AAA;}
 
 #main.groupe span.required{color: red;}
 #main.groupe span.warning{color: orange;}

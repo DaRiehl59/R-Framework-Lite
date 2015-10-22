@@ -20,10 +20,22 @@ class Groupe {
     private $id;
     
     /**
-     * @property String $nom Nom de l'utilisateur
+     * @property String $nom
      * @access private
      */
     private $nom;
+    
+    /**
+     * @property String $description
+     * @access private
+     */
+    private $description;
+    
+    /**
+     * @property String $maximum
+     * @access private
+     */
+    private $maximum;
     
     /**
      * @property String $avatar URL to avatar
@@ -49,22 +61,23 @@ class Groupe {
     
     public function __construct0()
     {
-        $this->id = null;
-        $this->nom = null;
-        $this->avatar = null;
     }
 
     public function __construct1($item)
     {
         $this->id = $item['id'];
         $this->nom = $item['nom'];
+        $this->description = $item['description'];
+        $this->maximum = $item['maximum'];
         $this->avatar = $item['avatar'];
     }
 
-    public function __construct3($id, $nom, $avatar)
+    public function __construct5($id, $nom, $description, $maximum, $avatar)
     {
         $this->id = $id;
         $this->nom = $nom;
+        $this->description = $description;
+        $this->maximum = $maximum;
         $this->avatar = $avatar;
     }
     

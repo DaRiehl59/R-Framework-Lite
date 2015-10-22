@@ -137,5 +137,40 @@ class GroupeTable {
         
         return $result;
     }
+
+    /**
+     * enregistrement des informations
+     * @param String $item
+     * @return boolean $result résultat de la requête SQL
+     */
+    public static function update($item){
+        $dbh = Database::connect();
+        
+        $query = "UPDATE " . self::$table . " SET" . "\r\n";
+        
+        $fields = array_keys($item);
+        
+        foreach($fields as $field)
+        {
+            $query .= $field . " = :".$field . "," . "\r\n";
+        }
+        $query  = substr($query, 0, strlen($query) -3);
+        $query .= ";";
+        
+        $sth = $dbh->prepare($query);
+        
+        foreach($item as $field => $value)
+        {
+            
+            $sth->bindParam(':' . $field, $item[$field]);
+        }
+        
+        $result = $sth->execute();
+        
+        Database::disconnect();
+        
+        return $result;
+    }
+    
 }
 ?>

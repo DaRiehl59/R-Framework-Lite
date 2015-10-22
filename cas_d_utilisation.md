@@ -28,7 +28,11 @@
 
 ## Diplomate
 
+* Consulter les signalements (message_signal::lire)
+
 ## Scribe
+
+* Editer une description de personnage (personnage::editer_description)
 
 ## Utilisateur
 
@@ -38,20 +42,26 @@
 
 **Fonctionallités disponibles** :
 
-* Se déconnecter            (utilisateur::deconnecter)
-* Inviter                   (utilisateur::inviter)
-* Consulter le profil       (utilisateur::profil_consulter)
-* Editer le profil          (utilisateur::profil_editer)
-* Télécharger un avatar     (utilisateur::profil_avatar_télécharger)
-* Choisir un avatar         (utilisateur::profil_avatar_choisir)
-* Editer les paramètres de confidentialité (utilisateur::confidentialite_editer)
-* Créer un personnage       (personnage::creer)
-* Editer un personnage      (personnage::editer)
-* Archiver un personnage    (personnage::archiver)
-* Proposer une aventure     (aventure::creer)
-* Editer une aventure       (aventure::editer)
+* Se déconnecter             (utilisateur::deconnect)
+* Inviter                    (utilisateur::invite)
+* Consulter le profil        (utilisateur::read_profil)
+* Editer le profil           (utilisateur::update_profil)
+* Télécharger un avatar      (utilisateur::upload_avatar)
+* Choisir un avatar          (utilisateur::select_avatar)
+* Editer les paramètres de confidentialité (utilisateur::update_confid)
+* Créer un personnage        (personnage::create)
+* Editer un personnage       (personnage::update)
+* Archiver un personnage     (personnage::archiv)
+* Proposer une aventure      (aventure::create)
+* Editer une aventure        (aventure::update)
+* Participer à une aventure  (participation::create)
+* Signaler une participation abusive (participation::signal)
+* Envoyer un message privé à un autre utilisateur (message::create)
+* Consulter ces messages     (message::read)
+* Effacer un/des messages    (message::archiv)
+* Signaler un message abusif (message::signal)
 
-# Anonyme
+## Anonyme
 
 **Pré-requis** : *aucun*
 
@@ -59,5 +69,5 @@
 
 **Fonctionallités disponibles** :
 
-* S'inscrire            (utilisateur::creer)
-* Se connecter          (utilisateur::connecter)
+* S'inscrire                 (utilisateur::creer)
+* Se connecter               (utilisateur::connecter)
