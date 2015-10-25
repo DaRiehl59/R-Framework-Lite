@@ -2,7 +2,7 @@
 
 class GroupeViewer
 {
-    public static function liste($groupes)
+    public static function liste($items)
     {
         global $PARAM;
         
@@ -18,7 +18,7 @@ class GroupeViewer
         Viewer::assign('max_file_size', $max_file_size);
         Viewer::assign('avatar_directory', $avatar_directory);
         Viewer::assign('theme', $theme);
-        Viewer::assign('groupes', $groupes);
+        Viewer::assign('groupes', $items);
         
         if(Session::get('connected'))
         {
@@ -29,7 +29,7 @@ class GroupeViewer
         Viewer::display('groupe_list.tpl');
     }
     
-    public static function editer($groupe)
+    public static function editer($item)
     {
         global $PARAM;
         
@@ -45,7 +45,7 @@ class GroupeViewer
         Viewer::assign('max_file_size', $max_file_size);
         Viewer::assign('avatar_directory', $avatar_directory);
         Viewer::assign('theme', $theme);
-        Viewer::assign('groupe', $groupe);
+        Viewer::assign('groupe', $item);
         
         if(Session::get('connected'))
         {
@@ -54,5 +54,27 @@ class GroupeViewer
         }
 
         Viewer::display('groupe_update.tpl');
+    }
+    
+    public static function supprimer($item)
+    {
+        global $PARAM;
+        
+        Viewer::init();
+        
+        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
+        $theme = $PARAM['icons']['theme'];
+        
+        Viewer::assign('avatar_directory', $avatar_directory);
+        Viewer::assign('theme', $theme);
+        Viewer::assign('groupe', $item);
+        
+        if(Session::get('connected'))
+        {
+            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('personnages', array());
+        }
+
+        Viewer::display('groupe_delete.tpl');
     }
 }

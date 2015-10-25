@@ -12,29 +12,29 @@ and open the template in the editor.
 
 #main.groupe fieldset{width: 361px; margin: auto; padding: 10px;}
 
-#main.groupe fieldset.liste{margin-top: 60px;}
+#main.groupe fieldset.list{margin-top: 60px;}
 
-#main.groupe fieldset.liste div{max-height: 241px; overflow-x: auto;}
+#main.groupe fieldset.list div{max-height: 241px; overflow-x: auto;}
 #main.groupe table{border-spacing: 0; border-collapse: collapse;}
 
-#main.groupe fieldset.liste tbody tr{border-top: 1px solid black; border-bottom: 1px solid black;}
-#main.groupe fieldset.liste tbody tr:nth-child(odd){background: whitesmoke;}
-#main.groupe fieldset.liste tbody tr:nth-child(even){background: lightgray;}
+#main.groupe fieldset.list tbody tr{border-top: 1px solid black; border-bottom: 1px solid black;}
+#main.groupe fieldset.list tbody tr:nth-child(odd){background: whitesmoke;}
+#main.groupe fieldset.list tbody tr:nth-child(even){background: lightgray;}
 
-#main.groupe fieldset.liste tbody tr:hover{background: lightblue;}
-#main.groupe fieldset.liste tbody tr:hover ul.menu li.icon{border: 1px solid lightblue;}
+#main.groupe fieldset.list tbody tr:hover{background: lightblue;}
+#main.groupe fieldset.list tbody tr:hover ul.menu li.icon{border: 1px solid lightblue;}
 
-#main.groupe fieldset.liste tbody td:nth-child(2){width:273px;}
+#main.groupe fieldset.list tbody td:nth-child(2){width:273px;}
 
-#main.groupe fieldset.liste td a{display: block;text-decoration: none; color: inherit;}
+#main.groupe fieldset.list td a{display: block;text-decoration: none; color: inherit;}
 
-#main.groupe fieldset.liste td img{width: 16px; height: 16px; margin-left:10px; margin-right: 10px;}
+#main.groupe fieldset.list td img{width: 16px; height: 16px; margin-left:10px; margin-right: 10px;}
 
-#main.groupe fieldset.liste tr:nth-child(odd) ul.menu li.icon{border: 1px solid whitesmoke;}
-#main.groupe fieldset.liste tr:nth-child(even) ul.menu li.icon{border: 1px solid lightgray;}
+#main.groupe fieldset.list tr:nth-child(odd) ul.menu li.icon{border: 1px solid whitesmoke;}
+#main.groupe fieldset.list tr:nth-child(even) ul.menu li.icon{border: 1px solid lightgray;}
 
-#main.groupe fieldset.liste tr:nth-child(odd) ul.menu li.icon:hover,
-#main.groupe fieldset.liste tr:nth-child(even) ul.menu li.icon:hover
+#main.groupe fieldset.list tr:nth-child(odd) ul.menu li.icon:hover,
+#main.groupe fieldset.list tr:nth-child(even) ul.menu li.icon:hover
 {
     background: lightgray;
     border-top: 1px solid gray;
@@ -43,20 +43,28 @@ and open the template in the editor.
     border-bottom: 1px solid black;
 }
 
-#main.groupe fieldset.liste ul.menu li.icon:active{
+#main.groupe fieldset.list ul.menu li.icon:active{
     border-top: 1px solid black;
     border-left: 1px solid black;
     border-right: 1px solid gray;
     border-bottom: 1px solid gray;
 }
 
-#main.groupe fieldset.ajouter th{text-align: left; vertical-align: top; line-height: 20px;}
-#main.groupe fieldset.ajouter th.submit{text-align: right;}
+#main.groupe fieldset.insert th{text-align: left; vertical-align: top; line-height: 20px;}
+#main.groupe fieldset.insert th.submit{text-align: right;}
 
-#main.groupe fieldset.editer{margin-top: 60px;}
-#main.groupe fieldset.editer th{text-align: left; vertical-align: top; line-height: 20px;}
-#main.groupe fieldset.editer th.submit{text-align: right;}
-#main.groupe fieldset.editer img{width: 100px; border: 1px solid #AAA;}
+#main.groupe fieldset.update{margin-top: 60px;}
+#main.groupe fieldset.update th{text-align: left; vertical-align: top; line-height: 20px;}
+#main.groupe fieldset.update th.submit{text-align: right;}
+#main.groupe fieldset.update img{width: 100px; border: 1px solid #AAA;}
+
+#main.groupe fieldset.delete{margin-top: 60px;}
+#main.groupe fieldset.delete th{text-align: left; vertical-align: top; line-height: 20px;}
+#main.groupe fieldset.delete th.submit{text-align: right;}
+#main.groupe fieldset.delete img{width: 100px; border: 1px solid #AAA;}
+#main.groupe fieldset.delete input[name="btn_delete"]{color: red; border: 1px solid #DD5555;}
+#main.groupe fieldset.delete input[name="btn_delete"]:hover{border: 1px solid red; background: #FF9999; color: darkred;}
+
 
 #main.groupe span.required{color: red;}
 #main.groupe span.warning{color: orange;}

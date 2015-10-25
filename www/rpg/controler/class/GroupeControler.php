@@ -61,6 +61,15 @@ class GroupeControler {
             $result = GroupeTable::update($item);
         }
         
+        if(isset($_POST['btn_delete']))
+        {
+            $id = filter_input(INPUT_POST, 'id',FILTER_SANITIZE_NUMBER_INT);
+            
+
+            $result = GroupeTable::delete($id);
+            
+        }
+        
         $groupes = GroupeTable::select('*');
         GroupeViewer::liste($groupes);
     }
@@ -78,6 +87,22 @@ class GroupeControler {
         else
         {
             GroupeViewer::editer($item);
+        }
+    }
+    
+    public static function supprimer()
+    {
+        $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        
+        $item = GroupeTable::select_by_id($id);
+        if(is_null($item))
+        {
+            $previous_url = "?c=groupe";
+            DefaultViewer::error("Groupe inconnu." , $previous_url);
+        }
+        else
+        {
+            GroupeViewer::supprimer($item);
         }
     }
 }

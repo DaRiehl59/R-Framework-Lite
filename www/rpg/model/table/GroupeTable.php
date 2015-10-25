@@ -183,7 +183,8 @@ class GroupeTable {
         $query = "DELETE FROM `" . self::$table . "` WHERE" . "\r\n"
                 . "id = :id";
         
-        $sth->bindParam(':id', $id);
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
         
         $result = $sth->execute();
         

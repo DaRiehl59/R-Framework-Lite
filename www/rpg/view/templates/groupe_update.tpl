@@ -1,6 +1,6 @@
 {include file="html_header.tpl"}{include file="top.tpl"}
             <div id="main" class="groupe">
-                <fieldset class="editer">
+                <fieldset class="update">
                     <legend>Editer un Groupe</legend>
                     <form enctype="multipart/form-data" action="?c=groupe" method="post">
                         <input type="hidden" name="id" value="{$groupe->id}">
@@ -27,8 +27,8 @@
                             </tr>
                             <tr>
                                 <th colspan="2" class="submit">
-                                    <input type="submit" name="btn_update" value="Enregistrer">
-                                    <input type="submit" name="btn_back" value="Retour" formnovalidate="">
+                                    <input type="submit" name="btn_update" value="Mettre-à-jour">
+                                    <input type="submit" name="btn_back" value="Annuler" formnovalidate="">
                                 </th>
                             </tr>
                         </table>

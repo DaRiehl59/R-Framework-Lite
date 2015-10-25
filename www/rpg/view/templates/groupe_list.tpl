@@ -1,6 +1,6 @@
 {include file="html_header.tpl"}{include file="top.tpl"}
             <div id="main" class="groupe">
-                <fieldset class="liste">
+                <fieldset class="list">
                     <legend>Liste des Groupes</legend>
                     <div>
                         <table>
@@ -37,7 +37,7 @@
                         </table>
                     </div>
                 </fieldset>
-                <fieldset class="ajouter">
+                <fieldset class="insert">
                     <legend>Ajouter un Groupe</legend>
                     <form enctype="multipart/form-data" action="?c=groupe" method="post">
                         <table>

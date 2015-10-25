@@ -14,6 +14,7 @@ $ROUTES=array(
             ''              => 'GroupeControler::liste',
             'liste'         => 'GroupeControler::liste',
             'editer'        => 'GroupeControler::editer',
+            'supprimer'     => 'GroupeControler::supprimer',
         ),
 );
 ?>
