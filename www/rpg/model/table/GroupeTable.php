@@ -21,7 +21,7 @@ class GroupeTable {
     private static $table = "groupe";
     
     /**
-     * chargement des informations
+     * recherche de tous les enregistrements
      * @param Array $fields
      * @return Utilisateur Utilisateur correspondant à id
      */
@@ -66,7 +66,7 @@ class GroupeTable {
     }
     
     /**
-     * chargement des informations d'un élément en fonction de son id
+     * recherche d'un enregistrement par son id
      * @param String $id
      * @return Object élément correspondant à la valeur de id
      */
@@ -98,14 +98,14 @@ class GroupeTable {
     }
 
     /**
-     * enregistrement des informations
+     * insertion d'un nouvel enregistrement
      * @param String $item
      * @return boolean $result résultat de la requête SQL
      */
     public static function insert($item){
         $dbh = Database::connect();
         
-        $query = "INSERT INTO " . self::$table . " (";
+        $query = "INSERT INTO `" . self::$table . "` (";
         
         $fields = array_keys($item);
         
@@ -139,14 +139,14 @@ class GroupeTable {
     }
 
     /**
-     * enregistrement des informations
+     * mise à jour d'un enregistrement
      * @param String $item
      * @return boolean $result résultat de la requête SQL
      */
     public static function update($item){
         $dbh = Database::connect();
         
-        $query = "UPDATE " . self::$table . " SET" . "\r\n";
+        $query = "UPDATE `" . self::$table . "` SET" . "\r\n";
         
         $fields = array_keys($item);
         
@@ -172,5 +172,24 @@ class GroupeTable {
         return $result;
     }
     
+    /**
+     * suppresssion d'un enregistrement
+     * @param String $id
+     * @return boolean $result résultat de la requête SQL
+     */
+    public static function delete($id){
+        $dbh = Database::connect();
+        
+        $query = "DELETE FROM `" . self::$table . "` WHERE" . "\r\n"
+                . "id = :id";
+        
+        $sth->bindParam(':id', $id);
+        
+        $result = $sth->execute();
+        
+        Database::disconnect();
+        
+        return $result;
+    }
 }
 ?>
