@@ -16,5 +16,11 @@ $ROUTES=array(
             'editer'        => 'GroupeControler::editer',
             'supprimer'     => 'GroupeControler::supprimer',
         ),
+    'droit' => array (
+            ''              => 'DroitControler::liste',
+            'liste'         => 'DroitControler::liste',
+            'editer'        => 'DroitControler::editer',
+            'supprimer'     => 'DroitControler::supprimer',
+        ),
 );
 ?>

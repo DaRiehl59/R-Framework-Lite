@@ -1,6 +1,6 @@
 <?php
 
-class GroupeViewer
+class DroitViewer
 {
     public static function liste($items)
     {
@@ -8,15 +8,8 @@ class GroupeViewer
         
         Viewer::init();
         
-        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
         $theme = $PARAM['icons']['theme'];
         
-        $max_file_size = file_upload_max_size();
-        $max_file_size_str = round($max_file_size/1024/1024) . " Mo";
-        
-        Viewer::assign('max_file_size_str', $max_file_size_str);
-        Viewer::assign('max_file_size', $max_file_size);
-        Viewer::assign('avatar_directory', $avatar_directory);
         Viewer::assign('theme', $theme);
         Viewer::assign('items', $items);
         
@@ -26,7 +19,7 @@ class GroupeViewer
             Viewer::assign('personnages', array());
         }
 
-        Viewer::display('groupe_list.tpl');
+        Viewer::display('droit_list.tpl');
     }
     
     public static function editer($item)
@@ -35,15 +28,8 @@ class GroupeViewer
         
         Viewer::init();
         
-        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
         $theme = $PARAM['icons']['theme'];
         
-        $max_file_size = file_upload_max_size();
-        $max_file_size_str = round($max_file_size/1024/1024) . " Mo";
-        
-        Viewer::assign('max_file_size_str', $max_file_size_str);
-        Viewer::assign('max_file_size', $max_file_size);
-        Viewer::assign('avatar_directory', $avatar_directory);
         Viewer::assign('theme', $theme);
         Viewer::assign('item', $item);
         
@@ -53,7 +39,7 @@ class GroupeViewer
             Viewer::assign('personnages', array());
         }
 
-        Viewer::display('groupe_update.tpl');
+        Viewer::display('droit_update.tpl');
     }
     
     public static function supprimer($item)
@@ -62,10 +48,8 @@ class GroupeViewer
         
         Viewer::init();
         
-        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
         $theme = $PARAM['icons']['theme'];
         
-        Viewer::assign('avatar_directory', $avatar_directory);
         Viewer::assign('theme', $theme);
         Viewer::assign('item', $item);
         
@@ -75,6 +59,6 @@ class GroupeViewer
             Viewer::assign('personnages', array());
         }
 
-        Viewer::display('groupe_delete.tpl');
+        Viewer::display('droit_delete.tpl');
     }
 }

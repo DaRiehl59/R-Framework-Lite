@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe d'accès à la table `groupe`
+ * Classe d'accès à la table `droit`
  *
  * @filesource model/table/UtilisateurTable.php
  * @author David RIEHL <david.riehl@gmail.com>
@@ -8,17 +8,17 @@
  * @copyright (c) 2015, D. [R]IEHL
  */
 
-require_once 'model/class/Groupe.php';
+require_once 'model/class/Droit.php';
 require_once 'kernel/Database.php';
 
-class GroupeTable {
+class DroitTable {
     
     /**
      * nom de la table
      * @var String $table
      * @access private
      */
-    private static $table = "groupe";
+    private static $table = "droit";
     
     /**
      * recherche de tous les enregistrements

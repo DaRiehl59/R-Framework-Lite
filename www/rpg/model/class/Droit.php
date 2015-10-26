@@ -1,13 +1,13 @@
 <?php
 /**
- * Classe Groupe
+ * Classe Droit
  *
- * @filesource model/class/Groupe.php
+ * @filesource model/class/Droit.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
  */
-class Groupe {
+class Droit {
     
     /**
      * Properties
@@ -26,23 +26,11 @@ class Groupe {
     private $nom;
     
     /**
-     * @property String $description
+     * @property String $action
      * @access private
      */
-    private $description;
+    private $action;
     
-    /**
-     * @property String $maximum
-     * @access private
-     */
-    private $maximum;
-    
-    /**
-     * @property String $avatar URL to avatar
-     * @access private
-     */
-    private $avatar;
-
     /**
      * Methods
      */
@@ -67,18 +55,14 @@ class Groupe {
     {
         $this->id = $item['id'];
         $this->nom = $item['nom'];
-        $this->description = $item['description'];
-        $this->maximum = $item['maximum'];
-        $this->avatar = $item['avatar'];
+        $this->action = $item['action'];
     }
 
-    public function __construct5($id, $nom, $description, $maximum, $avatar)
+    public function __construct3($id, $nom, $action)
     {
         $this->id = $id;
         $this->nom = $nom;
-        $this->description = $description;
-        $this->maximum = $maximum;
-        $this->avatar = $avatar;
+        $this->action = $action;
     }
     
     public function __get($name) {

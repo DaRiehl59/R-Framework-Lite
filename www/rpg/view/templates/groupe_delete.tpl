@@ -3,24 +3,24 @@
                 <fieldset class="delete">
                     <legend>Supprimer un Groupe</legend>
                     <form action="?c=groupe" method="post">
-                        <input type="hidden" name="id" value="{$groupe->id}">
+                        <input type="hidden" name="id" value="{$item->id}">
                         <table>
                             <tr>
                                 <th><label for="nom">Nom&nbsp;:</label></th>
-                                <td><input type="text" id="nom" name="nom" value="{$groupe->nom}" disabled=""></td>
+                                <td><input type="text" id="nom" name="nom" value="{$item->nom}" disabled=""></td>
                             </tr>
                             <tr>
                                 <th><label for="description">Description&nbsp;:</label></th>
-                                <td><textarea id="description" name="description" cols="30"  disabled="">{$groupe->description}</textarea></td>
+                                <td><textarea id="description" name="description" cols="30"  disabled="">{$item->description}</textarea></td>
                             </tr>
                             <tr>
                                 <th><label for="maximum">Maximum&nbsp;:</label></th>
-                                <td><input type="number" id="maximum" name="maximum" title="nombre maximum de membres" value="{$groupe->maximum}" disabled=""></td>
+                                <td><input type="number" id="maximum" name="maximum" title="nombre maximum de membres" value="{$item->maximum}" disabled=""></td>
                             </tr>
                             <tr>
                                 <th><label for="avatar">Avatar&nbsp;:</label></th>
                                 <td>
-                                    <img src="{$avatar_directory}/{$groupe->avatar}" alt="Avatar">
+                                    <img src="{$avatar_directory}/{$item->avatar}" alt="Avatar">
                                 </td>
                             </tr>
                             <tr>

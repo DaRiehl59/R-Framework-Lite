@@ -3,24 +3,24 @@
                 <fieldset class="update">
                     <legend>Editer un Groupe</legend>
                     <form enctype="multipart/form-data" action="?c=groupe" method="post">
-                        <input type="hidden" name="id" value="{$groupe->id}">
+                        <input type="hidden" name="id" value="{$item->id}">
                         <table>
                             <tr>
                                 <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
-                                <td><input type="text" id="nom" name="nom" maxlength="20" required="" value="{$groupe->nom}"></td>
+                                <td><input type="text" id="nom" name="nom" maxlength="20" required="" value="{$item->nom}"></td>
                             </tr>
                             <tr>
                                 <th><label for="description">Description&nbsp;:</label></th>
-                                <td><textarea id="description" name="description" cols="30">{$groupe->description}</textarea></td>
+                                <td><textarea id="description" name="description" cols="30">{$item->description}</textarea></td>
                             </tr>
                             <tr>
                                 <th><label for="maximum">Maximum<span class="required">*</span>&nbsp;:</label></th>
-                                <td><input type="number" id="maximum" name="maximum" required="" title="nombre maximum de membres" value="{$groupe->maximum}"></td>
+                                <td><input type="number" id="maximum" name="maximum" required="" title="nombre maximum de membres" value="{$item->maximum}"></td>
                             </tr>
                             <tr>
                                 <th><label for="avatar">Avatar<span class="warning">*</span>&nbsp;:</label></th>
                                 <td>
-                                    <img src="{$avatar_directory}/{$groupe->avatar}" alt="Avatar">
+                                    <img src="{$avatar_directory}/{$item->avatar}" alt="Avatar">
                                     <input type="hidden" name="MAX_FILE_SIZE" value="{$max_file_size}">
                                     <input type="file" id="avatar" name="userfile">
                                 </td>
