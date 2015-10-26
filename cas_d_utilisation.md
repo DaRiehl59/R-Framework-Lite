@@ -1,40 +1,78 @@
 # Cas d'utilisation
 
-## Architecte
 
-**Pré-requis** : 1 seul utilisateur (par défaut : *root*)
+## Hierarchie des Groupes
 
-**Description** : Utilisateur normal
+### Grand Concepteur
 
-**Fonctionallités disponibles** :
+**Pré-requis** : *aucun*
 
-* Nommer un Maître de jeu
-* Destituer un Maître de jeu
+**Maximum** : 1 seul utilisateur par serveur (par défaut : *root*)
+
+**Description** : Utilisateur qui a tous les pouvoirs
+
+**Fonctionallités spécifiques** :
+
+* Gérer les Architectes
+* Gérer les Univers
+* Gérer les Groupes
+* Gérer les Droits
+
+**Autres Fonctionallités disponibles ** :
+
 * **toutes les autres fonctionnalités**
 
-## Maître de Jeu
+### Architecte
 
-* Nommer un Juge
-* Nommer un Bourreau
-* Nommer un Veilleur
-* Nommer un Diplomate
-* Nommer un Scribe
+**Pré-requis** : *aucun*
 
-## Juge
+**Maximum** : 1 utilisateur par Univers
 
-## Boureau
+**Description** : Gérant de l'univers
 
-## Veilleur
+**Fonctionallités spécifiques** :
 
-## Diplomate
+* Gérer les Maîtres de jeu
+* Gérer les Régions
+* Gérer les Villes
 
-* Consulter les signalements (message_signal::lire)
+**Autres Fonctionallités disponibles ** :
 
-## Scribe
+* **les fonctionnalités de niveau inférieur**
+
+### Maître de Jeu
+
+* Gérer les Juges
+* Gérer les Scribes
+
+### Juge
+
+* Gérer les Bourreaux
+* Gérer les Diplomates
+
+### Boureau
+
+* Appliquer une sentence prononcée par le juge
+
+    * bannir définitivement
+    * bannir provisoirement
+    * blamer
+    * avertir
+
+### Diplomate
+
+* Gérer les Veilleurs
+* Gérer les signalements (message_signal::lire)
+
+### Veilleur
+
+* Signaler un comportement à un diplomate
+
+### Scribe
 
 * Editer une description de personnage (personnage::editer_description)
 
-## Utilisateur
+### Utilisateur
 
 **Pré-requis** : *être connecté*
 
@@ -61,7 +99,7 @@
 * Effacer un/des messages    (message::archiv)
 * Signaler un message abusif (message::signal)
 
-## Anonyme
+### Anonyme
 
 **Pré-requis** : *aucun*
 
