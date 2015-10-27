@@ -36,7 +36,7 @@
                                 <td>
                                     <select id="pays" name="id_pays" autocomplete="off">
 {section name=inscription_sec0 loop=$pays}
-                                        <option value="{$pays[inscription_sec0].id}"{if $pays[inscription_sec0].nom_fr_fr eq "France"} selected=""{/if}>{$pays[inscription_sec0].nom_fr_fr}</option>
+                                        <option value="{$pays[inscription_sec0]->id}"{if $pays[inscription_sec0]->nom_fr_fr eq "France"} selected=""{/if}>{$pays[inscription_sec0]->nom_fr_fr}</option>
 {/section}
                                     </select>
                                 </td>

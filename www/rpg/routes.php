@@ -5,10 +5,11 @@ $ROUTES=array(
             ''              => 'DefaultControler::defaultAction',
         ),
     'utilisateur' => array (
+            ''              => 'UtilisateurControler::profil',
+            'profil'        => 'UtilisateurControler::profil',
             'connexion'     => 'UtilisateurControler::connexion',
             'deconnexion'   => 'UtilisateurControler::deconnexion',
             'inscription'   => 'UtilisateurControler::inscription',
-            'profil'        => 'UtilisateurControler::profil',
         ),
     'groupe' => array (
             ''              => 'GroupeControler::liste',
@@ -24,7 +25,7 @@ $ROUTES=array(
         ),
     'attribuer' => array (
             ''              => 'AttribuerControler::link',
-            'link'         => 'DroitControler::link',
+            'link'          => 'DroitControler::link',
         ),
 );
 ?>
