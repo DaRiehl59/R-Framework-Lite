@@ -20,7 +20,6 @@ class DroitControler {
         if(isset($_POST['btn_ajouter']))
         {
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
-            $item['action'] = filter_input(INPUT_POST, 'action',FILTER_SANITIZE_STRING);
             
             $result = DroitTable::insert($item);
         }
@@ -28,7 +27,6 @@ class DroitControler {
         if(isset($_POST['btn_update']))
         {
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
-            $item['action'] = filter_input(INPUT_POST, 'action',FILTER_SANITIZE_STRING);
             
             $result = DroitTable::update($item);
         }

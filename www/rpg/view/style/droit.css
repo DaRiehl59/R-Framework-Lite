@@ -24,7 +24,7 @@ and open the template in the editor.
 #main.droit fieldset.list tbody tr:hover{background: lightblue;}
 #main.droit fieldset.list tbody tr:hover ul.menu li.icon{border: 1px solid lightblue;}
 
-#main.droit fieldset.list tbody td:nth-child(2){width:273px;}
+#main.droit fieldset.list tbody td:nth-child(1){width:311px;}
 
 #main.droit fieldset.list td a{display: block;text-decoration: none; color: inherit;}
 
@@ -57,6 +57,8 @@ and open the template in the editor.
 #main.droit fieldset.update th{text-align: left; vertical-align: top; line-height: 20px;}
 #main.droit fieldset.update th.submit{text-align: right;}
 #main.droit fieldset.update img{width: 100px; border: 1px solid #AAA;}
+#main.droit fieldset.update input[name="btn_update"]{color: green; border: 1px solid #55DD55;}
+#main.droit fieldset.update input[name="btn_update"]:hover{border: 1px solid green; background: #99FF99; color: darkgreen;}
 
 #main.droit fieldset.delete{margin-top: 60px;}
 #main.droit fieldset.delete th{text-align: left; vertical-align: top; line-height: 20px;}

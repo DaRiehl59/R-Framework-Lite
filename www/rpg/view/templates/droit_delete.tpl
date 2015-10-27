@@ -6,10 +6,6 @@
                         <input type="hidden" name="id" value="{$item->id}">
                         <table>
                             <tr>
-                                <th><label for="action">Action&nbsp;:</label></th>
-                                <td><input type="text" id="action" name="action" value="{$item->action}" disabled=""></td>
-                            </tr>
-                            <tr>
                                 <th><label for="nom">Nom&nbsp;:</label></th>
                                 <td><input type="text" id="nom" name="nom" value="{$item->nom}" disabled=""></td>
                             </tr>

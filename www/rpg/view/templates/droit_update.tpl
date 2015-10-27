@@ -6,12 +6,8 @@
                         <input type="hidden" name="id" value="{$item->id}">
                         <table>
                             <tr>
-                                <th><label for="action">Action<span class="required">*</span>&nbsp;:</label></th>
-                                <td><input type="text" id="action" name="action" maxlength="50" required="" value="{$item->action}"></td>
-                            </tr>
-                            <tr>
-                                <th><label for="nom">Nom&nbsp;:</label></th>
-                                <td><input type="text" id="nom" name="nom" maxlength="50" value="{$item->nom}"></td>
+                                <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
+                                <td><input type="text" id="nom" name="nom" maxlength="50" required="" value="{$item->nom}"></td>
                             </tr>
                             <tr>
                                 <th colspan="2" class="submit">

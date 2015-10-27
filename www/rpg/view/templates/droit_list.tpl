@@ -8,11 +8,6 @@
 {section name=liste_sec0 loop=$items}
                                 <tr>
                                     <td>
-                                        <a href="?c=droit&amp;a=affecter&amp;id={$items[liste_sec0]->id}" title="Action">
-                                            {$items[liste_sec0]->action}
-                                        </a>
-                                    </td>
-                                    <td>
                                         <a href="?c=droit&amp;a=affecter&amp;id={$items[liste_sec0]->id}" title="Nom">
                                             {$items[liste_sec0]->nom}
                                         </a>
@@ -42,12 +37,8 @@
                     <form action="?c=droit" method="post">
                         <table>
                             <tr>
-                                <th><label for="action">Action<span class="required">*</span>&nbsp;:</label></th>
-                                <td><input type="text" id="action" name="action" maxlength="50" required=""></td>
-                            </tr>
-                            <tr>
-                                <th><label for="nom">Nom&nbsp;:</label></th>
-                                <td><input type="text" id="nom" name="nom" maxlength="50"></td>
+                                <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
+                                <td><input type="text" id="nom" name="nom" maxlength="50" required=""></td>
                             </tr>
                             <tr>
                                 <th colspan="2" class="submit"><input type="submit" name="btn_ajouter" value="Ajouter"></th>
