@@ -18,7 +18,7 @@
 * Gérer les Groupes
 * Gérer les Droits
 
-**Autres Fonctionallités disponibles ** :
+**Autres Fonctionallités disponibles** :
 
 * **toutes les autres fonctionnalités**
 
@@ -36,7 +36,7 @@
 * Gérer les Régions
 * Gérer les Villes
 
-**Autres Fonctionallités disponibles ** :
+**Autres Fonctionallités disponibles** :
 
 * **les fonctionnalités de niveau inférieur**
 
