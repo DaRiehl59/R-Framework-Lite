@@ -2,14 +2,15 @@
 /**
  * Classe d'accès à la table `groupe`
  *
- * @filesource model/table/UtilisateurTable.php
+ * @filesource model/table/GroupeTable.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
  */
 
-require_once 'model/class/Groupe.php';
 require_once 'kernel/Database.php';
+
+require_once 'model/class/Groupe.php';
 
 class GroupeTable {
     
@@ -52,7 +53,7 @@ class GroupeTable {
         
         if($sth->rowCount())
         {
-            $results = $sth->fetchAll(PDO::FETCH_CLASS);
+            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
             $sth->closeCursor();
         }
         else
