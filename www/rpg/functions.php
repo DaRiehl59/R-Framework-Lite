@@ -136,15 +136,13 @@ function gen_date()
 function get_URI_root()
 {
     $requestURI = explode('/', urldecode($_SERVER['REQUEST_URI']));
-    $scriptName = explode('/', urldecode($_SERVER['SCRIPT_NAME']));
-
-    for($i= 0;$i < sizeof($scriptName);$i++)
+    //$scriptName = explode('/', urldecode($_SERVER['SCRIPT_NAME']));
+    
+    $nb = count($requestURI);
+    
+    for($index=0; $index < $nb -1; $index++)
     {
-        if ($requestURI[$i] == $scriptName[$i])
-        {
-            $requestURI_root[]=$requestURI[$i];
-            unset($requestURI[$i]);
-        }
+        $requestURI_root[] = $requestURI[$index];
     }
     
     $URI_root = implode('/',$requestURI_root);
