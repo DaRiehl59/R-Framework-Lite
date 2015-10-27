@@ -68,6 +68,10 @@ class Router {
         
         if($error)
         {
+            if(Session::get('connected'))
+            {
+                Viewer::assign('utilisateur', Session::get('utilisateur'));
+            }
             Viewer::display('empty.tpl');
             die();
         }
