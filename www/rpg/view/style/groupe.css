@@ -57,6 +57,8 @@ and open the template in the editor.
 #main.groupe fieldset.update th{text-align: left; vertical-align: top; line-height: 20px;}
 #main.groupe fieldset.update th.submit{text-align: right;}
 #main.groupe fieldset.update img{width: 100px; border: 1px solid #AAA;}
+#main.droit fieldset.update input[name="btn_update"]{color: green; border: 1px solid #55DD55;}
+#main.droit fieldset.update input[name="btn_update"]:hover{border: 1px solid green; background: #99FF99; color: darkgreen;}
 
 #main.groupe fieldset.delete{margin-top: 60px;}
 #main.groupe fieldset.delete th{text-align: left; vertical-align: top; line-height: 20px;}
