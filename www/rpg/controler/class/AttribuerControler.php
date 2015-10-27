@@ -2,7 +2,7 @@
 /**
  * Classe de controle des attributions des droits aux groupes
  *
- * @filesource controler/class/DroitControler.php
+ * @filesource controler/class/AttribuerControler.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
