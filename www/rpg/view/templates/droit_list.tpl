@@ -36,13 +36,17 @@
                     <legend>Ajouter un Droit</legend>
                     <form action="?c=droit" method="post">
                         <table>
-                            <tr>
-                                <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
-                                <td><input type="text" id="nom" name="nom" maxlength="50" required=""></td>
-                            </tr>
-                            <tr>
-                                <th colspan="2" class="submit"><input type="submit" name="btn_ajouter" value="Ajouter"></th>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="text" id="nom" name="nom" maxlength="50" required=""></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="2" class="submit"><input type="submit" name="btn_ajouter" value="Ajouter"></th>
+                                </tr>
+                            </tfoot>
                         </table>
                         <span class="required">* information obligatoire</span><br>
                     </form>
