@@ -49,14 +49,12 @@ class Droit {
     {
         $this->id = $item['id'];
         $this->nom = $item['nom'];
-        $this->action = $item['action'];
     }
 
-    public function __construct3($id, $nom, $action)
+    public function __construct2($id, $nom)
     {
         $this->id = $id;
         $this->nom = $nom;
-        $this->action = $action;
     }
     
     public function __get($name) {
