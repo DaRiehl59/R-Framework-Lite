@@ -8,7 +8,7 @@
 {section name=liste_sec0 loop=$items}
                                 <tr>
                                     <td>
-                                        <a href="?c=attribuer&amp;id={$items[liste_sec0]->id}" title="Nom">
+                                        <a href="?c=attribuer" title="Nom">
                                             {$items[liste_sec0]->nom}
                                         </a>
                                     </td>

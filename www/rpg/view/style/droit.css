@@ -14,7 +14,7 @@ and open the template in the editor.
 
 #main.droit fieldset.list{margin-top: 60px;}
 
-#main.droit fieldset.list div{max-height: 241px; overflow-x: auto;}
+#main.droit fieldset.list div{max-height: 241px; overflow-y: auto;}
 #main.droit table{border-spacing: 0; border-collapse: collapse;}
 
 #main.droit fieldset.list tbody tr{border-top: 1px solid black; border-bottom: 1px solid black;}
@@ -24,7 +24,7 @@ and open the template in the editor.
 #main.droit fieldset.list tbody tr:hover{background: lightblue;}
 #main.droit fieldset.list tbody tr:hover ul.menu li.icon{border: 1px solid lightblue;}
 
-#main.droit fieldset.list tbody td:nth-child(1){width:311px;}
+#main.droit fieldset.list tbody td:nth-child(1){width:296px;}
 
 #main.droit fieldset.list td a{display: block;text-decoration: none; color: inherit;}
 

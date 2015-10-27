@@ -2,7 +2,7 @@
 /**
  * Classe d'accès à la table `droit`
  *
- * @filesource model/table/UtilisateurTable.php
+ * @filesource model/table/DroitTable.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
@@ -52,7 +52,7 @@ class DroitTable {
         
         if($sth->rowCount())
         {
-            $results = $sth->fetchAll(PDO::FETCH_CLASS);
+            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
             $sth->closeCursor();
         }
         else
