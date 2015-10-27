@@ -15,10 +15,10 @@ class UtilisateurViewer
     {
         Viewer::init();
 
-        Viewer::assign('utilisateur', Session::get('utilisateur'));
+        Viewer::assign('session_utilisateur', Session::get('utilisateur'));
         Viewer::assign('personnages', array());
         
-        Viewer::assign('utilisateur_profil', $utilisateur);
+        Viewer::assign('utilisateur', $utilisateur);
         Viewer::assign('confidentialite', $confidentialite);
         Viewer::assign('pays', $pays);
         

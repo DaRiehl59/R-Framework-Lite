@@ -12,7 +12,7 @@ class DefaultViewer
         
         if(Session::get('connected'))
         {
-            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
             Viewer::assign('personnages', array());
         }
         
@@ -25,7 +25,7 @@ class DefaultViewer
 
         if(Session::get('connected'))
         {
-            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
             Viewer::assign('personnages', array());
         }
 
@@ -40,7 +40,7 @@ class DefaultViewer
 
         if(Session::get('connected'))
         {
-            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
             Viewer::assign('personnages', array());
         }
         

@@ -62,6 +62,12 @@ class Utilisateur {
     private $email;
 
     /**
+     * @property String $email_hash
+     * @access private
+     */
+    private $email_hash;
+
+    /**
      * @property int $id_confid_email
      * @access private
      */

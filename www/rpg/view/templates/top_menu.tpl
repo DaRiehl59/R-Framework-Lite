@@ -1,9 +1,9 @@
                 <div id="top_menu">
                     <ul class="main_menu">
                         <li class="profil">
-                            <a href="?c=utilisateur&amp;a=profil">
-                                <div class="avatar" style='background: url(http://www.gravatar.com/avatar/{$utilisateur['email_hash']}) no-repeat center center / 20px;' alt="profil" title="Profil"></div>
-                                {$utilisateur.nom}
+                            <a href="?c=utilisateur">
+                                <div class="avatar" style='background: url(http://www.gravatar.com/avatar/{$session_utilisateur['email_hash']}) no-repeat center center / 20px;' alt="profil" title="Profil"></div>
+                                {$session_utilisateur['nom']}
                             </a>
                         </li>
                         <li class="accueil"><a href=".">Accueil</a></li>
@@ -27,16 +27,16 @@
                             <ul class="sub_menu">
 {section name=menu_sec0 loop=$personnages}
                                 <li>
-                                    <a href="?c=personnage&amp;a=controler&amp;id={$personnages[menu_sec0].id}">
-                                        <span class="avatar" style='background: url({$personnages[menu_sec0].avatar});' alt="{$personnages[menu_sec0].nom}" title="{$personnages[menu_sec0].nom}"></span>
-                                        Contrôler {$personnages[menu_sec0].nom}
+                                    <a href="?c=personnage&amp;a=controler&amp;id={$personnages[menu_sec0]->id}">
+                                        <span class="avatar" style='background: url({$personnages[menu_sec0]->avatar});' alt="{$personnages[menu_sec0]->nom}" title="{$personnages[menu_sec0]->nom}"></span>
+                                        Contrôler {$personnages[menu_sec0]->nom}
                                     </a>
                                 </li>
 {/section}
-                                <li><a href="?c=personage&amp;a=creer">Créer un personage</a></li>
+                                <li><a href="?c=personage">Gérer les Personages</a></li>
                                 <li><a href="?c=groupe">Gérer les Groupes</a></li>
                                 <li><a href="?c=droit">Gérer les Droits</a></li>
-                                <li><a href="?c=utilisateur&amp;a=mon_compte">Mon Compte</a></li>
+                                <li><a href="?c=utilisateur&amp;a=settings">Paramètres</a></li>
                                 <li><a href="?c=utilisateur&amp;a=deconnexion">Déconnecter</a></li>
                             </ul>
                         </li>

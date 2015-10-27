@@ -14,7 +14,7 @@ class AttribuerViewer
         
         if(Session::get('connected'))
         {
-            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
             Viewer::assign('personnages', array());
         }
 

@@ -15,7 +15,7 @@ class DroitViewer
         
         if(Session::get('connected'))
         {
-            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
             Viewer::assign('personnages', array());
         }
 
@@ -35,7 +35,7 @@ class DroitViewer
         
         if(Session::get('connected'))
         {
-            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
             Viewer::assign('personnages', array());
         }
 
@@ -55,7 +55,7 @@ class DroitViewer
         
         if(Session::get('connected'))
         {
-            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
             Viewer::assign('personnages', array());
         }
 
