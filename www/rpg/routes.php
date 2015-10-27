@@ -22,5 +22,9 @@ $ROUTES=array(
             'editer'        => 'DroitControler::editer',
             'supprimer'     => 'DroitControler::supprimer',
         ),
+    'attribuer' => array (
+            ''              => 'AttribuerControler::link',
+            'link'         => 'DroitControler::link',
+        ),
 );
 ?>
