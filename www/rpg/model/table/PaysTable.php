@@ -2,13 +2,15 @@
 /**
  * Classe d'accès à la table `pays`
  *
- * @filesource model/table/UtilisateurTable.php
+ * @filesource model/table/PaysTable.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
  */
 
 require_once 'kernel/Database.php';
+
+require_once 'model/class/Pays.php';
 
 class PaysTable {
     
@@ -46,11 +48,12 @@ class PaysTable {
         $query .= " FROM `" . self::$table . "`;";
         
         $sth = $dbh->prepare($query);
+        $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
         $sth->execute();
         
         if($sth->rowCount())
         {
-            $results = $sth->fetchAll(PDO::FETCH_ASSOC);
+            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
         }
         else
         {
