@@ -10,6 +10,9 @@
 
 require_once 'kernel/Database.php';
 
+require_once 'model/class/Confidentialite.php';
+
+
 class ConfidentialiteTable {
     
     /**
@@ -46,11 +49,12 @@ class ConfidentialiteTable {
         $query .= " FROM `" . self::$table . "`;";
         
         $sth = $dbh->prepare($query);
+        $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
         $sth->execute();
         
         if($sth->rowCount())
         {
-            $results = $sth->fetchAll(PDO::FETCH_ASSOC);
+            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
         }
         else
         {
