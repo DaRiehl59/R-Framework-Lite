@@ -70,7 +70,7 @@
 
 ### Scribe
 
-* Editer une description de personnage (personnage::editer_description)
+* Editer une description de personnage (personnage::update_description)
 
 ### Utilisateur
 
