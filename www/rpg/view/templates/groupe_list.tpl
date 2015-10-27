@@ -8,12 +8,12 @@
 {section name=liste_sec0 loop=$items}
                                 <tr>
                                     <td>
-                                        <a href="?c=groupe&amp;a=affecter&amp;id={$items[liste_sec0]->id}" title="Avatar">
+                                        <a href="?c=affecter&amp;id={$items[liste_sec0]->id}" title="Avatar">
                                             <img src="{$avatar_directory}/{$items[liste_sec0]->avatar}" alt="Avatar">
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="?c=groupe&amp;a=affecter&amp;id={$items[liste_sec0]->id}" title="Nom">
+                                        <a href="?c=affecter&amp;id={$items[liste_sec0]->id}" title="Nom">
                                             {$items[liste_sec0]->nom}
                                         </a>
                                     </td>

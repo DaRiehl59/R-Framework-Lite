@@ -25,7 +25,11 @@ $ROUTES=array(
         ),
     'attribuer' => array (
             ''              => 'AttribuerControler::link',
-            'link'          => 'DroitControler::link',
+            'link'          => 'AttribuerControler::link',
+        ),
+    'affecter' => array (
+            ''              => 'AffecterControler::link',
+            'link'          => 'AffecterControler::link',
         ),
 );
 ?>

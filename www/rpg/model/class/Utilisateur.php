@@ -120,5 +120,9 @@ class Utilisateur {
     public function __set($name, $value) {
         $this->$name = $value;
     }
+    
+    public function __toString() {
+        return "[$this->id] $this->nom ($this->pseudo)";
+    }
 }
 ?>
