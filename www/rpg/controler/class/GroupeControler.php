@@ -28,6 +28,8 @@ class GroupeControler {
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
             $item['description'] = filter_input(INPUT_POST, 'description',FILTER_SANITIZE_STRING);
             $item['maximum'] = filter_input(INPUT_POST, 'maximum',FILTER_SANITIZE_STRING);
+            $item['connecte'] = (filter_input(INPUT_POST, 'connecte',FILTER_SANITIZE_STRING) == "on")?1:0;
+            $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
             
             $result = GroupeTable::insert($item);
         }
@@ -39,9 +41,12 @@ class GroupeControler {
                 $directory = $PARAM['groupes']['avatars']['directory'];
                 $item['avatar'] = upload_picture_to_dir($directory);
             }
+            $item['id'] = filter_input(INPUT_POST, 'id',FILTER_SANITIZE_NUMBER_INT);
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
             $item['description'] = filter_input(INPUT_POST, 'description',FILTER_SANITIZE_STRING);
             $item['maximum'] = filter_input(INPUT_POST, 'maximum',FILTER_SANITIZE_STRING);
+            $item['connecte'] = (filter_input(INPUT_POST, 'connecte',FILTER_SANITIZE_STRING) == "on")?1:0;
+            $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
             
             $result = GroupeTable::update($item);
         }

@@ -21,10 +21,20 @@
                                 <tr>
                                     <th><label for="avatar">Avatar<span class="warning">*</span>&nbsp;:</label></th>
                                     <td>
+{if $item->avatar neq ''}
                                         <img src="{$avatar_directory}/{$item->avatar}" alt="Avatar">
+{/if}
                                         <input type="hidden" name="MAX_FILE_SIZE" value="{$max_file_size}">
                                         <input type="file" id="avatar" name="userfile">
                                     </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="connecte">Connecté&nbsp;:</label></th>
+                                    <td><input type="checkbox" id="connecte" name="connecte" title="Groupe pour des utilisateurs connecté" {if $item->connecte} checked="checked"{/if}></td>
+                                </tr>
+                                <tr>
+                                    <th><label for="actif">Actif&nbsp;:</label></th>
+                                    <td><input type="checkbox" id="actif" name="actif" title="Groupe activé" {if $item->actif} checked="checked"{/if}></td>
                                 </tr>
                             </tbody>
                             <tfoot>

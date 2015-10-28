@@ -8,24 +8,33 @@
 {section name=liste_sec0 loop=$items}
                                 <tr>
                                     <td>
-                                        <a href="?c=affecter&amp;id={$items[liste_sec0]->id}" title="Avatar">
+                                        <a href="?c=groupe&amp;a=editer&amp;id={$items[liste_sec0]->id}" title="Editer">
+{if $items[liste_sec0]->avatar neq ''}
                                             <img src="{$avatar_directory}/{$items[liste_sec0]->avatar}" alt="Avatar">
+{else}
+                                            &nbsp;
+{/if}
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="?c=affecter&amp;id={$items[liste_sec0]->id}" title="Nom">
+                                        <a href="?c=groupe&amp;a=editer&amp;id={$items[liste_sec0]->id}" title="Editer">
                                             {$items[liste_sec0]->nom}
                                         </a>
                                     </td>
                                     <th>
                                         <ul class="menu">
                                             <li class="icon">
-                                                <a href="?c=groupe&amp;a=editer&amp;id={$items[liste_sec0]->id}" title="éditer">
+                                                <a href="?c=groupe&amp;a=editer&amp;id={$items[liste_sec0]->id}" title="Editer">
                                                     <div class="icon" style="background: url({$theme}/pencil_edit.png) center center / 16px;"></div>
                                                 </a>
                                             </li>
                                             <li class="icon">
-                                                <a href="?c=groupe&amp;a=supprimer&amp;id={$items[liste_sec0]->id}" title="supprimer">
+                                                <a href="?c=affecter&amp;id={$items[liste_sec0]->id}" title="Affecter">
+                                                    <div class="icon" style="background: url({$theme}/friends_group.png) center center / 16px;"></div>
+                                                </a>
+                                            </li>
+                                            <li class="icon">
+                                                <a href="?c=groupe&amp;a=supprimer&amp;id={$items[liste_sec0]->id}" title="Supprimer">
                                                     <div class="icon" style="background: url({$theme}/close_delete_2.png) center center / 16px;"></div>
                                                 </a>
                                             </li>
@@ -60,6 +69,14 @@
                                         <input type="hidden" name="MAX_FILE_SIZE" value="{$max_file_size}">
                                         <input type="file" id="avatar" name="userfile">
                                     </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="connecte">Connecté&nbsp;:</label></th>
+                                    <td><input type="checkbox" id="connecte" name="connecte" title="Groupe pour des utilisateurs connecté" checked="checked"></td>
+                                </tr>
+                                <tr>
+                                    <th><label for="actif">Actif&nbsp;:</label></th>
+                                    <td><input type="checkbox" id="actif" name="actif" title="Groupe activé" checked="checked"></td>
                                 </tr>
                             </tbody>
                             <tfoot>

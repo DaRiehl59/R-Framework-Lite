@@ -2,7 +2,12 @@
             <div id="main" class="affecter">
                 <fieldset class="global">
                     <legend>Affectation dans un groupe</legend>
-                    <h1><img src="{$avatar_directory}/{$groupe->avatar}" alt="Avatar">{$groupe->nom}</h1>
+                    <h1>
+{if $groupe->avatar neq ''}
+                        <img src="{$avatar_directory}/{$groupe->avatar}" alt="Avatar">
+{/if}
+                        {$groupe->nom}
+                    </h1>
                     <form action="?c=affecter&amp;id={$groupe->id}" method="post">
                         <table>
                             <tbody>
