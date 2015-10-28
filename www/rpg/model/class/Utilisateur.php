@@ -122,7 +122,7 @@ class Utilisateur {
     }
     
     public function __toString() {
-        return "[$this->id] $this->nom ($this->pseudo)";
+        return "$this->pseudo ($this->nom)";
     }
 }
 ?>
