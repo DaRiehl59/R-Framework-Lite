@@ -21,11 +21,6 @@ class AttribuerControler {
     {
         if(isset($_POST['btn_record']))
         {
-            /**
-             * à compléter
-             */
-            
-            
             $args = array(
                 'links'    => array(
                     'filter' => FILTER_SANITIZE_STRING,
