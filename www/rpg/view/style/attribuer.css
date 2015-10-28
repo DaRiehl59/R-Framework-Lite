@@ -14,7 +14,7 @@ and open the template in the editor.
 
 #main.attribuer fieldset.list{margin-top: 60px;}
 
-#main.attribuer fieldset.list div {max-height: 253px; overflow: auto;}
+#main.attribuer fieldset.list div {max-height: 600px; overflow: auto;}
 #main.attribuer table{border-spacing: 0; border-collapse: collapse; margin: auto;}
 
 #main.attribuer fieldset.list tbody tr{border-top: 1px solid black; border-bottom: 1px solid black;}
@@ -23,7 +23,6 @@ and open the template in the editor.
 
 #main.attribuer fieldset.list tbody tr:hover{background: lightblue;}
 
-#main.attribuer fieldset.list{margin-top: 60px;}
 #main.attribuer fieldset.list th{text-align: left; vertical-align: top; line-height: 20px;}
 #main.attribuer fieldset.list th.submit{text-align: right;}
 #main.attribuer fieldset.list input[name="btn_record"]{color: green; border: 1px solid #55DD55;}

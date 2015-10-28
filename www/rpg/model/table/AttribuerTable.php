@@ -107,6 +107,48 @@ class AttribuerTable {
     }
 
     /**
+     * suppresssion d'un enregistrement
+     * @param int $id_droit
+     * @return boolean $result résultat de la requête SQL
+     */
+    public static function delete_by_id_droit($id_droit){
+        $dbh = Database::connect();
+        
+        $query = "DELETE FROM `" . self::$table . "` WHERE" . "\r\n"
+                . "id_droit = :id_droit";
+        
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(':id_droit', $id_droit, PDO::PARAM_INT);
+        
+        $result = $sth->execute();
+        
+        Database::disconnect();
+        
+        return $result;
+    }
+    
+    /**
+     * suppresssion d'un enregistrement
+     * @param int $id_groupe
+     * @return boolean $result résultat de la requête SQL
+     */
+    public static function delete_by_id_groupe($id_groupe){
+        $dbh = Database::connect();
+        
+        $query = "DELETE FROM `" . self::$table . "` WHERE" . "\r\n"
+                . "id_groupe = :id_groupe";
+        
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(':id_groupe', $id_groupe, PDO::PARAM_INT);
+        
+        $result = $sth->execute();
+        
+        Database::disconnect();
+        
+        return $result;
+    }
+    
+    /**
      * purge de la table
      * @param int $id
      * @return boolean $result résultat de la requête SQL

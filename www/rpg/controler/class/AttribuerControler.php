@@ -19,6 +19,26 @@ require_once 'view/class/AttribuerViewer.php';
 class AttribuerControler {
     public static function link()
     {
+        if(isset($_GET['id_droit']))
+        {
+            $id_droit = filter_input(INPUT_GET, 'id_droit', FILTER_SANITIZE_NUMBER_INT);
+            $items1[] = DroitTable::select_by_id($id_droit);
+        }
+        else
+        {
+            $items1 = DroitTable::select('*');
+        }
+        
+        if(isset($_GET['id_groupe']))
+        {
+            $id_groupe = filter_input(INPUT_GET, 'id_groupe', FILTER_SANITIZE_NUMBER_INT);
+            $items2[] = GroupeTable::select_by_id($id_groupe);
+        }
+        else
+        {
+            $items2 = GroupeTable::select('*');
+        }
+        
         if(isset($_POST['btn_record']))
         {
             $args = array(
@@ -29,20 +49,33 @@ class AttribuerControler {
             );
             $filtered = filter_input_array(INPUT_POST, $args);
 
-            AttribuerTable::truncate();
-            foreach ($filtered['links'] as $item1 => $items)
+            if(isset($_GET['id_droit']))
             {
-                foreach ($items as $item2 => $value)
+                AttribuerTable::delete_by_id_droit($id_droit);
+            }
+            elseif(isset($_GET['id_groupe']))
+            {
+                AttribuerTable::delete_by_id_groupe($id_groupe);
+            }
+            else
+            {
+                AttribuerTable::truncate();
+            }
+            
+            if(isset($filtered['links']))
+            {
+                foreach ($filtered['links'] as $item1 => $items)
                 {
-                    $item['id_droit'] = $item1;
-                    $item['id_groupe'] = $item2;
-                    AttribuerTable::insert($item);
+                    foreach ($items as $item2 => $value)
+                    {
+                        $item['id_droit'] = $item1;
+                        $item['id_groupe'] = $item2;
+                        AttribuerTable::insert($item);
+                    }
                 }
             }
         }
         
-        $items1 = DroitTable::select('*');
-        $items2 = GroupeTable::select('*');
         $items3  = AttribuerTable::select('*');
         
         if(! empty($items3))

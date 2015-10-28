@@ -2,7 +2,13 @@
             <div id="main" class="attribuer">
                 <fieldset class="list">
                     <legend>Attribution des Droits</legend>
+{if $items1|@count eq 1}
+                    <form action="?c=attribuer&amp;id_droit={$items1[0]->id}" method="post">
+{elseif $items2|@count eq 1}
+                    <form action="?c=attribuer&amp;id_groupe={$items2[0]->id}" method="post">
+{else}
                     <form action="?c=attribuer" method="post">
+{/if}
                         <div>
                             <table>
                                 <thead>
@@ -29,7 +35,11 @@
                                     <tr>
                                         <th colspan="{$items2|@count + 1}" class="submit">
                                             <input type="submit" name="btn_record" value="Enregistrer">
+{if $items1|@count eq 1}
                                             <input type="submit" formnovalidate="" formaction="?c=droit" name="btn_back" value="Retour" >
+{elseif $items2|@count eq 1}
+                                            <input type="submit" formnovalidate="" formaction="?c=groupe" name="btn_back" value="Retour" >
+{/if}
                                         </th>
                                     </tr>
                                 </tfoot>

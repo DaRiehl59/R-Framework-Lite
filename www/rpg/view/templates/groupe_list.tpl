@@ -29,8 +29,13 @@
                                                 </a>
                                             </li>
                                             <li class="icon">
-                                                <a href="?c=affecter&amp;id={$items[liste_sec0]->id}" title="Affecter">
+                                                <a href="?c=affecter&amp;id={$items[liste_sec0]->id}" title="Affecter un membre">
                                                     <div class="icon" style="background: url({$theme}/friends_group.png) center center / 16px;"></div>
+                                                </a>
+                                            </li>
+                                            <li class="icon">
+                                                <a href="?c=attribuer&amp;id_groupe={$items[liste_sec0]->id}" title="Attribuer un droit">
+                                                    <div class="icon" style="background: url({$theme}/checked.png) center center / 16px;"></div>
                                                 </a>
                                             </li>
                                             <li class="icon">

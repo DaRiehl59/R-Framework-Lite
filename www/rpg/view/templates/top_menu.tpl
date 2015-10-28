@@ -36,6 +36,7 @@
                                 <li><a href="?c=personage">Gérer les Personages</a></li>
                                 <li><a href="?c=groupe">Gérer les Groupes</a></li>
                                 <li><a href="?c=droit">Gérer les Droits</a></li>
+                                <li><a href="?c=attribuer">Attributions</a></li>
                                 <li><a href="?c=utilisateur&amp;a=settings">Paramètres</a></li>
                                 <li><a href="?c=utilisateur&amp;a=deconnexion">Déconnecter</a></li>
                             </ul>

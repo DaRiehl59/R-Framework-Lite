@@ -24,7 +24,7 @@ and open the template in the editor.
 #main.groupe fieldset.list tbody tr:hover{background: lightblue;}
 #main.groupe fieldset.list tbody tr:hover ul.menu li.icon{border: 1px solid lightblue;}
 
-#main.groupe fieldset.list tbody td:nth-child(2){width:235px;}
+#main.groupe fieldset.list tbody td:nth-child(2){width:212px;}
 
 #main.groupe fieldset.list td a{display: block;text-decoration: none; color: inherit;}
 

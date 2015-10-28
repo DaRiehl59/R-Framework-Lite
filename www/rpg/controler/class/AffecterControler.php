@@ -19,7 +19,7 @@ require_once 'view/class/AffecterViewer.php';
 class AffecterControler {
     public static function link()
     {
-        $id_groupe = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+        $id_groupe = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
         
         if(isset($_POST['btn_ajouter_x']))
         {

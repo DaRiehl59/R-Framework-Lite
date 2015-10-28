@@ -8,19 +8,24 @@
 {section name=liste_sec0 loop=$items}
                                 <tr>
                                     <td>
-                                        <a href="?c=attribuer" title="Nom">
+                                        <a href="?c=droit&amp;a=editer&amp;id={$items[liste_sec0]->id}" title="Editer">
                                             {$items[liste_sec0]->nom}
                                         </a>
                                     </td>
                                     <th>
                                         <ul class="menu">
                                             <li class="icon">
-                                                <a href="?c=droit&amp;a=editer&amp;id={$items[liste_sec0]->id}" title="éditer">
+                                                <a href="?c=droit&amp;a=editer&amp;id={$items[liste_sec0]->id}" title="Editer">
                                                     <div class="icon" style="background: url({$theme}/pencil_edit.png) center center / 16px;"></div>
                                                 </a>
                                             </li>
                                             <li class="icon">
-                                                <a href="?c=droit&amp;a=supprimer&amp;id={$items[liste_sec0]->id}" title="supprimer">
+                                                <a href="?c=attribuer&amp;id_droit={$items[liste_sec0]->id}" title="Attribuer ce droit">
+                                                    <div class="icon" style="background: url({$theme}/checked.png) center center / 16px;"></div>
+                                                </a>
+                                            </li>
+                                            <li class="icon">
+                                                <a href="?c=droit&amp;a=supprimer&amp;id={$items[liste_sec0]->id}" title="Supprimer">
                                                     <div class="icon" style="background: url({$theme}/close_delete_2.png) center center / 16px;"></div>
                                                 </a>
                                             </li>
