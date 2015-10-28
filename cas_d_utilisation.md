@@ -7,78 +7,150 @@
 
 **Pré-requis** : *aucun*
 
-**Maximum** : 1 seul utilisateur par serveur (par défaut : *root*)
+**Maximum** : 1 par Serveur (par défaut : *root*)
 
-**Description** : Utilisateur qui a tous les pouvoirs
+**Description**
 
-**Fonctionallités spécifiques** :
+Maître absolu et incontesté des Univers.
+
+**Fonctionallités spécifiques**
 
 * Gérer les Architectes
 * Gérer les Univers
 * Gérer les Groupes
 * Gérer les Droits
 
-**Autres Fonctionallités disponibles** :
+**Autres Fonctionallités disponibles**
 
 * **toutes les autres fonctionnalités**
 
-### Architecte
+### Architecte(s)
 
 **Pré-requis** : *aucun*
 
-**Maximum** : 1 utilisateur par Univers
+**Maximum** : 1 par Univers
 
-**Description** : Gérant de l'univers
+**Description**
 
-**Fonctionallités spécifiques** :
+Maître d'un Univers.
+
+**Fonctionallités spécifiques**
 
 * Gérer les Maîtres de jeu
 * Gérer les Régions
 * Gérer les Villes
 
-**Autres Fonctionallités disponibles** :
+**Autres Fonctionallités disponibles**
 
 * **les fonctionnalités de niveau inférieur**
 
-### Maître de Jeu
+### Maître(s) de Jeu
+
+**Pré-requis** : *aucun*
+
+**Maximum** : 1 par Secteur
+
+**Description**
+
+Assistant de l'architecte sur le développement RP de son Univers.
+
+**Fonctionallités spécifiques**
 
 * Gérer les Juges
 * Gérer les Scribes
 
-### Juge
+### Juge(s)
+
+**Pré-requis** : *avoir été Boureau*, *niv XP min*
+
+**Maximum** : 1 par Secteur
+
+**Description**
+
+Impartial, il fait appliquer la loi dans un secteur.
+Une fois rendue, sa décision ne peut être contestée.
+
+**Fonctionallités spécifiques**
 
 * Gérer les Bourreaux
 * Gérer les Diplomates
 
-### Boureau
+### Boureau(x)
 
-* Appliquer une sentence prononcée par le juge
+**Pré-requis** : *avoir été Diplomate*, *niv XP min*
 
-    * bannir définitivement
-    * bannir provisoirement
-    * blamer
-    * avertir
+**Maximum** : 3 par Secteur
 
-### Diplomate
+**Description**
+
+Mystérieux et solitaire, il applique les sentences prononcées par le juge.
+
+**Fonctionallités spécifiques**
+
+* exécuter (archivage définitif d'un utilisateur + archivage définitif de tous les personnages)
+* exiler (archivage définitif d'un personnage)
+* emprisonner (banissement provisoirement : blocage de tous les personnages)
+* blamer (message public)
+* avertir (message privé)
+
+### Diplomate(s)
+
+**Pré-requis** : *avoir été Veilleur*, *niv XP min*
+
+**Maximum** : 5 par Secteur
+
+**Description**
+
+Généreux et volontaire, il est le garant de la paix dans un secteur.
+Il s'assure que les conflits peuvent être réglés à l'amiable avant de les porter devant le tribunal.
+
+**Fonctionallités spécifiques**
 
 * Gérer les Veilleurs
 * Gérer les signalements (message_signal::lire)
 
-### Veilleur
+### Veilleur(s)
+
+**Pré-requis** : *niv XP min*
+
+**Maximum** : 10 par Secteur
+
+**Description**
+
+Attentif, discret, honnête, il surveille le déroulement des aventures
+et le comportement RP / HRP des personnages / utilisateurs.
+En cas d'infraction aux règlements du site, du secteur, ou de l'univers
+le veilleur fait un signalement objectif et précis de l'incident.
+
+**Fonctionallités spécifiques**
 
 * Signaler un comportement à un diplomate
 
-### Scribe
+### Scribe(s)
+
+**Pré-requis** : *niv XP min*
+
+**Maximum** : 20 par Secteur
+
+**Description**
+
+Irréprochable dans son orthographe, et sa grammaire, il est le garant du respect de la langue Française.
+
+**Fonctionallités spécifiques**
 
 * Editer une description de personnage (personnage::update_description)
 
-### Utilisateur
+### Utilisateur(s)
 
 **Pré-requis** : *être connecté*
 
-**Description** : Utilisateur normal
+**Maximum** : illimité
 
-**Fonctionallités disponibles** :
+**Description**
+
+Utilisateur normal
+
+**Fonctionallités spécifiques**
 
 * Se déconnecter             (utilisateur::deconnect)
 * Inviter                    (utilisateur::invite)
@@ -99,7 +171,7 @@
 * Effacer un/des messages    (message::archiv)
 * Signaler un message abusif (message::signal)
 
-### Anonyme
+### Anonyme(s)
 
 **Pré-requis** : *aucun*
 
