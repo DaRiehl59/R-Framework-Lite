@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #main ul.menu li.icon {
     float: left;
-    margin-right: 5px; padding:0;
+    margin-right: 5px; margin-top: 2px; padding:0;
     width: 16px; height: 16px; line-height: 16px;
     border-radius: 3px; list-style: none;
     border: 1px solid beige;
@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 }
 
 #main ul.menu a {display:block; text-decoration: none; color:inherit;}
-#main ul.menu div{
+#main ul.menu div.icon{
     width:16px; height: 16px;
     background: no-repeat center center / 16px;
 }
