@@ -24,7 +24,7 @@ class UtilisateurTable {
      * connexion de l'utilisateur
      * @param String $identifiant
      * @param String $motdepasse
-     * @return Utilisateur Utilisateur qui a ouvert la connexion
+     * @return Object Utilisateur qui a ouvert la connexion
      */
     public static function connexion($identifiant,$motdepasse){
         $dbh = Database::connect();
@@ -55,8 +55,8 @@ class UtilisateurTable {
     
     /**
      * chargement des informations d'un utilisateur
-     * @param String $id
-     * @return Utilisateur Utilisateur correspondant à id
+     * @param int $id
+     * @return Object Utilisateur correspondant à id
      */
     public static function select_by_id($id){
         $dbh = Database::connect();

@@ -68,7 +68,7 @@ class GroupeTable {
     
     /**
      * recherche d'un enregistrement par son id
-     * @param String $id
+     * @param int $id
      * @return Object élément correspondant à la valeur de id
      */
     public static function select_by_id($id){
@@ -100,7 +100,7 @@ class GroupeTable {
 
     /**
      * insertion d'un nouvel enregistrement
-     * @param String $item
+     * @param Array $item
      * @return boolean $result résultat de la requête SQL
      */
     public static function insert($item){
@@ -141,7 +141,7 @@ class GroupeTable {
 
     /**
      * mise à jour d'un enregistrement
-     * @param String $item
+     * @param Array $item
      * @return boolean $result résultat de la requête SQL
      */
     public static function update($item){
@@ -175,7 +175,7 @@ class GroupeTable {
     
     /**
      * suppresssion d'un enregistrement
-     * @param String $id
+     * @param int $id
      * @return boolean $result résultat de la requête SQL
      */
     public static function delete($id){

@@ -59,19 +59,19 @@ class AffecterControler {
             }
         }
         
-        $members = AffecterTable::select_members_by_id_groupe($id_groupe);
+        $members = AffecterTable::get_members($id_groupe);
         $members_ids = array();
         
-        $items = AffecterTable::select_members_id_by_id_groupe($id_groupe);
+        $items = AffecterTable::get_members_ids($id_groupe);
         foreach($items as $item)
         {
             $members_ids[] = $item->id;
         }
         
-        $others  = AffecterTable::select_others_by_id_groupe($id_groupe);
+        $others  = AffecterTable::get_others($id_groupe);
         $others_ids = array();
         
-        $items  = AffecterTable::select_others_id_by_id_groupe($id_groupe);
+        $items  = AffecterTable::get_others_ids($id_groupe);
         foreach($items as $item)
         {
             $others_ids[] = $item->id;

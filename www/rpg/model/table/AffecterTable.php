@@ -22,56 +22,11 @@ class AffecterTable {
     private static $table = "affecter";
     
     /**
-     * recherche de tous les enregistrements
-     * @param Array $fields
-     * @return Utilisateur Utilisateur correspondant à id
-     */
-    public static function select(){
-        if(!func_num_args())
-        {
-            $fields = array('*');
-        }
-        else
-        {
-            $fields = func_get_args();
-        }
-        
-        
-        $dbh = Database::connect();
-        
-        $query  = "SELECT ";
-        foreach ($fields as $field)
-        {
-            $query .= "" . $field . ", ";
-        }
-        $query = substr($query, 0,  strlen($query) - 2);
-        $query .= " FROM `" . self::$table . "`;";
-        
-        $sth = $dbh->prepare($query);
-        $sth->setFetchMode(PDO::FETCH_CLASS, self::$table);
-        $sth->execute();
-        
-        if($sth->rowCount())
-        {
-            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
-            $sth->closeCursor();
-        }
-        else
-        {
-            $results = null;
-        }
-        
-        Database::disconnect();
-        
-        return $results;
-    }
-    
-    /**
      * recherche d'un membre par son id
      * @param int $id_groupe
      * @return Array élément correspondant à la valeur de id
      */
-    public static function select_members_by_id_groupe($id_groupe){
+    public static function get_members($id_groupe){
         $dbh = Database::connect();
         
         $query  = "SELECT *" . "\r\n"
@@ -110,7 +65,7 @@ class AffecterTable {
      * @param int $id_groupe
      * @return Array élément correspondant à la valeur de id
      */
-    public static function select_members_id_by_id_groupe($id_groupe){
+    public static function get_members_ids($id_groupe){
         $dbh = Database::connect();
         
         $query  = "SELECT id" . "\r\n"
@@ -149,7 +104,7 @@ class AffecterTable {
      * @param int $id_groupe
      * @return Array élément correspondant à la valeur de id
      */
-    public static function select_others_by_id_groupe($id_groupe){
+    public static function get_others($id_groupe){
         $dbh = Database::connect();
         
         $query  = "SELECT *" . "\r\n"
@@ -188,7 +143,7 @@ class AffecterTable {
      * @param int $id_groupe
      * @return Array élément correspondant à la valeur de id
      */
-    public static function select_others_id_by_id_groupe($id_groupe){
+    public static function get_others_ids($id_groupe){
         $dbh = Database::connect();
         
         $query  = "SELECT id" . "\r\n"
@@ -224,7 +179,7 @@ class AffecterTable {
     
     /**
      * insertion d'un nouvel enregistrement
-     * @param String $item
+     * @param Array $item
      * @return boolean $result résultat de la requête SQL
      */
     public static function insert($item){
@@ -264,40 +219,6 @@ class AffecterTable {
     }
 
     /**
-     * mise à jour d'un enregistrement
-     * @param String $item
-     * @return boolean $result résultat de la requête SQL
-     */
-    public static function update($item){
-        $dbh = Database::connect();
-        
-        $query = "UPDATE `" . self::$table . "` SET" . "\r\n";
-        
-        $fields = array_keys($item);
-        
-        foreach($fields as $field)
-        {
-            $query .= $field . " = :".$field . "," . "\r\n";
-        }
-        $query  = substr($query, 0, strlen($query) -3);
-        $query .= ";";
-        
-        $sth = $dbh->prepare($query);
-        
-        foreach($item as $field => $value)
-        {
-            
-            $sth->bindParam(':' . $field, $item[$field]);
-        }
-        
-        $result = $sth->execute();
-        
-        Database::disconnect();
-        
-        return $result;
-    }
-    
-    /**
      * suppresssion d'un enregistrement
      * @param Array $ids Fields included in Primary Key
      * @return boolean $result résultat de la requête SQL
@@ -325,24 +246,6 @@ class AffecterTable {
             $sth->bindParam(':' . $field, $ids[$field]);
         }
         
-        $result = $sth->execute();
-        
-        Database::disconnect();
-        
-        return $result;
-    }
-    
-    /**
-     * purge de la table
-     * @param String $id
-     * @return boolean $result résultat de la requête SQL
-     */
-    public static function truncate(){
-        $dbh = Database::connect();
-        
-        $query = "DELETE FROM `" . self::$table . "`";
-        
-        $sth = $dbh->prepare($query);
         $result = $sth->execute();
         
         Database::disconnect();

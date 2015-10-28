@@ -66,40 +66,8 @@ class AttribuerTable {
     }
     
     /**
-     * recherche d'un enregistrement par son id
-     * @param String $id
-     * @return Object élément correspondant à la valeur de id
-     */
-    public static function select_by_id($id){
-        $dbh = Database::connect();
-        
-        $query = "SELECT * FROM `" . self::$table . "`" . "\r\n"
-                . "WHERE id = :id;";
-        
-        $sth = $dbh->prepare($query);
-        $sth->bindParam(':id', $id, PDO::PARAM_INT);
-        
-        $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
-        $sth->execute();
-        
-        if($sth->rowCount() == 1)
-        {
-            $item = $sth->fetch(PDO::FETCH_CLASS);
-            $sth->closeCursor();
-        }
-        else
-        {
-            $item = null;
-        }
-        
-        Database::disconnect();
-        
-        return $item;
-    }
-
-    /**
      * insertion d'un nouvel enregistrement
-     * @param String $item
+     * @param Array $item
      * @return boolean $result résultat de la requête SQL
      */
     public static function insert($item){
@@ -139,63 +107,8 @@ class AttribuerTable {
     }
 
     /**
-     * mise à jour d'un enregistrement
-     * @param String $item
-     * @return boolean $result résultat de la requête SQL
-     */
-    public static function update($item){
-        $dbh = Database::connect();
-        
-        $query = "UPDATE `" . self::$table . "` SET" . "\r\n";
-        
-        $fields = array_keys($item);
-        
-        foreach($fields as $field)
-        {
-            $query .= $field . " = :".$field . "," . "\r\n";
-        }
-        $query  = substr($query, 0, strlen($query) -3);
-        $query .= ";";
-        
-        $sth = $dbh->prepare($query);
-        
-        foreach($item as $field => $value)
-        {
-            
-            $sth->bindParam(':' . $field, $item[$field]);
-        }
-        
-        $result = $sth->execute();
-        
-        Database::disconnect();
-        
-        return $result;
-    }
-    
-    /**
-     * suppresssion d'un enregistrement
-     * @param String $id
-     * @return boolean $result résultat de la requête SQL
-     */
-    public static function delete($id){
-        $dbh = Database::connect();
-        
-        $query = "DELETE FROM `" . self::$table . "` WHERE" . "\r\n"
-                . "id = :id";
-        
-        $sth = $dbh->prepare($query);
-        $sth->bindParam(':id', $id, PDO::PARAM_INT);
-        
-        $result = $sth->execute();
-        
-        Database::disconnect();
-        
-        return $result;
-    }
-    
-    /**
      * purge de la table
-     * @param String $id
+     * @param int $id
      * @return boolean $result résultat de la requête SQL
      */
     public static function truncate(){

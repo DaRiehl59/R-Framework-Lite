@@ -67,7 +67,7 @@ class DroitTable {
     
     /**
      * recherche d'un enregistrement par son id
-     * @param String $id
+     * @param int $id
      * @return Object élément correspondant à la valeur de id
      */
     public static function select_by_id($id){
@@ -99,7 +99,7 @@ class DroitTable {
 
     /**
      * insertion d'un nouvel enregistrement
-     * @param String $item
+     * @param Array $item
      * @return boolean $result résultat de la requête SQL
      */
     public static function insert($item){
@@ -140,7 +140,7 @@ class DroitTable {
 
     /**
      * mise à jour d'un enregistrement
-     * @param String $item
+     * @param Array $item
      * @return boolean $result résultat de la requête SQL
      */
     public static function update($item){
@@ -149,19 +149,19 @@ class DroitTable {
         $query = "UPDATE `" . self::$table . "` SET" . "\r\n";
         
         $fields = array_keys($item);
+        unset($fields['id']);
         
         foreach($fields as $field)
         {
             $query .= $field . " = :".$field . "," . "\r\n";
         }
-        $query  = substr($query, 0, strlen($query) -3);
-        $query .= ";";
+        $query  = substr($query, 0, strlen($query) -3) . "\r\n";
+        $query .= "WHERE id = :id;";
         
         $sth = $dbh->prepare($query);
         
         foreach($item as $field => $value)
         {
-            
             $sth->bindParam(':' . $field, $item[$field]);
         }
         
@@ -174,7 +174,7 @@ class DroitTable {
     
     /**
      * suppresssion d'un enregistrement
-     * @param String $id
+     * @param int $id
      * @return boolean $result résultat de la requête SQL
      */
     public static function delete($id){
