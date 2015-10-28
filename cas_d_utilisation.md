@@ -152,23 +152,24 @@ Utilisateur normal
 
 **Fonctionallités spécifiques**
 
-* Se déconnecter             (utilisateur::deconnect)
+* Se déconnecter             (utilisateur::disconnect)
 * Inviter                    (utilisateur::invite)
 * Consulter le profil        (utilisateur::read_profil)
-* Editer le profil           (utilisateur::update_profil)
+* Editer le profil           (utilisateur::owner_update_profil)
 * Télécharger un avatar      (utilisateur::upload_avatar)
 * Choisir un avatar          (utilisateur::select_avatar)
 * Editer les paramètres de confidentialité (utilisateur::update_confid)
 * Créer un personnage        (personnage::create)
-* Editer un personnage       (personnage::update)
-* Archiver un personnage     (personnage::archiv)
+* Editer un personnage       (personnage::owner_update)
+* Archiver un personnage     (personnage::owner_archive)
 * Proposer une aventure      (aventure::create)
-* Editer une aventure        (aventure::update)
+* Editer une aventure        (aventure::owner_update)
 * Participer à une aventure  (participation::create)
+* Editer une Participation   (participation::owner_update)
 * Signaler une participation abusive (participation::signal)
-* Envoyer un message privé à un autre utilisateur (message::create)
-* Consulter ces messages     (message::read)
-* Effacer un/des messages    (message::archiv)
+* Envoyer un message privé   (message::create)
+* Consulter ces messages     (message::owner_read)
+* Effacer un/des messages    (message::owner_archive)
 * Signaler un message abusif (message::signal)
 
 ### Anonyme(s)
@@ -179,5 +180,5 @@ Utilisateur normal
 
 **Fonctionallités disponibles** :
 
-* S'inscrire                 (utilisateur::creer)
-* Se connecter               (utilisateur::connecter)
+* S'inscrire                 (utilisateur::create)
+* Se connecter               (utilisateur::connect)
