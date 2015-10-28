@@ -16,12 +16,12 @@
                                         <ul class="menu">
                                             <li class="icon">
                                                 <a href="?c=droit&amp;a=editer&amp;id={$items[liste_sec0]->id}" title="éditer">
-                                                    <div style="background: url({$theme}/pencil_edit.png) center center / 16px;"></div>
+                                                    <div class="icon" style="background: url({$theme}/pencil_edit.png) center center / 16px;"></div>
                                                 </a>
                                             </li>
                                             <li class="icon">
                                                 <a href="?c=droit&amp;a=supprimer&amp;id={$items[liste_sec0]->id}" title="supprimer">
-                                                    <div style="background: url({$theme}/close_delete_2.png) center center / 16px;"></div>
+                                                    <div class="icon" style="background: url({$theme}/close_delete_2.png) center center / 16px;"></div>
                                                 </a>
                                             </li>
                                         </ul>
