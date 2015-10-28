@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 21 Octobre 2015 à 16:33
--- Version du serveur: 5.5.44-0ubuntu0.14.04.1
+-- Généré le: Mer 28 Octobre 2015 à 13:47
+-- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -32,6 +32,14 @@ CREATE TABLE IF NOT EXISTS `affecter` (
   PRIMARY KEY (`id_utilisateur`,`id_groupe`),
   KEY `id_groupe` (`id_groupe`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `affecter`
+--
+
+INSERT INTO `affecter` (`id_utilisateur`, `id_groupe`) VALUES
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -91,16 +99,27 @@ CREATE TABLE IF NOT EXISTS `groupe` (
   `nom` varchar(20) NOT NULL,
   `description` text NOT NULL,
   `maximum` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `avatar` varchar(255) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `connecte` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `groupe`
 --
 
-INSERT INTO `groupe` (`id`, `nom`, `description`, `maximum`, `avatar`) VALUES
-(1, 'Architectes', 'Respectés et craints de tous, les Architectes sont les Pères fondateurs des Univers.\r\nIls établissent les règles de chaque Univers et nomment les Maîtres de Jeu.', 3, '1.png');
+INSERT INTO `groupe` (`id`, `nom`, `description`, `maximum`, `avatar`, `connecte`, `actif`) VALUES
+(1, 'Grand Concepteur', 'Maître absolu et incontesté des Univers.', 1, '2c7fa0fa37eb7dc32a772f20c5306ac277b08768.png', 1, 1),
+(2, 'Architecte(s)', 'Maître d&#39;un Univers.', 1, '0c9a7e3da93a997931c324f3b7c554d2c477f71b.png', 1, 1),
+(3, 'Maître(s) de Jeu', 'Assistant de l&#39;architecte sur le développement RP de son Univers.', 1, '04eaa658cbaa9f5890b910bf061da667d72d44c4.png', 1, 1),
+(4, 'Juge(s)', 'Impartial, il fait appliquer la loi dans un secteur.\r\nUne fois rendue, sa décision ne peut être contestée.', 1, 'f05e649c978352cd60a1bfcdb3a269a48798295a.png', 1, 1),
+(5, 'Bourreau(x)', 'Mystérieux et solitaire, il applique les sentences prononcées par le juge.', 3, '4996de5c03d390882127c9d26fde43284f4f1294.png', 1, 1),
+(6, 'Diplomate(s)', 'Généreux et volontaire, il est le garant de la paix dans un secteur.\r\nIl s&#39;assure que les conflits peuvent être réglés à l&#39;amiable avant de les porter devant le tribunal.\r\n', 5, '31c56cea6c961b45036a6f8007b5ba8591e5acf7.png', 1, 1),
+(7, 'Veilleur(s)', 'Attentif, discret, honnête, il surveille le déroulement des aventures\r\net le comportement RP / HRP des personnages / utilisateurs.\r\nEn cas d&#39;infraction aux règlements du site, du secteur, ou de l&#39;univers\r\nle veilleur fait un signalement objectif et précis de l&#39;incident.', 10, 'dad5e7cde0cb21564176ed18ced68aec41c88719.png', 1, 1),
+(8, 'Scribe(s)', 'Irréprochable dans son orthographe, et sa grammaire, il est le garant du respect de la langue Française.', 20, '3159333ba60204a296f1367ea4059c59da45ee7b.png', 1, 1),
+(9, 'Utilisateur(s)', 'Utilisateur normal', 0, NULL, 1, 1),
+(10, 'Anonyme(s)', 'Internaute non connecté', 0, NULL, 0, 1);
 
 -- --------------------------------------------------------
 
