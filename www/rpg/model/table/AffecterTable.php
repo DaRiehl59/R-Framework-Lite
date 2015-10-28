@@ -48,7 +48,7 @@ class AffecterTable {
         $query .= " FROM `" . self::$table . "`;";
         
         $sth = $dbh->prepare($query);
-        $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
+        $sth->setFetchMode(PDO::FETCH_CLASS, self::$table);
         $sth->execute();
         
         if($sth->rowCount())
@@ -81,12 +81,52 @@ class AffecterTable {
                 . "    SELECT `id_utilisateur`" . "\r\n"
                 . "    FROM `" . self::$table . "`" . "\r\n"
                 . "    WHERE id_groupe = :id_groupe" . "\r\n"
-                . ");";
+                . ")" . "\r\n"
+                . "ORDER BY pseudo ASC;";
         
         $sth = $dbh->prepare($query);
         $sth->bindParam(':id_groupe', $id_groupe, PDO::PARAM_INT);
         
-        $sth->setFetchMode( PDO::FETCH_CLASS, 'Utilisateur');
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur');
+        $sth->execute();
+        
+        if($sth->rowCount())
+        {
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, 'Utilisateur');
+            $sth->closeCursor();
+        }
+        else
+        {
+            $items = array();
+        }
+        
+        Database::disconnect();
+        
+        return $items;
+    }
+
+    /**
+     * recherche d'un membre par son id
+     * @param int $id_groupe
+     * @return Array élément correspondant à la valeur de id
+     */
+    public static function select_members_id_by_id_groupe($id_groupe){
+        $dbh = Database::connect();
+        
+        $query  = "SELECT id" . "\r\n"
+                . "FROM `utilisateur`" . "\r\n"
+                . "WHERE `id` IN" . "\r\n"
+                . "(" . "\r\n"
+                . "    SELECT `id_utilisateur`" . "\r\n"
+                . "    FROM `" . self::$table . "`" . "\r\n"
+                . "    WHERE id_groupe = :id_groupe" . "\r\n"
+                . ")" . "\r\n"
+                . "ORDER BY pseudo ASC;";
+        
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(':id_groupe', $id_groupe, PDO::PARAM_INT);
+        
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur');
         $sth->execute();
         
         if($sth->rowCount())
@@ -119,7 +159,8 @@ class AffecterTable {
                 . "    SELECT `id_utilisateur`" . "\r\n"
                 . "    FROM `" . self::$table . "`" . "\r\n"
                 . "    WHERE id_groupe = :id_groupe" . "\r\n"
-                . ");";
+                . ")" . "\r\n"
+                . "ORDER BY pseudo ASC;";
         
         $sth = $dbh->prepare($query);
         $sth->bindParam(':id_groupe', $id_groupe, PDO::PARAM_INT);
@@ -142,6 +183,45 @@ class AffecterTable {
         return $items;
     }
 
+    /**
+     * recherche d'un autre par son id
+     * @param int $id_groupe
+     * @return Array élément correspondant à la valeur de id
+     */
+    public static function select_others_id_by_id_groupe($id_groupe){
+        $dbh = Database::connect();
+        
+        $query  = "SELECT id" . "\r\n"
+                . "FROM `utilisateur`" . "\r\n"
+                . "WHERE `id` NOT IN" . "\r\n"
+                . "(" . "\r\n"
+                . "    SELECT `id_utilisateur`" . "\r\n"
+                . "    FROM `" . self::$table . "`" . "\r\n"
+                . "    WHERE id_groupe = :id_groupe" . "\r\n"
+                . ")" . "\r\n"
+                . "ORDER BY pseudo ASC;";
+        
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(':id_groupe', $id_groupe, PDO::PARAM_INT);
+        
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur');
+        $sth->execute();
+        
+        if($sth->rowCount())
+        {
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, 'Utilisateur');
+            $sth->closeCursor();
+        }
+        else
+        {
+            $items = array();
+        }
+        
+        Database::disconnect();
+        
+        return $items;
+    }
+    
     /**
      * insertion d'un nouvel enregistrement
      * @param String $item
@@ -219,17 +299,31 @@ class AffecterTable {
     
     /**
      * suppresssion d'un enregistrement
-     * @param String $id
+     * @param Array $ids Fields included in Primary Key
      * @return boolean $result résultat de la requête SQL
      */
-    public static function delete($id){
+    public static function delete($ids){
         $dbh = Database::connect();
         
-        $query = "DELETE FROM `" . self::$table . "` WHERE" . "\r\n"
-                . "id = :id";
+        $query = "DELETE FROM `" . self::$table . "`" . "\r\n"
+               . "WHERE 1" . "\r\n";
+        
+        $fields = array_keys($ids);
+        
+        foreach($fields as $field)
+        {
+            $query .= "AND " . $field . " = :".$field . "\r\n";
+        }
+        
+        $query .= ";";
         
         $sth = $dbh->prepare($query);
-        $sth->bindParam(':id', $id, PDO::PARAM_INT);
+        
+        foreach($ids as $field => $value)
+        {
+            
+            $sth->bindParam(':' . $field, $ids[$field]);
+        }
         
         $result = $sth->execute();
         

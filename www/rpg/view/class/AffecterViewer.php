@@ -2,7 +2,7 @@
 
 class AffecterViewer
 {
-    public static function link($members,$others, $groupe)
+    public static function link($members, $members_ids, $others, $others_ids, $groupe)
     {
         global $PARAM;
         
@@ -15,7 +15,9 @@ class AffecterViewer
         Viewer::assign('theme', $theme);
         
         Viewer::assign('members', $members);
+        Viewer::assign('members_ids', $members_ids);
         Viewer::assign('others', $others);
+        Viewer::assign('others_ids', $others_ids);
         Viewer::assign('groupe', $groupe);
         
         if(Session::get('connected'))

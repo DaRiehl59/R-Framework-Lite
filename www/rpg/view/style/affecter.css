@@ -10,13 +10,14 @@ and open the template in the editor.
 
 #main.affecter{height: 677px;}
 
-#main.affecter img{width: 32px; float: left;}
-#main.affecter h1{float: left}
+#main.affecter img{width: 32px; float: left; margin-right: 10px;}
+#main.affecter h1{display: block; margin: 0; margin-bottom: 10px;}
 
+#main.affecter fieldset{margin: auto; padding: 10px;}
 
-#main.affecter fieldset{width: 361px; margin: auto; padding: 10px;}
+#main.affecter fieldset.global{margin-top: 60px; width: 695px;}
 
-#main.affecter fieldset.global{margin-top: 60px;}
+#main.affecter select{width: 300px;}
 
 #main.affecter fieldset.members{}
 
@@ -24,4 +25,7 @@ and open the template in the editor.
 
 #main.affecter table{border-spacing: 0; border-collapse: collapse; margin: auto;}
 
-#main.affecter th{width:32px;}
+#main.affecter tbody th li.icon32{margin: 5px;}
+#main.affecter tbody td{padding: 0; vertical-align: top;}
+
+#main.affecter tfoot th{text-align: right; padding-top: 10px;}
