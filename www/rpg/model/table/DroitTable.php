@@ -148,8 +148,11 @@ class DroitTable {
         
         $query = "UPDATE `" . self::$table . "` SET" . "\r\n";
         
+        $id=$item['id'];
+        unset($item['id']);
         $fields = array_keys($item);
-        unset($fields['id']);
+        $item['id']=$id;
+        unset($id);
         
         foreach($fields as $field)
         {
