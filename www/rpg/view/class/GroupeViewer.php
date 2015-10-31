@@ -8,7 +8,7 @@ class GroupeViewer
         
         Viewer::init();
         
-        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
+        $avatar_directory = $PARAM['groups']['avatars']['directory'];
         $theme = $PARAM['icons']['theme'];
         
         $max_file_size = file_upload_max_size();
@@ -35,7 +35,7 @@ class GroupeViewer
         
         Viewer::init();
         
-        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
+        $avatar_directory = $PARAM['groups']['avatars']['directory'];
         $theme = $PARAM['icons']['theme'];
         
         $max_file_size = file_upload_max_size();
@@ -62,7 +62,7 @@ class GroupeViewer
         
         Viewer::init();
         
-        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
+        $avatar_directory = $PARAM['groups']['avatars']['directory'];
         $theme = $PARAM['icons']['theme'];
         
         Viewer::assign('avatar_directory', $avatar_directory);

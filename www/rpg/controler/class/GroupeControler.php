@@ -22,7 +22,7 @@ class GroupeControler {
             $item['avatar'] = null;
             if(isset($_FILES['userfile']))
             {
-                $directory = $PARAM['groupes']['avatars']['directory'];
+                $directory = $PARAM['groups']['avatars']['directory'];
                 $item['avatar'] = upload_picture_to_dir($directory);
             }
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
@@ -38,7 +38,7 @@ class GroupeControler {
         {
             if(!empty($_FILES['userfile']['name']))
             {
-                $directory = $PARAM['groupes']['avatars']['directory'];
+                $directory = $PARAM['groups']['avatars']['directory'];
                 $item['avatar'] = upload_picture_to_dir($directory);
             }
             $item['id'] = filter_input(INPUT_POST, 'id',FILTER_SANITIZE_NUMBER_INT);

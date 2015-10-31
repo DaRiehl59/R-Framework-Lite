@@ -28,7 +28,7 @@ $PARAM['uploads']['directory']              = "./uploads";
 /**
  * Groupes Parameters
  */
-$PARAM['groupes']['avatars']['directory']   = $PARAM['uploads']['directory']. '/' . "groupes";
+$PARAM['groups']['avatars']['directory']   = $PARAM['uploads']['directory']. '/' . "groups";
 
 /**
  * Users Parameters
