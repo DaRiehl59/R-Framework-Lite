@@ -16,7 +16,12 @@ Maître absolu et incontesté des Univers.
 **Fonctionallités spécifiques**
 
 * Gérer les Architectes
-* Gérer les Univers
+
+    * Affecter un veilleur                          (Affecter::grant_architectes)
+    * Révoquer un veilleur                          (Affecter::revok_architectes)
+
+* Gérer les Univers                                 (Univers::create)
+                                            
 * Gérer les Groupes
 * Gérer les Droits
 
@@ -57,7 +62,14 @@ Assistant de l'architecte sur le développement RP de son Univers.
 **Fonctionallités spécifiques**
 
 * Gérer les Juges
+
+    * Affecter un Juge                              (Affecter::grant_juges)
+    * Révoquer un Juge                              (Affecter::revok_juges)
+
 * Gérer les Scribes
+
+    * Affecter un Scribe                            (Affecter::grant_scribes)
+    * Révoquer un Scribe                            (Affecter::revok_scribes)
 
 ### Juge(s)
 
@@ -73,7 +85,14 @@ Une fois rendue, sa décision ne peut être contestée.
 **Fonctionallités spécifiques**
 
 * Gérer les Bourreaux
+
+    * Affecter un Bourreau                          (Affecter::grant_bourreaux)
+    * Révoquer un Bourreau                          (Affecter::revok_bourreaux)
+
 * Gérer les Diplomates
+
+    * Affecter un Diplomate                         (Affecter::grant_diplomates)
+    * Révoquer un Diplomate                         (Affecter::revok_diplomates)
 
 ### Boureau(x)
 
@@ -107,7 +126,22 @@ Il s'assure que les conflits peuvent être réglés à l'amiable avant de les po
 **Fonctionallités spécifiques**
 
 * Gérer les Veilleurs
-* Gérer les signalements (message_signal::lire)
+
+    * Affecter un veilleur                          (Affecter::grant_veilleurs)
+    * Révoquer un veilleur                          (Affecter::revok_veilleurs)
+
+* Gérer les signalements des messages privés
+
+    * Lire les messages privés signalés             (Message::read_signaled)
+    * Annuler le signalement d'un message privé     (Message::unsignal)
+    * Confirmer le signalement d'un message         (Message::confirm_signal)
+
+* Gérer les signalements des participations
+
+    * Lire les participations signalées             (Participation::read_signaled)
+    * Annuler le signalement d'une participation    (Participation::unsignal)
+    * Confirmer le signalement d'une participation  (Participation::confirm_signal)
+
 
 ### Veilleur(s)
 
@@ -126,6 +160,7 @@ le veilleur fait un signalement objectif et précis de l'incident.
 
 * Signaler un comportement à un diplomate
 
+
 ### Scribe(s)
 
 **Pré-requis** : *niv XP min*
@@ -138,7 +173,8 @@ Irréprochable dans son orthographe, et sa grammaire, il est le garant du respec
 
 **Fonctionallités spécifiques**
 
-* Editer une description de personnage (personnage::update_description)
+* Editer une description de personnage              (Personnage::update_description)
+
 
 ### Utilisateur(s)
 
@@ -152,25 +188,42 @@ Utilisateur normal
 
 **Fonctionallités spécifiques**
 
-* Se déconnecter             (utilisateur::disconnect)
-* Inviter                    (utilisateur::invite)
-* Consulter le profil        (utilisateur::read_profil)
-* Editer le profil           (utilisateur::owner_update_profil)
-* Télécharger un avatar      (utilisateur::upload_avatar)
-* Choisir un avatar          (utilisateur::select_avatar)
-* Editer les paramètres de confidentialité (utilisateur::update_confid)
-* Créer un personnage        (personnage::create)
-* Editer un personnage       (personnage::owner_update)
-* Archiver un personnage     (personnage::owner_archive)
-* Proposer une aventure      (aventure::create)
-* Editer une aventure        (aventure::owner_update)
-* Participer à une aventure  (participation::create)
-* Editer une Participation   (participation::owner_update)
-* Signaler une participation abusive (participation::signal)
-* Envoyer un message privé   (message::create)
-* Consulter ces messages     (message::owner_read)
-* Effacer un/des messages    (message::owner_archive)
-* Signaler un message abusif (message::signal)
+* Se déconnecter                                    (Utilisateur::disconnect)
+* Inviter                                           (Utilisateur::invite)
+
+* Gérer son  Profil
+
+    * Consulter le profil                           (Utilisateur::read_profil)
+    * Editer le profil                              (Utilisateur::owner_update_profil)
+    * Télécharger un avatar                         (Utilisateur::upload_avatar)
+    * Choisir un avatar                             (Utilisateur::select_avatar)
+
+* Editer les paramètres de confidentialité          (Utilisateur::update_confid)
+
+* Gérer ses personnages
+
+    * Créer un personnage                           (Personnage::create)
+    * Editer un personnage                          (Personnage::owner_update)
+    * Archiver un personnage                        (Personnage::owner_archive)
+
+* Gérer ses aventures
+
+    * Proposer une aventure                         (Aventure::create)
+    * Editer une aventure                           (Aventure::update_owner)
+
+
+* Participer à une aventure                         (Participation::create)
+
+    * Editer une Participation                      (Participation::update_owner)
+    * Signaler une participation abusive            (Participation::signal)
+
+* Gérer ses messages privés
+
+    * Envoyer un message privé                      (Message::create)
+    * Consulter ces messages                        (Message::read_owner)
+    * Effacer un/des messages                       (Message::archive_owner)
+    * Signaler un message privé abusif              (Message::signal)
+
 
 ### Anonyme(s)
 
@@ -180,5 +233,6 @@ Utilisateur normal
 
 **Fonctionallités disponibles** :
 
-* S'inscrire                 (utilisateur::create)
-* Se connecter               (utilisateur::connect)
+* Se connecter                                  (Utilisateur::connect)
+* S'inscrire                                    (Utilisateur::create)
+* mot de passe oublié                           (Utilisateur::forgotten_pwd)
