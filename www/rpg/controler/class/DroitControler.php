@@ -26,6 +26,7 @@ class DroitControler {
         
         if(isset($_POST['btn_update']))
         {
+            $item['id'] = filter_input(INPUT_POST, 'id',FILTER_SANITIZE_NUMBER_INT);
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
             
             $result = DroitTable::update($item);
