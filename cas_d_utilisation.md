@@ -17,8 +17,8 @@ Maître absolu et incontesté des Univers.
 
 * Gérer les Architectes
 
-    * Affecter un veilleur                          (Affecter::grant_architectes)
-    * Révoquer un veilleur                          (Affecter::revok_architectes)
+    * Affecter un architecte                          (Affecter::grant_architectes)
+    * Révoquer un architecte                          (Affecter::revok_architectes)
 
 * Gérer les Univers                                 (Univers::create)
                                             
