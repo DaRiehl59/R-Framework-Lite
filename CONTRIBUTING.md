@@ -1,34 +1,53 @@
-View
+#To Contribute to this Project ...
 
-./www/rpg/view
+Project Web Directory : ./www/rpg
 
-    ./template
+##Project MVC Architecture
+
+###View
+
+**./www/rpg/view**
+
+* ./templates
     
-        affichage du site
+    Smarty templates directory
     
-    ./class
+* ./class
     
-        initialisation de Smarty
-        assignation des variables
-        chargement du template
+    View Class directory
+
+    * initiate Smarty engine
+    * assign PHP to Smarty variables
+    * display templates
     
 
-Controler
+###Controler
 
-./www/rpg/controler
+**./www/rpg/controler**
 
-        récupération des formulaires
-        appel du modele
-        appel de la vue
+* ./class
 
-Model
+    Controler Class directory
 
-./www/rpg/model
+    * get form data
+    * call Model methods
+    * call View methods
 
-    ./class
+###Model
+
+**./www/rpg/model**
+
+* ./class
         
-        contenu d'un objet
+    Model Object Definition Class
         
-    ./table
+* ./table
     
-        génération des requêtes SQL
+    Object Relational Mapping
+    Generic SQL Statement Generation
+
+##References
+
+###Use Case Diagram
+
+See the [USE CASE](USE_CASE.md) (Dia)
