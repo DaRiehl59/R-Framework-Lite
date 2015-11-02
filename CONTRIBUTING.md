@@ -48,6 +48,10 @@ Project Web Directory : ./www/rpg
 
 ##References
 
-###Use Case Diagram
+###Use Case
 
-See the [USE CASE](USE_CASE.md) (Dia)
+See the [USE CASE](USE_CASE.md) (md)
+
+###Class Diagramm
+
+See the [CLASS DIAGRAMM](CLASS_DIAGRAMM.dia) (Dia File)
