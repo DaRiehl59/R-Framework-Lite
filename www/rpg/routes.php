@@ -13,12 +13,14 @@ $ROUTES=array(
         ),
     'groupe' => array (
             ''              => 'GroupeControler::read',
+            'create'        => 'GroupeControler::read',
             'read'          => 'GroupeControler::read',
             'update'        => 'GroupeControler::update',
             'delete'        => 'GroupeControler::delete',
         ),
     'droit' => array (
             ''              => 'DroitControler::read',
+            'create'        => 'DroitControler::read',
             'read'          => 'DroitControler::read',
             'update'        => 'DroitControler::update',
             'delete'        => 'DroitControler::delete',
