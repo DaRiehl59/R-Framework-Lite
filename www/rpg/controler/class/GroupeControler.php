@@ -13,7 +13,7 @@ require_once 'model/table/GroupeTable.php';
 require_once 'view/class/GroupeViewer.php';
 
 class GroupeControler {
-    public static function liste()
+    public static function read()
     {
         global $PARAM;
         
@@ -61,10 +61,10 @@ class GroupeControler {
         }
         
         $items = GroupeTable::select('*');
-        GroupeViewer::liste($items);
+        GroupeViewer::read($items);
     }
     
-    public static function editer()
+    public static function update()
     {
         $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
         
@@ -76,11 +76,11 @@ class GroupeControler {
         }
         else
         {
-            GroupeViewer::editer($item);
+            GroupeViewer::update($item);
         }
     }
     
-    public static function supprimer()
+    public static function delete()
     {
         $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
         
@@ -92,7 +92,7 @@ class GroupeControler {
         }
         else
         {
-            GroupeViewer::supprimer($item);
+            GroupeViewer::delete($item);
         }
     }
 }

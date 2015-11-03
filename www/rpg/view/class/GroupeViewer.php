@@ -2,7 +2,7 @@
 
 class GroupeViewer
 {
-    public static function liste($items)
+    public static function read($items)
     {
         global $PARAM;
         
@@ -26,10 +26,10 @@ class GroupeViewer
             Viewer::assign('personnages', array());
         }
 
-        Viewer::display('groupe_list.tpl');
+        Viewer::display('groupe_read.tpl');
     }
     
-    public static function editer($item)
+    public static function update($item)
     {
         global $PARAM;
         
@@ -56,7 +56,7 @@ class GroupeViewer
         Viewer::display('groupe_update.tpl');
     }
     
-    public static function supprimer($item)
+    public static function delete($item)
     {
         global $PARAM;
         

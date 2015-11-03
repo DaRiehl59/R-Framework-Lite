@@ -38,7 +38,7 @@
                                 <li><a href="?c=droit">Gérer les Droits</a></li>
                                 <li><a href="?c=attribuer">Attributions</a></li>
                                 <li><a href="?c=utilisateur&amp;a=settings">Paramètres</a></li>
-                                <li><a href="?c=utilisateur&amp;a=deconnexion">Déconnecter</a></li>
+                                <li><a href="?c=utilisateur&amp;a=disconnect">Déconnecter</a></li>
                             </ul>
                         </li>
                     </ul>

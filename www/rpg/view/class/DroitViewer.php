@@ -2,7 +2,7 @@
 
 class DroitViewer
 {
-    public static function liste($items)
+    public static function read($items)
     {
         global $PARAM;
         
@@ -19,10 +19,10 @@ class DroitViewer
             Viewer::assign('personnages', array());
         }
 
-        Viewer::display('droit_list.tpl');
+        Viewer::display('droit_read.tpl');
     }
     
-    public static function editer($item)
+    public static function update($item)
     {
         global $PARAM;
         
@@ -42,7 +42,7 @@ class DroitViewer
         Viewer::display('droit_update.tpl');
     }
     
-    public static function supprimer($item)
+    public static function delete($item)
     {
         global $PARAM;
         

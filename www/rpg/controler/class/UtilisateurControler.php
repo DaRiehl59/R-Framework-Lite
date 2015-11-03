@@ -16,7 +16,7 @@ require_once 'model/table/PaysTable.php';
 require_once 'view/class/UtilisateurViewer.php';
 
 class UtilisateurControler {
-    public static function connexion()
+    public static function connect()
     {
         $identifiant = filter_input(INPUT_POST, 'identifiant',FILTER_SANITIZE_STRING);
         $motdepasse = filter_input(INPUT_POST, 'motdepasse', FILTER_SANITIZE_STRING);
@@ -71,7 +71,7 @@ class UtilisateurControler {
         }
     }
     
-    public static function deconnexion()
+    public static function disconnect()
     {
         Session::close();
         if(Router::has_previous()) {
@@ -83,7 +83,7 @@ class UtilisateurControler {
         }
     }
     
-    public static function inscription()
+    public static function subscribe()
     {
         $pays = PaysTable::select();
         

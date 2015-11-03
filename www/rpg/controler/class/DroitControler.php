@@ -13,7 +13,7 @@ require_once 'model/table/DroitTable.php';
 require_once 'view/class/DroitViewer.php';
 
 class DroitControler {
-    public static function liste()
+    public static function read()
     {
         global $PARAM;
         
@@ -42,10 +42,10 @@ class DroitControler {
         }
         
         $items = DroitTable::select('*');
-        DroitViewer::liste($items);
+        DroitViewer::read($items);
     }
     
-    public static function editer()
+    public static function update()
     {
         $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
         
@@ -57,11 +57,11 @@ class DroitControler {
         }
         else
         {
-            DroitViewer::editer($item);
+            DroitViewer::update($item);
         }
     }
     
-    public static function supprimer()
+    public static function delete()
     {
         $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
         
@@ -73,7 +73,7 @@ class DroitControler {
         }
         else
         {
-            DroitViewer::supprimer($item);
+            DroitViewer::delete($item);
         }
     }
 }
