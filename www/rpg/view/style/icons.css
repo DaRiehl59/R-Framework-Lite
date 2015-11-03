@@ -1,0 +1,50 @@
+/*
+Copyright (C) 2015 david
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : 16 oct. 2015, 12:02:12
+    Author     : david
+*/
+
+#main ul.menu{display: inline-block; padding:0; margin: 0;}
+
+#main ul.menu li.icon {
+    float: left;
+    margin-right: 5px; margin-top: 2px; padding:0;
+    width: 16px; height: 16px; line-height: 16px;
+    border-radius: 3px; list-style: none;
+    border: 1px solid beige;
+}
+
+#main ul.menu li.icon:hover {
+    background: lightgray;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+#main ul.menu li.icon:active {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+#main ul.menu a {display:block; text-decoration: none; color:inherit;}
+#main ul.menu div.icon{
+    width:16px; height: 16px;
+    background: no-repeat center center / 16px;
+}

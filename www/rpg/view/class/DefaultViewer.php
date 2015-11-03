@@ -12,24 +12,24 @@ class DefaultViewer
         
         if(Session::get('connected'))
         {
-            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
             Viewer::assign('personnages', array());
         }
         
         Viewer::display('defaultViewer_defaultAction.tpl');
     }
     
-    public static function error($message)
+    public static function error($message, $previous_url=".")
     {
         Viewer::init();
 
         if(Session::get('connected'))
         {
-            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
             Viewer::assign('personnages', array());
         }
 
-        Viewer::error($message);
+        Viewer::error($message, $previous_url);
         
         Viewer::display('empty.tpl');
     }
@@ -40,7 +40,7 @@ class DefaultViewer
 
         if(Session::get('connected'))
         {
-            Viewer::assign('utilisateur', Session::get('utilisateur'));
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
             Viewer::assign('personnages', array());
         }
         

@@ -13,22 +13,33 @@ body{
 #top{
     width: 1050px;
     height: 62px;
+    background-color: #E0E0E0;
+    border-bottom: 1px solid black;
 }
 #top_logo{
     float: left;
     width: 200px;
     height: 60px;
-    background: url(../../images/rpg-logo.png) no-repeat center center;
+    padding-left: 10px;
+    background: url(../../RolePlayUniverse.png) no-repeat center center;
     background-size: 200px 50px;
-    border:1px solid black;
+    /*border:1px solid black;*/
+}
+#top_logo_mini{
+    float: left;
+    width: 200px;
+    height: 60px;
+    padding-left: 10px;
+    background: url(../../RolePlayUniverse.png) no-repeat center center;
+    background-size: 200px 50px;
+    /*border:1px solid black;*/
 }
 #top_menu, #top_connexion{
     float: left;
-    width: 846px;
+    width: 836px;
     height: 60px;
-    border: 1px solid black;
-    background-color: #E0E0E0;
     text-align: right;
+    /*border: 1px solid black;*/
 }
 
 #main{
@@ -56,4 +67,3 @@ body{
     line-height: 30px;
     border:1px solid black;
 }
-

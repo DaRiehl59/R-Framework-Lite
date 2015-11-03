@@ -68,6 +68,11 @@ class Router {
         
         if($error)
         {
+            if(Session::get('connected'))
+            {
+                Viewer::assign('session_utilisateur', Session::get('utilisateur'));
+                Viewer::assign('personnages', array());
+            }
             Viewer::display('empty.tpl');
             die();
         }
@@ -87,6 +92,11 @@ class Router {
         
         if($error)
         {
+            if(Session::get('connected'))
+            {
+                Viewer::assign('session_utilisateur', Session::get('utilisateur'));
+                Viewer::assign('personnages', array());
+            }
             Viewer::display('empty.tpl');
             die();
         }

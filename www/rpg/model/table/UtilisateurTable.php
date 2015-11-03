@@ -14,10 +14,17 @@ require_once 'kernel/Database.php';
 class UtilisateurTable {
     
     /**
+     * nom de la table
+     * @var String $table
+     * @access private
+     */
+    private static $table = "utilisateur";
+    
+    /**
      * connexion de l'utilisateur
      * @param String $identifiant
      * @param String $motdepasse
-     * @return Utilisateur Utilisateur qui a ouvert la connexion
+     * @return Object Utilisateur qui a ouvert la connexion
      */
     public static function connexion($identifiant,$motdepasse){
         $dbh = Database::connect();
@@ -27,13 +34,14 @@ class UtilisateurTable {
                 . "AND   motdepasse  = :motdepasse;";
         
         $sth = $dbh->prepare($query);
+        $sth->setFetchMode(PDO::FETCH_CLASS, self::$table);
         $sth->bindParam(':identifiant', $identifiant);
         $sth->bindParam(':motdepasse', $motdepasse);
         
         $sth->execute();
         if($sth->rowCount() == 1)
         {
-            $utilisateur = $sth->fetch(PDO::FETCH_ASSOC);
+            $utilisateur = $sth->fetch(PDO::FETCH_CLASS);
         }
         else
         {
@@ -47,22 +55,23 @@ class UtilisateurTable {
     
     /**
      * chargement des informations d'un utilisateur
-     * @param String $id
-     * @return Utilisateur Utilisateur correspondant à id
+     * @param int $id
+     * @return Object Utilisateur correspondant à id
      */
-    public static function get_utilisateur_by_id($id){
+    public static function select_by_id($id){
         $dbh = Database::connect();
         
         $query = "SELECT * FROM `utilisateur`" . "\r\n"
                 . "WHERE id = :id;";
         
         $sth = $dbh->prepare($query);
+        $sth->setFetchMode(PDO::FETCH_CLASS, self::$table);
         $sth->bindParam(':id', $id, PDO::PARAM_INT);
         
         $sth->execute();
         if($sth->rowCount() == 1)
         {
-            $utilisateur = $sth->fetch(PDO::FETCH_ASSOC);
+            $utilisateur = $sth->fetch(PDO::FETCH_CLASS);
         }
         else
         {
@@ -75,32 +84,44 @@ class UtilisateurTable {
     }
     
     /**
-     * chargement des informations d'un utilisateur
-     * @param String $id
-     * @return Utilisateur Utilisateur correspondant à id
+     * enregistrement des informations
+     * @param String $item
+     * @return boolean $result résultat de la requête SQL
      */
     public static function insert($item){
         $dbh = Database::connect();
         
-        $query = "SELECT * FROM `utilisateur`" . "\r\n"
-                . "WHERE id = :id;";
+        $query = "INSERT INTO " . self::$table . " (";
+        
+        $fields = array_keys($item);
+        
+        foreach($fields as $field)
+        {
+            $query .= $field . ", ";
+        }
+        $query  = substr($query, 0, strlen($query) -2);
+        $query .= ")\r\nVALUES\r\n(";
+        
+        foreach($fields as $field)
+        {
+            $query .= ":" . $field . ", ";
+        }
+        $query  = substr($query, 0, strlen($query) -2);
+        $query .= ");";
         
         $sth = $dbh->prepare($query);
-        $sth->bindParam(':id', $id, PDO::PARAM_INT);
         
-        $sth->execute();
-        if($sth->rowCount() == 1)
+        foreach($item as $field => $value)
         {
-            $utilisateur = $sth->fetch(PDO::FETCH_ASSOC);
+            
+            $sth->bindParam(':' . $field, $item[$field]);
         }
-        else
-        {
-            $utilisateur = null;
-        }
+        
+        $result = $sth->execute();
         
         Database::disconnect();
         
-        return $utilisateur;
+        return $result;
     }
 }
 ?>

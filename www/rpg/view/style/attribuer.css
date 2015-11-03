@@ -1,0 +1,32 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16 oct. 2015, 14:25:13
+    Author     : david
+*/
+
+#main.attribuer{height: 677px;}
+
+#main.attribuer fieldset{width: 361px; margin: auto; padding: 10px;}
+
+#main.attribuer fieldset.list{margin-top: 60px;}
+
+#main.attribuer fieldset.list div {max-height: 600px; overflow: auto;}
+#main.attribuer table{border-spacing: 0; border-collapse: collapse; margin: auto;}
+
+#main.attribuer fieldset.list tbody tr{border-top: 1px solid black; border-bottom: 1px solid black;}
+#main.attribuer fieldset.list tbody tr:nth-child(odd){background: whitesmoke;}
+#main.attribuer fieldset.list tbody tr:nth-child(even){background: lightgray;}
+
+#main.attribuer fieldset.list tbody tr:hover{background: lightblue;}
+
+#main.attribuer fieldset.list th{text-align: left; vertical-align: top; line-height: 20px;}
+#main.attribuer fieldset.list th.submit{text-align: right;}
+#main.attribuer fieldset.list input[name="btn_record"]{color: green; border: 1px solid #55DD55;}
+#main.attribuer fieldset.list input[name="btn_record"]:hover{border: 1px solid green; background: #99FF99; color: darkgreen;}
+
+#main.attribuer span.required{color: red;}
+#main.attribuer span.warning{color: orange;}

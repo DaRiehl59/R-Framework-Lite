@@ -50,7 +50,7 @@ class Database
         try {
             self::$dbh = new PDO($dsn, $user, $passwd, $options);
         } catch (PDOException $e) {
-            Viewer::error($e->getMessage());
+            DefaultViewer::error($e->getMessage());
             die();
         }
         

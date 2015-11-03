@@ -5,8 +5,8 @@
                     <form action="?c=utilisateur&amp;a=inscription" method="POST">
                         <table>
                             <tr>
-                                <th><label for="pseudo">Identifiant<span class="required">*</span>&nbsp;:</label></th>
-                                <td><input type="text" id="pseudo" name="pseudo" maxlength="20" placeholder="Identifiant de connexion" required=""></td>
+                                <th><label for="identifiant">Identifiant<span class="required">*</span>&nbsp;:</label></th>
+                                <td><input type="text" id="identifiant" name="identifiant" maxlength="20" placeholder="Identifiant de connexion" required=""></td>
                             </tr>
                             <tr>
                                 <th rowspan="2"><label for="motdepasse">Mot de passe<span class="required">*</span>&nbsp;:</label></th>
@@ -36,7 +36,7 @@
                                 <td>
                                     <select id="pays" name="id_pays" autocomplete="off">
 {section name=inscription_sec0 loop=$pays}
-                                        <option value="{$pays[inscription_sec0].id}"{if $pays[inscription_sec0].nom_fr_fr eq "France"} selected=""{/if}>{$pays[inscription_sec0].nom_fr_fr}</option>
+                                        <option value="{$pays[inscription_sec0]->id}"{if $pays[inscription_sec0]->nom_fr_fr eq "France"} selected=""{/if}>{$pays[inscription_sec0]->nom_fr_fr}</option>
 {/section}
                                     </select>
                                 </td>
