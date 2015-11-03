@@ -8,7 +8,7 @@ class AffecterViewer
         
         Viewer::init();
 
-        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
+        $avatar_directory = $PARAM['groups']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
         
         $theme = $PARAM['icons']['theme'];
