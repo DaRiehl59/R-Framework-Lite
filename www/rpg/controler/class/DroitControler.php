@@ -20,6 +20,7 @@ class DroitControler {
         if(isset($_POST['btn_ajouter']))
         {
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
+            $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
             
             $result = DroitTable::insert($item);
         }
@@ -28,6 +29,7 @@ class DroitControler {
         {
             $item['id'] = filter_input(INPUT_POST, 'id',FILTER_SANITIZE_NUMBER_INT);
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
+            $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
             
             $result = DroitTable::update($item);
         }
@@ -75,6 +77,48 @@ class DroitControler {
         {
             DroitViewer::delete($item);
         }
+    }
+    
+    public static function active()
+    {
+        $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        
+        $object = DroitTable::select_by_id($id);
+        if(is_null($object))
+        {
+            $previous_url = "?c=droit";
+            DefaultViewer::error("Droit inconnu." , $previous_url);
+        }
+        else
+        {
+            $item['id'] = $object->id;
+            $item['nom'] = $object->nom;
+            $item['actif'] = 1;
+            
+            $result = DroitTable::update($item);
+        }
+        self::read();
+    }
+    
+    public static function desactive()
+    {
+        $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        
+        $object = DroitTable::select_by_id($id);
+        if(is_null($object))
+        {
+            $previous_url = "?c=droit";
+            DefaultViewer::error("Droit inconnu." , $previous_url);
+        }
+        else
+        {
+            $item['id'] = $object->id;
+            $item['nom'] = $object->nom;
+            $item['actif'] = 0;
+            
+            $result = DroitTable::update($item);
+        }
+        self::read();
     }
 }
 ?>

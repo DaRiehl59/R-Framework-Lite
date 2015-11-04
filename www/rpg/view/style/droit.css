@@ -10,7 +10,7 @@ and open the template in the editor.
 
 #main.droit{height: 677px;}
 
-#main.droit fieldset{width: 361px; margin: auto; padding: 10px;}
+#main.droit fieldset{width: 400px; margin: auto; padding: 10px;}
 
 #main.droit fieldset.list{margin-top: 60px;}
 
@@ -24,11 +24,9 @@ and open the template in the editor.
 #main.droit fieldset.list tbody tr:hover{background: lightblue;}
 #main.droit fieldset.list tbody tr:hover ul.menu li.icon{border: 1px solid lightblue;}
 
-#main.droit fieldset.list tbody td:nth-child(1){width:273px;}
+#main.droit fieldset.list tbody td:nth-child(1){width:285px;}
 
 #main.droit fieldset.list td a{display: block;text-decoration: none; color: inherit;}
-
-#main.droit fieldset.list td img{width: 16px; height: 16px; margin-left:10px; margin-right: 10px;}
 
 #main.droit fieldset.list tr:nth-child(odd) ul.menu li.icon{border: 1px solid whitesmoke;}
 #main.droit fieldset.list tr:nth-child(even) ul.menu li.icon{border: 1px solid lightgray;}
@@ -52,6 +50,7 @@ and open the template in the editor.
 
 #main.droit fieldset.insert th{text-align: left; vertical-align: top; line-height: 20px;}
 #main.droit fieldset.insert th.submit{text-align: right;}
+#main.droit fieldset.insert input[name="nom"]{width: 300px;}
 
 #main.droit fieldset.update{margin-top: 60px;}
 #main.droit fieldset.update th{text-align: left; vertical-align: top; line-height: 20px;}

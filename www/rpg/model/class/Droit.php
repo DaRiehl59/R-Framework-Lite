@@ -26,6 +26,12 @@ class Droit {
     private $nom;
     
     /**
+     * @property String $actif
+     * @access private
+     */
+    private $actif;
+    
+    /**
      * Methods
      */
     

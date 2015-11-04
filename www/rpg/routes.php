@@ -24,6 +24,8 @@ $ROUTES=array(
             'read'          => 'DroitControler::read',
             'update'        => 'DroitControler::update',
             'delete'        => 'DroitControler::delete',
+            'active'        => 'DroitControler::active',
+            'desactive'     => 'DroitControler::desactive',
         ),
     'attribuer' => array (
             ''              => 'AttribuerControler::link',

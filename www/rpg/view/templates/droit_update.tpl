@@ -10,6 +10,10 @@
                                     <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
                                     <td><input type="text" id="nom" name="nom" maxlength="50" required="" value="{$item->nom}"></td>
                                 </tr>
+                                <tr>
+                                    <th><label for="actif">Actif&nbsp;:</label></th>
+                                    <td><input type="checkbox" id="actif" name="actif" title="Droit activé" {if $item->actif} checked="checked"{/if}></td>
+                                </tr>
                             </tbody>
                             <tfoot>
                                 <tr>

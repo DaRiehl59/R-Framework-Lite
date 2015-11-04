@@ -19,6 +19,20 @@
                                                     <div class="icon" style="background: url({$theme}/pencil_edit.png) center center / 16px;"></div>
                                                 </a>
                                             </li>
+{if $items[liste_sec0]->actif eq 0}
+                                            <li class="icon">
+                                                <a href="?c=droit&amp;a=active&amp;id={$items[liste_sec0]->id}" title="Activer ce droit">
+                                                    <div class="icon" style="background: url({$theme}/play.png) center center / 16px;"></div>
+                                                </a>
+                                            </li>
+{/if}
+{if $items[liste_sec0]->actif eq 1}
+                                            <li class="icon">
+                                                <a href="?c=droit&amp;a=desactive&amp;id={$items[liste_sec0]->id}" title="Désactiver ce droit">
+                                                    <div class="icon" style="background: url({$theme}/pause.png) center center / 16px;"></div>
+                                                </a>
+                                            </li>
+{/if}
                                             <li class="icon">
                                                 <a href="?c=attribuer&amp;id_droit={$items[liste_sec0]->id}" title="Attribuer ce droit">
                                                     <div class="icon" style="background: url({$theme}/checked.png) center center / 16px;"></div>
@@ -45,6 +59,10 @@
                                 <tr>
                                     <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
                                     <td><input type="text" id="nom" name="nom" maxlength="50" required=""></td>
+                                </tr>
+                                <tr>
+                                    <th><label for="actif">Actif&nbsp;:</label></th>
+                                    <td><input type="checkbox" id="actif" name="actif" title="Droit activé" checked="checked"></td>
                                 </tr>
                             </tbody>
                             <tfoot>
