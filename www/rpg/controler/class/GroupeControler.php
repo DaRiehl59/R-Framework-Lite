@@ -95,5 +95,53 @@ class GroupeControler {
             GroupeViewer::delete($item);
         }
     }
+    
+    public static function active()
+    {
+        $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        
+        $object = GroupeTable::select_by_id($id);
+        if(is_null($object))
+        {
+            $previous_url = "?c=groupe";
+            DefaultViewer::error("Groupe inconnu." , $previous_url);
+        }
+        else
+        {
+            $item['id'] = $object->id;
+            $item['nom'] = $object->nom;
+            $item['description'] = $object->description;
+            $item['maximum'] = $object->maximum;
+            $item['connecte'] = $object->connecte;
+            $item['actif'] = 1;
+            
+            $result = GroupeTable::update($item);
+            self::read();
+        }
+    }
+    
+    public static function desactive()
+    {
+        $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        
+        $object = GroupeTable::select_by_id($id);
+        if(is_null($object))
+        {
+            $previous_url = "?c=groupe";
+            DefaultViewer::error("Groupe inconnu." , $previous_url);
+        }
+        else
+        {
+            $item['id'] = $object->id;
+            $item['nom'] = $object->nom;
+            $item['description'] = $object->description;
+            $item['maximum'] = $object->maximum;
+            $item['connecte'] = $object->connecte;
+            $item['actif'] = 0;
+            
+            $result = GroupeTable::update($item);
+            self::read();
+        }
+    }
 }
 ?>

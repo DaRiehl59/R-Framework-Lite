@@ -17,6 +17,8 @@ $ROUTES=array(
             'read'          => 'GroupeControler::read',
             'update'        => 'GroupeControler::update',
             'delete'        => 'GroupeControler::delete',
+            'active'        => 'GroupeControler::active',
+            'desactive'     => 'GroupeControler::desactive',
         ),
     'droit' => array (
             ''              => 'DroitControler::read',
