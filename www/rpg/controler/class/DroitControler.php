@@ -96,8 +96,8 @@ class DroitControler {
             $item['actif'] = 1;
             
             $result = DroitTable::update($item);
+            self::read();
         }
-        self::read();
     }
     
     public static function desactive()
@@ -117,8 +117,8 @@ class DroitControler {
             $item['actif'] = 0;
             
             $result = DroitTable::update($item);
+            self::read();
         }
-        self::read();
     }
 }
 ?>
