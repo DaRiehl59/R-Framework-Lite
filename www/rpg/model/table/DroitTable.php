@@ -44,7 +44,8 @@ class DroitTable {
             $query .= "" . $field . ", ";
         }
         $query = substr($query, 0,  strlen($query) - 2);
-        $query .= " FROM `" . self::$table . "`;";
+        $query .= " FROM `" . self::$table . "`"
+                . "ORDER BY `nom` ASC;";
         
         $sth = $dbh->prepare($query);
         $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
