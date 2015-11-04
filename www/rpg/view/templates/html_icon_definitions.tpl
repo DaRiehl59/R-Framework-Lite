@@ -21,6 +21,10 @@
                                                 background: url({$theme}/unlock.png) center center / 16px;
                                             }
                                             
+                                            div[name="assign"]{
+                                                background: url({$theme}/friends_group.png) center center / 16px;
+                                            }
+                                            
                                             div[name="grant"]{
                                                 background: url({$theme}/checked.png) center center / 16px;
                                             }
