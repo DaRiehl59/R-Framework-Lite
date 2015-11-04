@@ -55,14 +55,13 @@ and open the template in the editor.
 #main.droit fieldset.update{margin-top: 60px;}
 #main.droit fieldset.update th{text-align: left; vertical-align: top; line-height: 20px;}
 #main.droit fieldset.update th.submit{text-align: right;}
-#main.droit fieldset.update img{width: 100px; border: 1px solid #AAA;}
+#main.droit fieldset.update input[name="nom"]{width: 300px;}
 #main.droit fieldset.update input[name="btn_update"]{color: green; border: 1px solid #55DD55;}
 #main.droit fieldset.update input[name="btn_update"]:hover{border: 1px solid green; background: #99FF99; color: darkgreen;}
 
 #main.droit fieldset.delete{margin-top: 60px;}
 #main.droit fieldset.delete th{text-align: left; vertical-align: top; line-height: 20px;}
 #main.droit fieldset.delete th.submit{text-align: right;}
-#main.droit fieldset.delete img{width: 100px; border: 1px solid #AAA;}
 #main.droit fieldset.delete input[name="btn_delete"]{color: red; border: 1px solid #DD5555;}
 #main.droit fieldset.delete input[name="btn_delete"]:hover{border: 1px solid red; background: #FF9999; color: darkred;}
 
