@@ -10,11 +10,11 @@ and open the template in the editor.
 
 #main.attribuer{height: 677px;}
 
-#main.attribuer fieldset{width: 361px; margin: auto; padding: 10px;}
+#main.attribuer fieldset{width: 400px; margin: auto; padding: 10px;}
 
 #main.attribuer fieldset.list{margin-top: 60px;}
 
-#main.attribuer fieldset.list div {max-height: 600px; overflow: auto;}
+#main.attribuer fieldset.list div {max-height: 600px; max-width: 950px;overflow: auto;}
 #main.attribuer table{border-spacing: 0; border-collapse: collapse; margin: auto;}
 
 #main.attribuer fieldset.list tbody tr{border-top: 1px solid black; border-bottom: 1px solid black;}
