@@ -13,34 +13,35 @@
                                         </a>
                                     </td>
                                     <th>
+{include file="html_icon_definitions.tpl"}
                                         <ul class="menu">
                                             <li class="icon">
                                                 <a href="?c=droit&amp;a=update&amp;id={$items[liste_sec0]->id}" title="Editer">
-                                                    <div class="icon" style="background: url({$theme}/pencil_edit.png) center center / 16px;"></div>
+                                                    <div class="icon" name="update"></div>
                                                 </a>
                                             </li>
 {if $items[liste_sec0]->actif eq 0}
                                             <li class="icon">
                                                 <a href="?c=droit&amp;a=active&amp;id={$items[liste_sec0]->id}" title="Activer ce droit">
-                                                    <div class="icon" style="background: url({$theme}/play.png) center center / 16px;"></div>
+                                                    <div class="icon" name="unlock"></div>
                                                 </a>
                                             </li>
 {/if}
 {if $items[liste_sec0]->actif eq 1}
                                             <li class="icon">
                                                 <a href="?c=droit&amp;a=desactive&amp;id={$items[liste_sec0]->id}" title="Désactiver ce droit">
-                                                    <div class="icon" style="background: url({$theme}/pause.png) center center / 16px;"></div>
+                                                    <div class="icon" name="lock"></div>
                                                 </a>
                                             </li>
 {/if}
                                             <li class="icon">
                                                 <a href="?c=attribuer&amp;id_droit={$items[liste_sec0]->id}" title="Attribuer ce droit">
-                                                    <div class="icon" style="background: url({$theme}/checked.png) center center / 16px;"></div>
+                                                    <div class="icon" name="grant"></div>
                                                 </a>
                                             </li>
                                             <li class="icon">
                                                 <a href="?c=droit&amp;a=delete&amp;id={$items[liste_sec0]->id}" title="Supprimer">
-                                                    <div class="icon" style="background: url({$theme}/close_delete_2.png) center center / 16px;"></div>
+                                                    <div class="icon" name="delete"></div>
                                                 </a>
                                             </li>
                                         </ul>
