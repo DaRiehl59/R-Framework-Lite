@@ -17,10 +17,10 @@ Maître absolu et incontesté des Univers.
 
 * Gérer les Architectes
 
-    * Affecter un architecte                        (AffecterControler::grant_architectes)
-    * Révoquer un architecte                        (AffecterControler::revok_architectes)
+    * Affecter un architecte                          (Affecter::grant_architectes)
+    * Révoquer un architecte                          (Affecter::revok_architectes)
 
-* Gérer les Univers                                 (UniversControler::create)
+* Gérer les Univers                                 (Univers::create)
                                             
 * Gérer les Groupes
 * Gérer les Droits
@@ -63,13 +63,13 @@ Assistant de l'architecte sur le développement RP de son Univers.
 
 * Gérer les Juges
 
-    * Affecter un Juge                              (AffecterControler::grant_juges)
-    * Révoquer un Juge                              (AffecterControler::revok_juges)
+    * Affecter un Juge                              (Affecter::grant_juges)
+    * Révoquer un Juge                              (Affecter::revok_juges)
 
 * Gérer les Scribes
 
-    * Affecter un Scribe                            (AffecterControler::grant_scribes)
-    * Révoquer un Scribe                            (AffecterControler::revok_scribes)
+    * Affecter un Scribe                            (Affecter::grant_scribes)
+    * Révoquer un Scribe                            (Affecter::revok_scribes)
 
 ### Juge(s)
 
@@ -86,13 +86,13 @@ Une fois rendue, sa décision ne peut être contestée.
 
 * Gérer les Bourreaux
 
-    * Affecter un Bourreau                          (AffecterControler::grant_bourreaux)
-    * Révoquer un Bourreau                          (AffecterControler::revok_bourreaux)
+    * Affecter un Bourreau                          (Affecter::grant_bourreaux)
+    * Révoquer un Bourreau                          (Affecter::revok_bourreaux)
 
 * Gérer les Diplomates
 
-    * Affecter un Diplomate                         (AffecterControler::grant_diplomates)
-    * Révoquer un Diplomate                         (AffecterControler::revok_diplomates)
+    * Affecter un Diplomate                         (Affecter::grant_diplomates)
+    * Révoquer un Diplomate                         (Affecter::revok_diplomates)
 
 ### Boureau(x)
 
@@ -127,32 +127,20 @@ Il s'assure que les conflits peuvent être réglés à l'amiable avant de les po
 
 * Gérer les Veilleurs
 
-    * Affecter un veilleur                          (AffecterControler::grant_veilleurs)
-    * Révoquer un veilleur                          (AffecterControler::revok_veilleurs)
+    * Affecter un veilleur                          (Affecter::grant_veilleurs)
+    * Révoquer un veilleur                          (Affecter::revok_veilleurs)
 
-* Gérer les signalements d'Utilisateurs
+* Gérer les signalements des messages privés
 
-    * Lire le signalement                           (UtilisateurSignalControler::read)
-    * Annuler le signalement                        (UtilisateurSignalControler::cancel)
-    * Confirmer le signalement                      (UtilisateurSignalControler::confirm)
+    * Lire les messages privés signalés             (Message::read_signaled)
+    * Annuler le signalement d'un message privé     (Message::unsignal)
+    * Confirmer le signalement d'un message         (Message::confirm_signal)
 
-* Gérer les signalements des Messages Privés
+* Gérer les signalements des participations
 
-    * Lire le signalement                           (MessageSignalControler::read)
-    * Annuler le signalement                        (MessageSignalControler::cancel)
-    * Confirmer le signalement                      (MessageSignalControler::confirm)
-
-* Gérer les signalements des Messages Privés RP
-
-    * Lire le signalement                           (MessageRPSignalControler::read)
-    * Annuler le signalement                        (MessageRPSignalControler::cancel)
-    * Confirmer le signalement                      (MessageRPSignalControler::confirm)
-
-* Gérer les signalements des Interventions
-
-    * Lire le signalement                           (InterventionSignalControler::read)
-    * Annuler le signalement                        (InterventionSignalControler::cancel)
-    * Confirmer le signalement                      (InterventionSignalControler::confirm)
+    * Lire les participations signalées             (Participation::read_signaled)
+    * Annuler le signalement d'une participation    (Participation::unsignal)
+    * Confirmer le signalement d'une participation  (Participation::confirm_signal)
 
 
 ### Veilleur(s)
@@ -185,7 +173,7 @@ Irréprochable dans son orthographe, et sa grammaire, il est le garant du respec
 
 **Fonctionallités spécifiques**
 
-* Editer une description de personnage              (PersonnageControler::update_description)
+* Editer une description de personnage              (Personnage::update_description)
 
 
 ### Utilisateur(s)
@@ -200,62 +188,42 @@ Utilisateur normal
 
 **Fonctionallités spécifiques**
 
-* Se déconnecter                                    (UtilisateurControler::disconnect)
-* Inviter                                           (UtilisateurControler::invite)
+* Se déconnecter                                    (Utilisateur::disconnect)
+* Inviter                                           (Utilisateur::invite)
 
 * Gérer son  Profil
 
-    * Consulter son profil                          (UtilisateurControler::read_owner_profil)
-    * Editer son profil                             (UtilisateurControler::update_owner_profil)
-    * Télécharger un avatar                         (UtilisateurControler::upload_avatar)
-    * Choisir un avatar                             (UtilisateurControler::select_avatar)
+    * Consulter le profil                           (Utilisateur::read_profil)
+    * Editer le profil                              (Utilisateur::owner_update_profil)
+    * Télécharger un avatar                         (Utilisateur::upload_avatar)
+    * Choisir un avatar                             (Utilisateur::select_avatar)
 
-* Gérer ses paramètres de confidentialité
-
-    * Editer ses paramètres de confidentialité      (UtilisateurControler::update_confid)
-
-* Gérer ses contacts
-
-    * Consulter la liste des utilisateurs           (UtilisateurControler::read_list)
-    * Consulter le profil des utilisateurs          (UtilisateurControler::read_profil)
-    * Ajouter un utilisateur à sa liste de contats  (UtilisateurControler::add_contact)
-    * Retirer un utilisateur de sa liste de contats (UtilisateurControler::remove_contact)
-    * Bloquer un contact                            (UtilisateurControler::block_contact)
-    * Signaler un utilisateur malveillant           (UtilisateurSignalControler::create)
-
-* Gérer ses messages privés
-
-    * Envoyer un message privé                      (MessageControler::create)
-    * Consulter ces messages                        (MessageControler::read_owner)
-    * Effacer un/des messages                       (MessageControler::archive_owner)
-    * Signaler un message privé abusif              (MessageSignalControler::create)
+* Editer les paramètres de confidentialité          (Utilisateur::update_confid)
 
 * Gérer ses personnages
 
-    * Créer un personnage                           (PersonnageControler::create)
-    * Editer un personnage                          (PersonnageControler::update_owner)
-    * Archiver un personnage                        (PersonnageControler::archive_owner)
-
-* Intervenir dans une aventure
-
-    * Publier une nouvelle Intervention             (InterventionControler::create)
-    * Effectuer une Action                          (InterventionControler::use_action)
-    * Editer une Intervention                       (InterventionControler::update_owner)
-    * Signaler une Intervention abusive             (InterventionSignalControler::create)
-
-* Gérer ses messages privés RP
-
-    * Envoyer un message privé RP                   (MessageRPControler::create)
-    * Consulter ces messages RP                     (MessageRPControler::read_owner)
-    * Effacer un/des messages RP                    (MessageRPControler::archive_owner)
-    * Signaler un message privé RP abusif           (MessageRPSignalControler::create)
+    * Créer un personnage                           (Personnage::create)
+    * Editer un personnage                          (Personnage::owner_update)
+    * Archiver un personnage                        (Personnage::owner_archive)
 
 * Gérer ses aventures
 
-    * Proposer une aventure                         (AventureControler::create)
-    * Editer une aventure                           (AventureControler::update_owner)
-    * Annuler la proposition d'une aventure         (AventureControler::archive_owner)
-    * Clore une aventure                            (AventureControler::close_owner)
+    * Proposer une aventure                         (Aventure::create)
+    * Editer une aventure                           (Aventure::update_owner)
+
+
+* Participer à une aventure                         (Participation::create)
+
+    * Editer une Participation                      (Participation::update_owner)
+    * Signaler une participation abusive            (Participation::signal)
+
+* Gérer ses messages privés
+
+    * Envoyer un message privé                      (Message::create)
+    * Consulter ces messages                        (Message::read_owner)
+    * Effacer un/des messages                       (Message::archive_owner)
+    * Signaler un message privé abusif              (Message::signal)
+
 
 ### Anonyme(s)
 
@@ -265,6 +233,6 @@ Utilisateur normal
 
 **Fonctionallités disponibles** :
 
-* Se connecter                                      (UtilisateurControler::connect)
-* S'inscrire                                        (UtilisateurControler::create)
-* mot de passe oublié                               (UtilisateurControler::forgotten)
+* Se connecter                                  (Utilisateur::connect)
+* S'inscrire                                    (Utilisateur::create)
+* mot de passe oublié                           (Utilisateur::forgotten_pwd)
