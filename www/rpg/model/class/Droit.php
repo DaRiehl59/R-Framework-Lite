@@ -26,7 +26,7 @@ class Droit {
     private $nom;
     
     /**
-     * @property String $actif
+     * @property Boolean $actif
      * @access private
      */
     private $actif;
@@ -55,12 +55,14 @@ class Droit {
     {
         $this->id = $item['id'];
         $this->nom = $item['nom'];
+        $this->nom = $item['actif'];
     }
 
     public function __construct2($id, $nom)
     {
         $this->id = $id;
         $this->nom = $nom;
+        $this->actif = $actif;
     }
     
     public function __get($name) {
