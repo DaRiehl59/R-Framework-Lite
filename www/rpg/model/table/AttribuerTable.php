@@ -66,6 +66,50 @@ class AttribuerTable {
     }
     
     /**
+     * recherche des éléments attribués à un id
+     * @param string $classname
+     * @param string $FK_name
+     * @param mixed $FK_value
+     * @return array élément correspondant à la valeur de id
+     */
+    public static function get_items($classname,$FK_name,$FK_value){
+        $dbh = Database::connect();
+        
+        $fields = get_object_vars(new Attribuer());
+        unset($fields[$FK_name]);
+        $result_FK_name = array_keys($fields)[0];
+        
+        $query  = "SELECT *" . "\r\n"
+                . "FROM `" . $classname . "`" . "\r\n"
+                . "WHERE `id` IN" . "\r\n"
+                . "(" . "\r\n"
+                . "    SELECT `" . $result_FK_name . "`" . "\r\n"
+                . "    FROM `" . self::$table . "`" . "\r\n"
+                . "    WHERE `" . $FK_name . "` = :FK_name" . "\r\n"
+                . ");";
+        
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(':FK_name', $FK_value);
+        
+        $sth->setFetchMode(PDO::FETCH_CLASS, $classname);
+        $sth->execute();
+        
+        if($sth->rowCount())
+        {
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, $classname);
+        }
+        else
+        {
+            $items = array();
+        }
+        
+        $sth->closeCursor();
+        Database::disconnect();
+        
+        return $items;
+    }
+
+    /**
      * insertion d'un nouvel enregistrement
      * @param Array $item
      * @return boolean $result résultat de la requête SQL
