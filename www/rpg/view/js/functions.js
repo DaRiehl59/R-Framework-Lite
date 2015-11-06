@@ -18,8 +18,8 @@ function toggle(source, name, id, begin, end) {
     
     for (var index=begin; index<=end; index++)
     {
-        chk_name = name + '[' + id + '][' + index + ']';
-        myCheckboxes = document.getElementsByName(chk_name);
+        checkbox_name = name + '[' + id + '][' + index + ']';
+        myCheckboxes = document.getElementsByName(checkbox_name);
         if (myCheckboxes.length)
         {
 //            console.log(index);
