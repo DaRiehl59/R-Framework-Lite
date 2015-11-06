@@ -64,12 +64,12 @@ class AttribuerControler {
             
             if(isset($filtered['links']))
             {
-                foreach ($filtered['links'] as $item1 => $items)
+                foreach ($filtered['links'] as $item2 => $items)
                 {
-                    foreach ($items as $item2 => $value)
+                    foreach ($items as $item1 => $value)
                     {
-                        $item['id_droit'] = $item1;
                         $item['id_groupe'] = $item2;
+                        $item['id_droit'] = $item1;
                         AttribuerTable::insert($item);
                     }
                 }
@@ -82,7 +82,7 @@ class AttribuerControler {
         {
             foreach ($items3 as $item3)
             {
-                $links[$item3->id_droit][$item3->id_groupe] = true;
+                $links[$item3->id_groupe][$item3->id_droit] = true;
             }
         }
         else

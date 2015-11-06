@@ -3,11 +3,11 @@
                 <fieldset class="list">
                     <legend>Attribution des Droits</legend>
 {if $items1|@count eq 1}
-                    <form action="?c=attribuer&amp;id_droit={$items1[0]->id}" method="post">
+                    <form id="link_frm" action="?c=attribuer&amp;id_droit={$items1[0]->id}" method="post">
 {elseif $items2|@count eq 1}
-                    <form action="?c=attribuer&amp;id_groupe={$items2[0]->id}" method="post">
+                    <form id="link_frm" action="?c=attribuer&amp;id_groupe={$items2[0]->id}" method="post">
 {else}
-                    <form action="?c=attribuer" method="post">
+                    <form id="link_frm" action="?c=attribuer" method="post">
 {/if}
                         <div>
                             <table>
@@ -18,6 +18,12 @@
                                         <th>{$items2[link_sec0]->nom}</th>
 {/section}
                                     </tr>
+                                    <tr>
+                                        <th>&nbsp;</th>
+{section name=link_sec0 loop=$items2}
+<th><input type="checkbox" name="all[{$items2[link_sec0]->id}]" onClick="toggle(this, 'links', {$items2[link_sec0]->id}, {$begin}, {$end})" title="tout cocher"></th>
+{/section}
+                                    </tr>
                                 </thead>
                                 <tbody>
 {section name=link_sec1 loop=$items1}
@@ -25,7 +31,7 @@
                                         <th>{$items1[link_sec1]->nom}</th>
 {section name=link_sec2 loop=$items2}
                                         <td>
-                                            <input type="checkbox" name="links[{$items1[link_sec1]->id}][{$items2[link_sec2]->id}]"{if isset($links[$items1[link_sec1]->id][$items2[link_sec2]->id])} checked="checked"{/if}>
+                                            <input type="checkbox" name="links[{$items2[link_sec2]->id}][{$items1[link_sec1]->id}]"{if isset($links[$items2[link_sec2]->id][$items1[link_sec1]->id])} checked="checked"{/if}>
                                         </td>
 {/section}
                                     </tr>
