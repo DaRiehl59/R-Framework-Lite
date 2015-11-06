@@ -71,7 +71,7 @@ $PARAM['model']['db']['engine'] = "InnoDB";
  */
 $PARAM['view']['directory']     = "./view";
 $PARAM['view']['class']         = $PARAM['view']['directory'].'/'."class";
-$PARAM['view']['js']            = $PARAM['controler']['directory'].'/'."js";
+$PARAM['view']['js']            = $PARAM['view']['directory'].'/'."js";
 $PARAM['view']['style']         = $PARAM['view']['directory'].'/'.'style';
 $PARAM['view']['templates']     = $PARAM['view']['directory'].'/'."templates";
 
