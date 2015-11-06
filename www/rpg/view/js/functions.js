@@ -10,7 +10,7 @@ function dump(obj) {
 
     var pre = document.createElement('pre');
     pre.innerHTML = out;
-    document.body.appendChild(pre)
+    document.body.appendChild(pre);
 }
 
 function toggle(source, name, id, begin, end) {
