@@ -71,8 +71,9 @@ $PARAM['model']['db']['engine'] = "InnoDB";
  */
 $PARAM['view']['directory']     = "./view";
 $PARAM['view']['class']         = $PARAM['view']['directory'].'/'."class";
-$PARAM['view']['templates']     = $PARAM['view']['directory'].'/'."templates";
+$PARAM['view']['js']            = $PARAM['controler']['directory'].'/'."js";
 $PARAM['view']['style']         = $PARAM['view']['directory'].'/'.'style';
+$PARAM['view']['templates']     = $PARAM['view']['directory'].'/'."templates";
 
 /**
  * Controler Parameters
@@ -80,7 +81,6 @@ $PARAM['view']['style']         = $PARAM['view']['directory'].'/'.'style';
 $PARAM['controler']['directory']= "./controler";
 $PARAM['controler']['class']    = $PARAM['controler']['directory'].'/'.'class';
 $PARAM['controler']['ajax']     = $PARAM['controler']['directory'].'/'.'ajax';
-$PARAM['controler']['js']       = $PARAM['controler']['directory'].'/'."js";
 
 /**
  * Plugins Parameters

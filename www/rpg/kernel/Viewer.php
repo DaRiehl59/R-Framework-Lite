@@ -43,7 +43,7 @@ class Viewer
             }
             self::$smarty->assign("head_styles", $styles);
 
-            $folder = $PARAM['controler']['js'];
+            $folder = $PARAM['view']['js'];
             $files = get_files($folder);
             $scripts = array();
             foreach ($files as $file)
