@@ -15,55 +15,23 @@ class Confidentialite {
     
     /**
      * @property int $id Clé Primaire
-     * @access private
+     * @access public
      */
-    private $id;
+    public $id;
     
     /**
      * @property int $libelle
-     * @access private
+     * @access public
      */
-    private $libelle;
+    public $libelle;
     
     
     /**
      * Methods
      */
     
-    public function __construct() {
-        $num = func_num_args();
-        if(method_exists($this, "__construct".$num))
-        {
-            call_user_func_array(array($this,"__construct".$num), func_get_args());
-        }
-        else
-        {
-            throw new Exception("Constructor do not accept ".$num." argument(s).");
-        }
-    }
-    
-    public function __construct0()
-    {
-    }
-
-    public function __construct1($item)
-    {
-        $this->id = $item['id'];
-        $this->libelle = $item['libelle'];
-    }
-
-    public function __construct2($id, $libelle)
-    {
-        $this->id =  func_get_arg(0);
-        $this->libelle = func_get_arg(1);
-    }
-    
-    public function __get($name) {
-        return $this->$name;
-    }
-    
-    public function __set($name, $value) {
-        $this->$name = $value;
+    public function __toString() {
+        return $this->libelle;
     }
 }
 ?>

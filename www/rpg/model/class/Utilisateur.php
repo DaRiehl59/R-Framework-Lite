@@ -15,111 +15,103 @@ class Utilisateur {
     
     /**
      * @property int $id Clé Primaire
-     * @access private
+     * @access public
      */
-    private $id;
+    public $id;
     
      /**
      * @property String $identifiant
-     * @access private
+     * @access public
      */
-    private $identifiant;
+    public $identifiant;
 
      /**
      * @property String $motdepasse
-     * @access private
+     * @access public
      */
-    private $motdepasse;
+    public $motdepasse;
         
      /**
      * @property String $pseudo
-     * @access private
+     * @access public
      */
-    private $pseudo;
+    public $pseudo;
         
      /**
      * @property String $avatar
-     * @access private
+     * @access public
      */
-    private $avatar;
+    public $avatar;
         
     /**
      * @property String $nom
-     * @access private
+     * @access public
      */
-    private $nom;
+    public $nom;
     
     /**
      * @property int $id_confid_nom
-     * @access private
+     * @access public
      */
-    private $id_confid_nom;
+    public $id_confid_nom;
     
     /**
      * @property String $email
-     * @access private
+     * @access public
      */
-    private $email;
+    public $email;
 
     /**
      * @property String $email_hash
-     * @access private
+     * @access public
      */
-    private $email_hash;
+    public $email_hash;
 
     /**
      * @property int $id_confid_email
-     * @access private
+     * @access public
      */
-    private $id_confid_email;
+    public $id_confid_email;
     
     /**
      * @property String $ville
-     * @access private
+     * @access public
      */
-    private $ville;
+    public $ville;
 
     /**
      * @property int $id_confid_ville
-     * @access private
+     * @access public
      */
-    private $id_confid_ville;
+    public $id_confid_ville;
     
     /**
      * @property int $id_pays
-     * @access private
+     * @access public
      */
-    private $id_pays;
+    public $id_pays;
 
     /**
      * @property int $id_confid_id_pays
-     * @access private
+     * @access public
      */
-    private $id_confid_id_pays;
+    public $id_confid_id_pays;
     
      /**
      * @property String $description
-     * @access private
+     * @access public
      */
-    private $description;
+    public $description;
 
     /**
      * @property int $id_confid_description
-     * @access private
+     * @access public
      */
-    private $id_confid_description;
+    public $id_confid_description;
     
    /**
      * Methods
      */
-    
-    public function __get($name) {
-        return $this->$name;
-    }
-    
-    public function __set($name, $value) {
-        $this->$name = $value;
-    }
     
     public function __toString() {
         return "$this->pseudo ($this->nom)";
