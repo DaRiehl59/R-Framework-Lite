@@ -14,7 +14,7 @@ class Pays {
      */
     
     /**
-     * @property int $id Clé Primaire
+     * @property int $id Primary Key
      * @access public
      */
     public $id;
@@ -26,25 +26,25 @@ class Pays {
     public $code;
     
     /**
-     * @property String $alpha2
+     * @property string $alpha2
      * @access public
      */
     public $alpha2;
     
     /**
-     * @property String $alpha3
+     * @property string $alpha3
      * @access public
      */
     public $alpha3;
     
     /**
-     * @property String $nom_fr_fr
+     * @property string $nom_fr_fr
      * @access public
      */
     public $nom_fr_fr;
     
     /**
-     * @property String $nom_en_gb
+     * @property string $nom_en_gb
      * @access public
      */
     public $nom_en_gb;

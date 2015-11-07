@@ -14,19 +14,19 @@ class Droit {
      */
     
     /**
-     * @property int $id Clé Primaire
+     * @property int $id Primary Key
      * @access public
      */
     public $id;
     
     /**
-     * @property String $nom
+     * @property string $nom
      * @access public
      */
     public $nom;
     
     /**
-     * @property Boolean $actif
+     * @property boolean $actif
      * @access public
      */
     public $actif;

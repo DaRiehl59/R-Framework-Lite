@@ -14,13 +14,13 @@ class Attribuer {
      */
     
     /**
-     * @property int $id_droit Clé Etrangère vers droit et membre de la Clé Primaire
+     * @property int $id_droit Primary Key, Foreign Key references droit->id
      * @access public
      */
     public $id_droit;
     
     /**
-     * @property int $id_droit Clé Etrangère vers groupe et membre de la Clé Primaire
+     * @property int $id_groupe Primary Key, Foreign Key references groupe->id
      * @access public
      */
     public $id_groupe;

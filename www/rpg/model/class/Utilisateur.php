@@ -14,73 +14,73 @@ class Utilisateur {
      */
     
     /**
-     * @property int $id Clé Primaire
+     * @property int $id Primary Key
      * @access public
      */
     public $id;
     
      /**
-     * @property String $identifiant
+     * @property string $identifiant
      * @access public
      */
     public $identifiant;
 
      /**
-     * @property String $motdepasse
+     * @property string $motdepasse
      * @access public
      */
     public $motdepasse;
         
      /**
-     * @property String $pseudo
+     * @property string $pseudo
      * @access public
      */
     public $pseudo;
         
      /**
-     * @property String $avatar
+     * @property string $avatar
      * @access public
      */
     public $avatar;
         
     /**
-     * @property String $nom
+     * @property string $nom
      * @access public
      */
     public $nom;
     
     /**
-     * @property int $id_confid_nom
+     * @property int $id_confid_nom Foreign Key references Confidentialite->id
      * @access public
      */
     public $id_confid_nom;
     
     /**
-     * @property String $email
+     * @property string $email
      * @access public
      */
     public $email;
 
     /**
-     * @property String $email_hash
+     * @property string $email_hash
      * @access public
      */
     public $email_hash;
 
     /**
-     * @property int $id_confid_email
+     * @property int $id_confid_email Foreign Key references Confidentialite->id
      * @access public
      */
     public $id_confid_email;
     
     /**
-     * @property String $ville
+     * @property string $ville
      * @access public
      */
     public $ville;
 
     /**
-     * @property int $id_confid_ville
+     * @property int $id_confid_ville Foreign Key references Confidentialite->id
      * @access public
      */
     public $id_confid_ville;
@@ -92,10 +92,10 @@ class Utilisateur {
     public $id_pays;
 
     /**
-     * @property int $id_confid_id_pays
+     * @property int $id_confid_pays Foreign Key references Confidentialite->id
      * @access public
      */
-    public $id_confid_id_pays;
+    public $id_confid_pays;
     
      /**
      * @property String $description
@@ -104,7 +104,7 @@ class Utilisateur {
     public $description;
 
     /**
-     * @property int $id_confid_description
+     * @property int $id_confid_description Foreign Key references Confidentialite->id
      * @access public
      */
     public $id_confid_description;

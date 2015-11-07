@@ -14,31 +14,31 @@ class Groupe {
      */
     
     /**
-     * @property int $id Clé Primaire
+     * @property int $id Primary Key
      * @access public
      */
     public $id;
     
     /**
-     * @property String $nom
+     * @property string $nom
      * @access public
      */
     public $nom;
     
     /**
-     * @property String $description
+     * @property string $description
      * @access public
      */
     public $description;
     
     /**
-     * @property String $maximum
+     * @property int $maximum
      * @access public
      */
     public $maximum;
     
     /**
-     * @property String $avatar URL to avatar
+     * @property string $avatar
      * @access public
      */
     public $avatar;

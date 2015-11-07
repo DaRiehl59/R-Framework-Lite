@@ -14,13 +14,13 @@ class Confidentialite {
      */
     
     /**
-     * @property int $id Clé Primaire
+     * @property int $id Primary Key
      * @access public
      */
     public $id;
     
     /**
-     * @property int $libelle
+     * @property string $libelle
      * @access public
      */
     public $libelle;

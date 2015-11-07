@@ -14,13 +14,13 @@ class Affecter {
      */
     
     /**
-     * @property int $id_utilisateur Clé Etrangère vers utilisateur et membre de la Clé Primaire
+     * @property int $id_utilisateur Primary Key, Foreign Key references Utilisateur->id
      * @access public
      */
     public $id_utilisateur;
     
     /**
-     * @property int $id_droit Clé Etrangère vers groupe et membre de la Clé Primaire
+     * @property int $id_droit Primary Key, Foreign Key references groupe->id
      * @access public
      */
     public $id_groupe;
