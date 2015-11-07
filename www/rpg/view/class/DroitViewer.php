@@ -8,10 +8,10 @@ class DroitViewer
         
         Viewer::init();
         
-        $theme = $PARAM['icons']['theme'];
-        
-        Viewer::assign('theme', $theme);
         Viewer::assign('items', $items);
+
+        $theme = $PARAM['icons']['theme'];
+        Viewer::assign('theme', $theme);
         
         if(Session::get('connected'))
         {
@@ -28,10 +28,10 @@ class DroitViewer
         
         Viewer::init();
         
-        $theme = $PARAM['icons']['theme'];
-        
-        Viewer::assign('theme', $theme);
         Viewer::assign('item', $item);
+
+        $theme = $PARAM['icons']['theme'];
+        Viewer::assign('theme', $theme);
         
         if(Session::get('connected'))
         {
@@ -48,10 +48,10 @@ class DroitViewer
         
         Viewer::init();
         
-        $theme = $PARAM['icons']['theme'];
-        
-        Viewer::assign('theme', $theme);
         Viewer::assign('item', $item);
+
+        $theme = $PARAM['icons']['theme'];
+        Viewer::assign('theme', $theme);
         
         if(Session::get('connected'))
         {

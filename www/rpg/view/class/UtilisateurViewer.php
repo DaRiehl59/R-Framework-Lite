@@ -15,12 +15,15 @@ class UtilisateurViewer
     {
         Viewer::init();
 
-        Viewer::assign('session_utilisateur', Session::get('utilisateur'));
-        Viewer::assign('personnages', array());
-        
         Viewer::assign('utilisateur', $utilisateur);
         Viewer::assign('confidentialite', $confidentialite);
         Viewer::assign('pays', $pays);
+
+        if(Session::get('connected'))
+        {
+            Viewer::assign('session_utilisateur', Session::get('utilisateur'));
+            Viewer::assign('personnages', array());
+        }
         
         Viewer::display('utilisateur_profil.tpl');
     }

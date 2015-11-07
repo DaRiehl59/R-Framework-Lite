@@ -8,17 +8,19 @@ class GroupeViewer
         
         Viewer::init();
         
+        Viewer::assign('items', $items);
+        
         $avatar_directory = $PARAM['groups']['avatars']['directory'];
+        Viewer::assign('avatar_directory', $avatar_directory);
+        
         $theme = $PARAM['icons']['theme'];
+        Viewer::assign('theme', $theme);
         
         $max_file_size = file_upload_max_size();
-        $max_file_size_str = round($max_file_size/1024/1024) . " Mo";
-        
-        Viewer::assign('max_file_size_str', $max_file_size_str);
         Viewer::assign('max_file_size', $max_file_size);
-        Viewer::assign('avatar_directory', $avatar_directory);
-        Viewer::assign('theme', $theme);
-        Viewer::assign('items', $items);
+        
+        $max_file_size_str = round($max_file_size/1024/1024) . " Mo";
+        Viewer::assign('max_file_size_str', $max_file_size_str);
         
         if(Session::get('connected'))
         {
@@ -35,17 +37,19 @@ class GroupeViewer
         
         Viewer::init();
         
+        Viewer::assign('item', $item);
+        
         $avatar_directory = $PARAM['groups']['avatars']['directory'];
+        Viewer::assign('avatar_directory', $avatar_directory);
+        
         $theme = $PARAM['icons']['theme'];
+        Viewer::assign('theme', $theme);
         
         $max_file_size = file_upload_max_size();
-        $max_file_size_str = round($max_file_size/1024/1024) . " Mo";
-        
-        Viewer::assign('max_file_size_str', $max_file_size_str);
         Viewer::assign('max_file_size', $max_file_size);
-        Viewer::assign('avatar_directory', $avatar_directory);
-        Viewer::assign('theme', $theme);
-        Viewer::assign('item', $item);
+        
+        $max_file_size_str = round($max_file_size/1024/1024) . " Mo";
+        Viewer::assign('max_file_size_str', $max_file_size_str);
         
         if(Session::get('connected'))
         {
@@ -62,12 +66,13 @@ class GroupeViewer
         
         Viewer::init();
         
-        $avatar_directory = $PARAM['groups']['avatars']['directory'];
-        $theme = $PARAM['icons']['theme'];
-        
-        Viewer::assign('avatar_directory', $avatar_directory);
-        Viewer::assign('theme', $theme);
         Viewer::assign('item', $item);
+        
+        $avatar_directory = $PARAM['groups']['avatars']['directory'];
+        Viewer::assign('avatar_directory', $avatar_directory);
+        
+        $theme = $PARAM['icons']['theme'];
+        Viewer::assign('theme', $theme);
         
         if(Session::get('connected'))
         {

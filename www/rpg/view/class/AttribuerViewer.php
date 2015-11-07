@@ -11,7 +11,6 @@ class AttribuerViewer
         Viewer::assign('items1', $items1);
         Viewer::assign('items2', $items2);
         Viewer::assign('links', $links);
-        $nb = count($items1);
         
         if(!empty($items1))
         {
