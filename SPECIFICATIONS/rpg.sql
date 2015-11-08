@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 06 Novembre 2015 à 18:18
+-- Généré le: Dim 08 Novembre 2015 à 18:08
 -- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.14
 
@@ -135,6 +135,22 @@ INSERT INTO `attribuer` (`id_droit`, `id_groupe`) VALUES
 (1, 10),
 (3, 10),
 (4, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `communaute`
+--
+
+CREATE TABLE IF NOT EXISTS `communaute` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(20) NOT NULL,
+  `description` text NOT NULL,
+  `maximum` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `avatar` varchar(255) DEFAULT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
