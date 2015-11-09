@@ -108,11 +108,7 @@ class GroupeControler {
         }
         else
         {
-            $item['id'] = $object->id;
-            $item['nom'] = $object->nom;
-            $item['description'] = $object->description;
-            $item['maximum'] = $object->maximum;
-            $item['connecte'] = $object->connecte;
+            $item = get_object_vars($object);
             $item['actif'] = 1;
             
             $result = GroupeTable::update($item);
@@ -132,11 +128,7 @@ class GroupeControler {
         }
         else
         {
-            $item['id'] = $object->id;
-            $item['nom'] = $object->nom;
-            $item['description'] = $object->description;
-            $item['maximum'] = $object->maximum;
-            $item['connecte'] = $object->connecte;
+            $item = get_object_vars($object);
             $item['actif'] = 0;
             
             $result = GroupeTable::update($item);

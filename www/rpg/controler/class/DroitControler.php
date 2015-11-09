@@ -91,8 +91,7 @@ class DroitControler {
         }
         else
         {
-            $item['id'] = $object->id;
-            $item['nom'] = $object->nom;
+            $item = get_object_vars($object);
             $item['actif'] = 1;
             
             $result = DroitTable::update($item);
@@ -112,8 +111,7 @@ class DroitControler {
         }
         else
         {
-            $item['id'] = $object->id;
-            $item['nom'] = $object->nom;
+            $item = get_object_vars($object);
             $item['actif'] = 0;
             
             $result = DroitTable::update($item);
