@@ -44,6 +44,18 @@ class Groupe {
     public $avatar;
 
     /**
+     * @property boolean $connecte
+     * @access public
+     */
+    public $connecte;
+
+    /**
+     * @property boolean $actif
+     * @access public
+     */
+    public $actif;
+    
+    /**
      * Methods
      */
     
