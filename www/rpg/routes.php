@@ -37,5 +37,14 @@ $ROUTES=array(
             ''              => 'AffecterControler::link',
             'link'          => 'AffecterControler::link',
         ),
+    'personnage' => array (
+            ''              => 'PersonnageControler::read',
+            'create'        => 'PersonnageControler::read',
+            'read'          => 'PersonnageControler::read',
+            'update'        => 'PersonnageControler::update',
+            'delete'        => 'PersonnageControler::delete',
+            'active'        => 'PersonnageControler::active',
+            'desactive'     => 'PersonnageControler::desactive',
+        ),
 );
 ?>
