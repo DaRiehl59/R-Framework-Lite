@@ -10,7 +10,7 @@ class GroupeViewer
         
         Viewer::assign('items', $items);
         
-        $avatar_directory = $PARAM['groups']['avatars']['directory'];
+        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
         
         $theme = $PARAM['icons']['theme'];
@@ -39,7 +39,7 @@ class GroupeViewer
         
         Viewer::assign('item', $item);
         
-        $avatar_directory = $PARAM['groups']['avatars']['directory'];
+        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
         
         $theme = $PARAM['icons']['theme'];
@@ -68,7 +68,7 @@ class GroupeViewer
         
         Viewer::assign('item', $item);
         
-        $avatar_directory = $PARAM['groups']['avatars']['directory'];
+        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
         
         $theme = $PARAM['icons']['theme'];
