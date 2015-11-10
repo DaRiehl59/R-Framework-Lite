@@ -6,7 +6,7 @@
 #Ligne 2 : Loïc, Thomas, Arnaud, Johann, Pierre-Antoine
 
 => Classe
-=> link_permettre
+=> link_exercer
 
 #Ligne 3 : Alexis, Jason, Baptiste, Elias, Quentin
 
