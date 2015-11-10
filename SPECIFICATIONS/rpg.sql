@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Dim 08 Novembre 2015 à 18:08
+-- Généré le: Mar 10 Novembre 2015 à 17:57
 -- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.14
 
@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `groupe` (
 --
 
 INSERT INTO `groupe` (`id`, `nom`, `description`, `maximum`, `avatar`, `connecte`, `actif`) VALUES
-(1, 'Grand Concepteur', 'Maître absolu et incontesté des Univers.', 1, '2c7fa0fa37eb7dc32a772f20c5306ac277b08768.png', 1, 1),
+(1, 'test', '', 0, '', 0, 1),
 (2, 'Architecte(s)', 'Maître d&#39;un Univers.', 1, '0c9a7e3da93a997931c324f3b7c554d2c477f71b.png', 1, 1),
 (3, 'Maître(s) de Jeu', 'Assistant de l&#39;architecte sur le développement RP de son Univers.', 1, '3159333ba60204a296f1367ea4059c59da45ee7b.png', 1, 1),
 (4, 'Juge(s)', 'Impartial, il fait appliquer la loi dans un secteur.\r\nUne fois rendue, sa décision ne peut être contestée.', 1, 'f05e649c978352cd60a1bfcdb3a269a48798295a.png', 1, 1),
@@ -530,6 +530,22 @@ INSERT INTO `pays` (`id`, `code`, `alpha2`, `alpha3`, `nom_en_gb`, `nom_fr_fr`) 
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `personnage`
+--
+
+CREATE TABLE IF NOT EXISTS `personnage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(30) NOT NULL,
+  `avatar` varchar(255) NOT NULL,
+  `actif` tinyint(1) unsigned NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_utilisateur` (`id_utilisateur`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `utilisateur`
 --
 
@@ -583,6 +599,12 @@ ALTER TABLE `affecter`
 ALTER TABLE `attribuer`
   ADD CONSTRAINT `attribuer_ibfk_1` FOREIGN KEY (`id_groupe`) REFERENCES `groupe` (`id`),
   ADD CONSTRAINT `attribuer_ibfk_2` FOREIGN KEY (`id_droit`) REFERENCES `droit` (`id`);
+
+--
+-- Contraintes pour la table `personnage`
+--
+ALTER TABLE `personnage`
+  ADD CONSTRAINT `personnage_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `utilisateur`
