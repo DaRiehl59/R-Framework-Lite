@@ -35,7 +35,7 @@ $PARAM['utilisateurs']['gallerie']['directory'] = $PARAM['utilisateurs']['direct
 /**
  * Groupes Parameters
  */
-$PARAM['groupes']['avatars']['directory']       = $PARAM['uploads']['directory']. '/' . "groups";
+$PARAM['groupes']['avatars']['directory']       = $PARAM['uploads']['directory']. '/' . "groupes";
 $PARAM['groupes']['anonymous']                  = "Anonyme(s)";
 
 /**
