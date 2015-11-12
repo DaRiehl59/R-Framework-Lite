@@ -26,7 +26,7 @@ $PARAM['icons']['theme']        = $PARAM['icons']['directory'] . '/' . "blueberr
 $PARAM['uploads']['directory']                  = "./uploads";
 
 /**
- * Groupes Parameters
+ * Utilisateurs Parameters
  */
 $PARAM['utilisateurs']['directory']             = $PARAM['uploads']['directory']. '/' . "utilisateurs";
 $PARAM['utilisateurs']['avatars']['directory']  = $PARAM['utilisateurs']['directory']. '/' . "avatars";
@@ -42,13 +42,6 @@ $PARAM['groupes']['anonymous']                  = "Anonyme(s)";
  * Personnages Parameters
  */
 $PARAM['personnages']['avatars']['directory']    = $PARAM['uploads']['directory']. '/' . "personnages";
-
-/**
- * Users Parameters
- */
-$PARAM['users']['directory']            = $PARAM['uploads']['directory']. '/' . "users";
-$PARAM['users']['avatars']['directory'] = '/' . "avatars";
-$PARAM['users']['gallery']['directory'] = '/' . "gallery";
 
 /**
  * Pictures Parameters
