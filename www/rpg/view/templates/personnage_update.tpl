@@ -7,6 +7,12 @@
                         <table>
                             <tbody>
                                 <tr>
+                                    <th><label for="id_utilisateur">Propriétaire<span class="required">*</span>&nbsp;:</label></th>
+                                    <td>
+{html_options id=id_utilisateur name=id_utilisateur options=$utilisateurs selected=$item->id_utilisateur}
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
                                     <td><input type="text" id="nom" name="nom" maxlength="20" required="" value="{$item->nom}"></td>
                                 </tr>
@@ -22,7 +28,7 @@
                                 </tr>
                                 <tr>
                                     <th><label for="actif">Actif&nbsp;:</label></th>
-                                    <td><input type="checkbox" id="actif" name="actif" title="Groupe activé" {if $item->actif} checked="checked"{/if}></td>
+                                    <td><input type="checkbox" id="actif" name="actif" title="Personnage activé" {if $item->actif} checked="checked"{/if}></td>
                                 </tr>
                             </tbody>
                             <tfoot>

@@ -2,13 +2,15 @@
 
 class PersonnageViewer
 {
-    public static function read($items)
+    public static function read($items, $utilisateurs, $id_utilisateur)
     {
         global $PARAM;
         
         Viewer::init();
         
         Viewer::assign('items', $items);
+        Viewer::assign('utilisateurs', $utilisateurs);
+        Viewer::assign('id_utilisateur', $id_utilisateur);
         
         $avatar_directory = $PARAM['personnages']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
@@ -31,13 +33,14 @@ class PersonnageViewer
         Viewer::display('personnage_read.tpl');
     }
     
-    public static function update($item)
+    public static function update($item, $utilisateurs)
     {
         global $PARAM;
         
         Viewer::init();
         
         Viewer::assign('item', $item);
+        Viewer::assign('utilisateurs', $utilisateurs);
         
         $avatar_directory = $PARAM['personnages']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
@@ -60,13 +63,14 @@ class PersonnageViewer
         Viewer::display('personnage_update.tpl');
     }
     
-    public static function delete($item)
+    public static function delete($item, $utilisateurs)
     {
         global $PARAM;
         
         Viewer::init();
         
         Viewer::assign('item', $item);
+        Viewer::assign('utilisateurs', $utilisateurs);
         
         $avatar_directory = $PARAM['personnages']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);

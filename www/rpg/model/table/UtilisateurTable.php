@@ -54,6 +54,52 @@ class UtilisateurTable {
     }
     
     /**
+     * recherche de tous les enregistrements
+     * @param Array $fields
+     * @return Utilisateur Utilisateur correspondant à id
+     */
+    public static function select(){
+        if(!func_num_args())
+        {
+            $fields = array('*');
+        }
+        else
+        {
+            $fields = func_get_args();
+        }
+        
+        
+        $dbh = Database::connect();
+        
+        $query  = "SELECT ";
+        foreach ($fields as $field)
+        {
+            $query .= "" . $field . ", ";
+        }
+        $query = substr($query, 0,  strlen($query) - 2);
+        $query .= " FROM `" . self::$table . "`"
+                . "ORDER BY `nom` ASC;";
+        
+        $sth = $dbh->prepare($query);
+        $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
+        $sth->execute();
+        
+        if($sth->rowCount())
+        {
+            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
+            $sth->closeCursor();
+        }
+        else
+        {
+            $results = null;
+        }
+        
+        Database::disconnect();
+        
+        return $results;
+    }
+    
+    /**
      * chargement des informations d'un utilisateur
      * @param int $id
      * @return Object Utilisateur correspondant à id

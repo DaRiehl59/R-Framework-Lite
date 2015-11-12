@@ -62,6 +62,12 @@
                         <table>
                             <tbody>
                                 <tr>
+                                    <th><label for="id_utilisateur">Propriétaire<span class="required">*</span>&nbsp;:</label></th>
+                                    <td>
+{html_options id=id_utilisateur name=id_utilisateur options=$utilisateurs selected=$id_utilisateur}
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
                                     <td><input type="text" id="nom" name="nom" maxlength="20" required=""></td>
                                 </tr>

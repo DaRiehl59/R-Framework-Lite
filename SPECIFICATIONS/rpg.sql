@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 10 Novembre 2015 à 17:57
+-- Généré le: Jeu 12 Novembre 2015 à 09:58
 -- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.14
 
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `communaute` (
   `avatar` varchar(255) DEFAULT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `groupe` (
 --
 
 INSERT INTO `groupe` (`id`, `nom`, `description`, `maximum`, `avatar`, `connecte`, `actif`) VALUES
-(1, 'test', '', 0, '', 0, 1),
+(1, 'Grand Concepteur', '', 0, '2c7fa0fa37eb7dc32a772f20c5306ac277b08768.png', 0, 1),
 (2, 'Architecte(s)', 'Maître d&#39;un Univers.', 1, '0c9a7e3da93a997931c324f3b7c554d2c477f71b.png', 1, 1),
 (3, 'Maître(s) de Jeu', 'Assistant de l&#39;architecte sur le développement RP de son Univers.', 1, '3159333ba60204a296f1367ea4059c59da45ee7b.png', 1, 1),
 (4, 'Juge(s)', 'Impartial, il fait appliquer la loi dans un secteur.\r\nUne fois rendue, sa décision ne peut être contestée.', 1, 'f05e649c978352cd60a1bfcdb3a269a48798295a.png', 1, 1),

@@ -42,7 +42,7 @@ class PersonnageControler {
             $item['id'] = filter_input(INPUT_POST, 'id',FILTER_SANITIZE_NUMBER_INT);
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
             $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
-            $item['id_utilisateur'] = Session::get('utilisateur')['id'];
+            $item['id_utilisateur'] = filter_input(INPUT_POST, 'id_utilisateur',FILTER_SANITIZE_NUMBER_INT);
             
             $result = PersonnageTable::update($item);
         }
@@ -57,7 +57,21 @@ class PersonnageControler {
         }
         
         $items = PersonnageTable::select('*');
-        PersonnageViewer::read($items);
+        $items2 = UtilisateurTable::select('*');
+        $utilisateurs = array();
+        foreach($items2 as $item2)
+        {
+            $utilisateurs[$item2->id] = $item2->nom;
+        }
+        if(Session::get('connected'))
+        {
+            $id_utilisateur = Session::get('utilisateur')['id'];
+        }
+        else
+        {
+            $id_utilisateur = null;
+        }
+        PersonnageViewer::read($items, $utilisateurs, $id_utilisateur);
     }
     
     public static function update()
@@ -72,7 +86,13 @@ class PersonnageControler {
         }
         else
         {
-            PersonnageViewer::update($item);
+            $items2 = UtilisateurTable::select('*');
+            $utilisateurs = array();
+            foreach($items2 as $item2)
+            {
+                $utilisateurs[$item2->id] = $item2->nom;
+            }
+            PersonnageViewer::update($item, $utilisateurs);
         }
     }
     
@@ -88,7 +108,13 @@ class PersonnageControler {
         }
         else
         {
-            PersonnageViewer::delete($item);
+            $items2 = UtilisateurTable::select('*');
+            $utilisateurs = array();
+            foreach($items2 as $item2)
+            {
+                $utilisateurs[$item2->id] = $item2->nom;
+            }
+            PersonnageViewer::delete($item, $utilisateurs);
         }
     }
     
