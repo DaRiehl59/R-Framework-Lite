@@ -14,7 +14,7 @@ class AffecterViewer
         Viewer::assign('others_ids', $others_ids);
         Viewer::assign('groupe', $groupe);
 
-        $avatar_directory = $PARAM['groups']['avatars']['directory'];
+        $avatar_directory = $PARAM['groupes']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
         
         $theme = $PARAM['icons']['theme'];
