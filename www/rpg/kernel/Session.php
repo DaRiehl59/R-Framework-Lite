@@ -36,11 +36,6 @@ class Session {
     }
     
     public static function set($name,$value){
-        $result = isset($_SESSION[$name]);
-        if ($result)
-        {
-            $_SESSION[$name]=$value;
-        }
-        return $result;
+        $_SESSION[$name]=$value;
     }
 }
