@@ -53,13 +53,13 @@ class AttribuerTable {
         if($sth->rowCount())
         {
             $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
-            $sth->closeCursor();
         }
         else
         {
             $results = null;
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $results;
@@ -145,6 +145,7 @@ class AttribuerTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;
@@ -166,6 +167,7 @@ class AttribuerTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;
@@ -187,6 +189,7 @@ class AttribuerTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;
@@ -205,6 +208,7 @@ class AttribuerTable {
         $sth = $dbh->prepare($query);
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;

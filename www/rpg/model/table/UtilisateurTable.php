@@ -41,16 +41,17 @@ class UtilisateurTable {
         $sth->execute();
         if($sth->rowCount() == 1)
         {
-            $utilisateur = $sth->fetch(PDO::FETCH_CLASS);
+            $item = $sth->fetch(PDO::FETCH_CLASS);
         }
         else
         {
-            $utilisateur = null;
+            $item = null;
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
-        return $utilisateur;
+        return $item;
     }
     
     /**
@@ -86,17 +87,17 @@ class UtilisateurTable {
         
         if($sth->rowCount())
         {
-            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
-            $sth->closeCursor();
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
         }
         else
         {
-            $results = null;
+            $items = array();
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
-        return $results;
+        return $items;
     }
     
     /**
@@ -117,16 +118,17 @@ class UtilisateurTable {
         $sth->execute();
         if($sth->rowCount() == 1)
         {
-            $utilisateur = $sth->fetch(PDO::FETCH_CLASS);
+            $item = $sth->fetch(PDO::FETCH_CLASS);
         }
         else
         {
-            $utilisateur = null;
+            $item = null;
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
-        return $utilisateur;
+        return $item;
     }
     
     /**
@@ -165,6 +167,7 @@ class UtilisateurTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;

@@ -53,17 +53,17 @@ class GroupeTable {
         
         if($sth->rowCount())
         {
-            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
-            $sth->closeCursor();
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
         }
         else
         {
-            $results = null;
+            $items = array();
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
-        return $results;
+        return $items;
     }
     
     /**
@@ -86,16 +86,47 @@ class GroupeTable {
         if($sth->rowCount() == 1)
         {
             $item = $sth->fetch(PDO::FETCH_CLASS);
-            $sth->closeCursor();
         }
         else
         {
             $item = null;
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $item;
+    }
+
+    /**
+     * recherche d'un enregistrement par son id
+     * @param int $id
+     * @return Object élément correspondant à la valeur de id
+     */
+    public static function select_not_connecte(){
+        $dbh = Database::connect();
+        
+        $query = "SELECT * FROM `" . self::$table . "`" . "\r\n"
+                . "WHERE connecte IS FALSE;";
+        
+        $sth = $dbh->prepare($query);
+        
+        $sth->setFetchMode(PDO::FETCH_CLASS, self::$table);
+        $sth->execute();
+        
+        if($sth->rowCount())
+        {
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
+        }
+        else
+        {
+            $items = array();
+        }
+        
+        $sth->closeCursor();
+        Database::disconnect();
+        
+        return $items;
     }
 
     /**
@@ -134,6 +165,7 @@ class GroupeTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;
@@ -171,6 +203,7 @@ class GroupeTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;
@@ -192,6 +225,7 @@ class GroupeTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;

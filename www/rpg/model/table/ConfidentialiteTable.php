@@ -54,16 +54,17 @@ class ConfidentialiteTable {
         
         if($sth->rowCount())
         {
-            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
         }
         else
         {
-            $results = null;
+            $items = array();
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
-        return $results;
+        return $items;
     }
 }
 ?>

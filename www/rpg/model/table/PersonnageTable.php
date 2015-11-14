@@ -53,17 +53,17 @@ class PersonnageTable {
         
         if($sth->rowCount())
         {
-            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
-            $sth->closeCursor();
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
         }
         else
         {
-            $results = null;
+            $items = array();
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
-        return $results;
+        return $items;
     }
     
     /**
@@ -86,13 +86,13 @@ class PersonnageTable {
         if($sth->rowCount() == 1)
         {
             $item = $sth->fetch(PDO::FETCH_CLASS);
-            $sth->closeCursor();
         }
         else
         {
             $item = null;
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $item;
@@ -134,6 +134,7 @@ class PersonnageTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;
@@ -171,6 +172,7 @@ class PersonnageTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;
@@ -192,6 +194,7 @@ class PersonnageTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;

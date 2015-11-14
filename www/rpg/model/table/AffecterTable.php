@@ -48,13 +48,13 @@ class AffecterTable {
         if($sth->rowCount())
         {
             $items = $sth->fetchAll(PDO::FETCH_CLASS, 'Utilisateur');
-            $sth->closeCursor();
         }
         else
         {
             $items = array();
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $items;
@@ -87,13 +87,13 @@ class AffecterTable {
         if($sth->rowCount())
         {
             $items = $sth->fetchAll(PDO::FETCH_CLASS, 'Utilisateur');
-            $sth->closeCursor();
         }
         else
         {
             $items = array();
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $items;
@@ -126,13 +126,13 @@ class AffecterTable {
         if($sth->rowCount())
         {
             $items = $sth->fetchAll(PDO::FETCH_CLASS, 'Utilisateur');
-            $sth->closeCursor();
         }
         else
         {
             $items = array();
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $items;
@@ -165,13 +165,13 @@ class AffecterTable {
         if($sth->rowCount())
         {
             $items = $sth->fetchAll(PDO::FETCH_CLASS, 'Utilisateur');
-            $sth->closeCursor();
         }
         else
         {
             $items = array();
         }
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $items;
@@ -257,6 +257,7 @@ class AffecterTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;
@@ -292,6 +293,7 @@ class AffecterTable {
         
         $result = $sth->execute();
         
+        $sth->closeCursor();
         Database::disconnect();
         
         return $result;
