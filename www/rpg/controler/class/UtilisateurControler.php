@@ -51,23 +51,27 @@ class UtilisateurControler {
             {
                 foreach ($groupe_objects as $groupe_object)
                 {
-                    $groupe = get_object_vars($groupe_object);
-                    $groupes[] = $groupe;
-
-                    /**
-                     * Chargement des droits
-                     */
-
-                    $classname = "droit";
-                    $FK_name = "id_groupe";
-                    $FK_value = $groupe_object->id;
-                    $droit_objects = AttribuerTable::get_items($classname, $FK_name, $FK_value);
-                    if(!empty($droit_objects))
+                    if($groupe_object->actif)
                     {
-                        foreach ($droit_objects as $droit_object)
+                        $groupes[] = $groupe_object->nom;
+
+                        /**
+                         * Chargement des droits
+                         */
+
+                        $classname = 'droit';
+                        $FK_name = 'id_groupe';
+                        $FK_value = $groupe_object->id;
+                        $droit_objects = AttribuerTable::get_items($classname, $FK_name, $FK_value);
+                        if(!empty($droit_objects))
                         {
-                            $droit = get_object_vars($droit_object);
-                            $droits[] = $droit;
+                            foreach ($droit_objects as $droit_object)
+                            {
+                                if($droit_object->actif)
+                                {
+                                    $droits[] = $droit_object->nom;
+                                }
+                            }
                         }
                     }
                 }

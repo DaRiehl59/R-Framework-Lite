@@ -8,8 +8,11 @@
  * @copyright (c) 2015, D. [R]IEHL
  */
 
-require_once 'model/class/Attribuer.php';
 require_once 'kernel/Database.php';
+
+require_once 'model/class/Droit.php';
+require_once 'model/class/Attribuer.php';
+require_once 'model/class/Groupe.php';
 
 class AttribuerTable {
     

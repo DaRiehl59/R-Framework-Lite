@@ -15,6 +15,7 @@ import_directory($PARAM['plugins']['directory']);
 import_directory($PARAM['controler']['class']);
 
 Session::init();
+Security::init();
 
 /**
  * Routing

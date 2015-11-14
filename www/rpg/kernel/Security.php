@@ -11,17 +11,17 @@ require_once 'model/class/Droit.php';
 
 
 class Security {
-    //put your code here
     public static function init()
     {
         global $PARAM;
         
         if(Session::get('connected'))
         {
-            $identifiant = Session::get('identifiant');
-            $motdepasse = Session::get('motdepasse');
-            if(!is_null($identifiant) && !is_null($motdepasse))
+            $session_utilisateur = Session::get('utilisateur');
+            if(!is_null($session_utilisateur))
             {
+                $identifiant = $session_utilisateur['identifiant'];
+                $motdepasse = $session_utilisateur['motdepasse'];
                 $object = UtilisateurTable::connexion($identifiant, $motdepasse);
 
                 if(!is_null($object)){
@@ -47,51 +47,47 @@ class Security {
                     {
                         foreach ($groupe_objects as $groupe_object)
                         {
-                            $groupe = get_object_vars($groupe_object);
-                            $groupes[] = $groupe;
+                            if($groupe_object->actif)
+                            {
+                                $groupes[] = $groupe_object->nom;
 
-                            /**
-                             * Chargement des droits
-                             */
-                            
-                            $classname = "droit";
-                            $FK_name = "id_groupe";
-                            $FK_value = $groupe_object->id;
-                            $droit_objects = AttribuerTable::get_items($classname, $FK_name, $FK_value);
-                            if(!empty($droit_objects))
-                            {
-                                foreach ($droit_objects as $droit_object)
+                                /**
+                                 * Chargement des droits
+                                 */
+
+                                $classname = 'droit';
+                                $FK_name = 'id_groupe';
+                                $FK_value = $groupe_object->id;
+                                $droit_objects = AttribuerTable::get_items($classname, $FK_name, $FK_value);
+                                if(!empty($droit_objects))
                                 {
-                                    $droit = get_object_vars($droit_object);
-                                    $droits[] = $droit;
+                                    foreach ($droit_objects as $droit_object)
+                                    {
+                                        if($droit_object->actif)
+                                        {
+                                            $droits[] = $droit_object->nom;
+                                        }
+                                    }
                                 }
-                                Session::set('droits', $droits);
-                            }
-                            else
-                            {
-                                Session::set('droits', $droits);
                             }
                         }
-                        Session::set('groupes', $groupes);
                     }
-                    else
-                    {
-                        Session::set('groupes', $groupes);
-                    }
+                    Session::set('groupes', $groupes);
+                    Session::set('droits', $droits);
                 }
                 else
                 {
-                    Session::set('connected')=false;
+                    Session::set('connected',false);
                     Viewer::init();
-                    Viewer::error("Erreur de session. Veuillez vous reconnecter");
+                    Viewer::error("Erreur de session (1). Veuillez vous reconnecter");
                     // defaultViewer::defaultAction();
                 }
             }
             else
             {
-                Session::set('connected')=false;
+                Session::set('connected',false);
                 Viewer::init();
-                Viewer::error("Erreur de session. Veuillez vous reconnecter");
+                Viewer::error("Erreur de session (2). Veuillez vous reconnecter");
                 // defaultViewer::defaultAction();
             }
         }
@@ -101,17 +97,50 @@ class Security {
             /**
              * Loading Anonymous privileges
              */
-            $dbh = Database::connect();
-            $statement =  "SELECT droit.*"."\r\n"
-                        . "FROM groupe"
-                        . "INNER JOIN attribuer ON attribuer.id_groupe = groupe.id"
-                        . "INNER JOIN droit     ON attribuer.id_droit  = droit.id"
-                        . "WHERE groupe.connecte IS FALSE;";
-            $sth = $dbh->prepare($statement);
-            $sth->bindParam('nom', $nom);
-            $sth->execute();
-            $droits = $sth->fetchAll(PDO::FETCH_CLASS, 'Droit');
-            Database::disconnect();
+            
+            $groupe_objects = GroupeTable::select_not_connecte();
+            
+            if(!empty($groupe_objects))
+            {
+                foreach ($groupe_objects as $groupe_object)
+                {
+                    if($groupe_object->actif)
+                    {
+                        $groupes[] = $groupe_object->nom;
+
+                        /**
+                         * Chargement des droits
+                         */
+
+                        $classname = 'droit';
+                        $FK_name = 'id_groupe';
+                        $FK_value = $groupe_object->id;
+                        $droit_objects = AttribuerTable::get_items($classname, $FK_name, $FK_value);
+                        if(!empty($droit_objects))
+                        {
+                            foreach ($droit_objects as $droit_object)
+                            {
+                                if($droit_object->actif)
+                                {
+                                    $droits[] = $droit_object->nom;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Session::set('groupes', $groupes);
+            Session::set('droits', $droits);
+            
+                    
+                    
         }
+    }
+    
+    public static function check($controler_method)
+    {
+        $needle = $controler_method;
+        $haystack = Session::get('droits');
+        return in_array($needle, $haystack);
     }
 }

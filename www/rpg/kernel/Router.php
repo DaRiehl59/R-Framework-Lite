@@ -65,6 +65,11 @@ class Router {
             Viewer::error("Router Error : no route for `" . self::$action ."` action " . " in `". self::$controler . "` controler.");
             $error = true;
         }
+        if(!Security::check($ROUTES[self::$controler][self::$action]))
+        {
+            Viewer::error("Router Error : no route for `" . self::$action ."` action " . " in `". self::$controler . "` controler.");
+            $error = true;
+        }
         
         if($error)
         {
