@@ -36,47 +36,44 @@ class UtilisateurControler {
             Session::set('utilisateur', $utilisateur);
             Session::set('connected', true);
             
+            $groupes = array();
+            $droits = array();
+
             /**
              * Chargement des groupes
              */
+
             $classname = "groupe";
             $FK_name = "id_utilisateur";
             $FK_value = $utilisateur['id'];
             $groupe_objects = AffecterTable::get_items($classname, $FK_name, $FK_value);
-            if(!empty($groupe_objects)){
+            if(!empty($groupe_objects))
+            {
                 foreach ($groupe_objects as $groupe_object)
                 {
                     $groupe = get_object_vars($groupe_object);
                     $groupes[] = $groupe;
-                    
+
                     /**
                      * Chargement des droits
                      */
+
                     $classname = "droit";
                     $FK_name = "id_groupe";
                     $FK_value = $groupe_object->id;
                     $droit_objects = AttribuerTable::get_items($classname, $FK_name, $FK_value);
-                    if(!empty($droit_objects)){
+                    if(!empty($droit_objects))
+                    {
                         foreach ($droit_objects as $droit_object)
                         {
                             $droit = get_object_vars($droit_object);
                             $droits[] = $droit;
                         }
-                        Session::set('droits', $droits);
-                    }
-                    else
-                    {
-                        $droits = array();
-                        Session::set('droits', $droits);
                     }
                 }
-                Session::set('groupes', $groupes);
             }
-            else
-            {
-                $groupes = array();
-                Session::set('groupes', $groupes);
-            }
+            Session::set('groupes', $groupes);
+            Session::set('droits', $droits);
             
             if(Router::has_previous()) {
                 Router::call_previous_controler();
