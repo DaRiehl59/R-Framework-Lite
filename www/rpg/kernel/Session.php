@@ -24,10 +24,23 @@ class Session {
     }
     
     public static function get($name){
-        return $_SESSION[$name];
+        if (isset($_SESSION[$name]))
+        {
+            $result = $_SESSION[$name];
+        }
+        else
+        {
+            $result = null;
+        }
+        return $result;
     }
     
     public static function set($name,$value){
-        $_SESSION[$name]=$value;
+        $result = isset($_SESSION[$name]);
+        if ($result)
+        {
+            $_SESSION[$name]=$value;
+        }
+        return $result;
     }
 }
