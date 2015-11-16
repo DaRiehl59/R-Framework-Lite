@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Jeu 12 Novembre 2015 à 09:58
+-- Généré le: Lun 16 Novembre 2015 à 18:26
 -- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.14
 
@@ -19,6 +19,21 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `rpg`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `action`
+--
+
+CREATE TABLE IF NOT EXISTS `action` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(30) NOT NULL,
+  `description` text NOT NULL,
+  `avatar` varchar(255) NOT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -46,6 +61,25 @@ INSERT INTO `affecter` (`id_utilisateur`, `id_groupe`) VALUES
 (2, 6),
 (2, 7),
 (2, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `anecdote`
+--
+
+CREATE TABLE IF NOT EXISTS `anecdote` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titre` varchar(200) NOT NULL,
+  `description` text NOT NULL,
+  `moment` datetime NOT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `id_personnage` int(11) NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_personnage` (`id_personnage`),
+  KEY `id_utilisateur` (`id_utilisateur`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -100,6 +134,21 @@ INSERT INTO `attribuer` (`id_droit`, `id_groupe`) VALUES
 (34, 1),
 (35, 1),
 (36, 1),
+(37, 1),
+(38, 1),
+(39, 1),
+(40, 1),
+(41, 1),
+(42, 1),
+(43, 1),
+(44, 1),
+(45, 1),
+(46, 1),
+(47, 1),
+(48, 1),
+(49, 1),
+(50, 1),
+(51, 1),
 (5, 9),
 (6, 9),
 (7, 9),
@@ -132,9 +181,45 @@ INSERT INTO `attribuer` (`id_droit`, `id_groupe`) VALUES
 (34, 9),
 (35, 9),
 (36, 9),
+(51, 9),
 (1, 10),
 (3, 10),
-(4, 10);
+(4, 10),
+(51, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `aventure`
+--
+
+CREATE TABLE IF NOT EXISTS `aventure` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titre` varchar(200) NOT NULL,
+  `description` text NOT NULL,
+  `debut` datetime DEFAULT NULL,
+  `fin` datetime DEFAULT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `id_utilisateur` int(11) NOT NULL,
+  `id_univers` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_utilisateur` (`id_utilisateur`),
+  KEY `id_univers` (`id_univers`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `classe`
+--
+
+CREATE TABLE IF NOT EXISTS `classe` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(20) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -143,14 +228,48 @@ INSERT INTO `attribuer` (`id_droit`, `id_groupe`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `communaute` (
-  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(20) NOT NULL,
   `description` text NOT NULL,
   `maximum` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `avatar` varchar(255) DEFAULT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `id_lieu` int(11) NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_utilisateur` (`id_utilisateur`),
+  KEY `id_lieu` (`id_lieu`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `competence`
+--
+
+CREATE TABLE IF NOT EXISTS `competence` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(30) NOT NULL,
+  `description` text NOT NULL,
+  `avatar` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `conferer`
+--
+
+CREATE TABLE IF NOT EXISTS `conferer` (
+  `id_race` int(11) NOT NULL,
+  `id_classe` int(11) NOT NULL,
+  `id_competence` int(11) NOT NULL,
+  `quantite` int(11) NOT NULL,
+  PRIMARY KEY (`id_race`,`id_classe`,`id_competence`),
+  KEY `id_classe` (`id_classe`),
+  KEY `id_competence` (`id_competence`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -177,6 +296,20 @@ INSERT INTO `confidentialite` (`id`, `libelle`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `consommer`
+--
+
+CREATE TABLE IF NOT EXISTS `consommer` (
+  `id_action` int(11) NOT NULL,
+  `id_competence` int(11) NOT NULL,
+  `quantite` int(11) NOT NULL,
+  PRIMARY KEY (`id_action`,`id_competence`),
+  KEY `id_competence` (`id_competence`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `droit`
 --
 
@@ -185,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `droit` (
   `nom` varchar(50) NOT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
 
 --
 -- Contenu de la table `droit`
@@ -197,7 +330,7 @@ INSERT INTO `droit` (`id`, `nom`, `actif`) VALUES
 (4, 'UtilisateurControler::forgotten', 1),
 (5, 'UtilisateurControler::disconnect', 1),
 (6, 'UtilisateurControler::invite', 1),
-(7, 'UtilisateurControler::read_profil', 1),
+(7, 'UtilisateurControler::read_owner_profil', 1),
 (8, 'UtilisateurControler::update_owner_profil', 1),
 (9, 'UtilisateurControler::upload_avatar', 1),
 (10, 'UtilisateurControler::select_avatar', 1),
@@ -226,7 +359,48 @@ INSERT INTO `droit` (`id`, `nom`, `actif`) VALUES
 (33, 'AventureControler::create', 1),
 (34, 'AventureControler::update_owner', 1),
 (35, 'AventureControler::archive_owner', 1),
-(36, 'AventureControler::close_owner', 1);
+(36, 'AventureControler::close_owner', 1),
+(37, 'DroitControler::read', 1),
+(38, 'DroitControler::update', 1),
+(39, 'DroitControler::delete', 1),
+(40, 'DroitControler::active', 1),
+(41, 'DroitControler::desactive', 1),
+(42, 'GroupeControler::read', 1),
+(43, 'GroupeControler::update', 1),
+(44, 'GroupeControler::delete', 1),
+(45, 'GroupeControler::active', 1),
+(46, 'GroupeControler::desactive', 1),
+(47, 'AffecterControler::link', 1),
+(48, 'AttribuerControler::link', 1),
+(49, 'GroupeControler::create', 1),
+(50, 'DroitControler::create', 1),
+(51, 'DefaultControler::defaultAction', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `exercer`
+--
+
+CREATE TABLE IF NOT EXISTS `exercer` (
+  `id_personnage` int(11) NOT NULL,
+  `id_classe` int(11) NOT NULL,
+  PRIMARY KEY (`id_personnage`,`id_classe`),
+  KEY `id_classe` (`id_classe`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `exister`
+--
+
+CREATE TABLE IF NOT EXISTS `exister` (
+  `id_race` int(11) NOT NULL,
+  `id_univers` int(11) NOT NULL,
+  PRIMARY KEY (`id_race`,`id_univers`),
+  KEY `id_univers` (`id_univers`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -250,7 +424,7 @@ CREATE TABLE IF NOT EXISTS `groupe` (
 --
 
 INSERT INTO `groupe` (`id`, `nom`, `description`, `maximum`, `avatar`, `connecte`, `actif`) VALUES
-(1, 'Grand Concepteur', '', 0, '2c7fa0fa37eb7dc32a772f20c5306ac277b08768.png', 0, 1),
+(1, 'Grand Concepteur', 'Maître absolu et incontesté des Univers.', 1, '2c7fa0fa37eb7dc32a772f20c5306ac277b08768.png', 1, 1),
 (2, 'Architecte(s)', 'Maître d&#39;un Univers.', 1, '0c9a7e3da93a997931c324f3b7c554d2c477f71b.png', 1, 1),
 (3, 'Maître(s) de Jeu', 'Assistant de l&#39;architecte sur le développement RP de son Univers.', 1, '3159333ba60204a296f1367ea4059c59da45ee7b.png', 1, 1),
 (4, 'Juge(s)', 'Impartial, il fait appliquer la loi dans un secteur.\r\nUne fois rendue, sa décision ne peut être contestée.', 1, 'f05e649c978352cd60a1bfcdb3a269a48798295a.png', 1, 1),
@@ -260,6 +434,128 @@ INSERT INTO `groupe` (`id`, `nom`, `description`, `maximum`, `avatar`, `connecte
 (8, 'Scribe(s)', 'Irréprochable dans son orthographe, et sa grammaire, il est le garant du respect de la langue Française.', 20, '5f8b9b655d9d5b32f97d6d03dd6bcc5970823b1e.png', 1, 1),
 (9, 'Utilisateur(s)', 'Utilisateur normal', 0, NULL, 1, 1),
 (10, 'Anonyme(s)', 'Internaute non connecté', 0, NULL, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `intervention`
+--
+
+CREATE TABLE IF NOT EXISTS `intervention` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` text NOT NULL,
+  `moment` datetime NOT NULL,
+  `id_personnage` int(11) NOT NULL,
+  `id_aventure` int(11) NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  `id_action` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_personnage` (`id_personnage`),
+  KEY `id_aventure` (`id_aventure`),
+  KEY `id_utilisateur` (`id_utilisateur`),
+  KEY `id_action` (`id_action`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `lieu`
+--
+
+CREATE TABLE IF NOT EXISTS `lieu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(30) NOT NULL,
+  `avatar` varchar(255) NOT NULL,
+  `coord_x` int(11) NOT NULL,
+  `coord_y` int(11) NOT NULL,
+  `carte` varchar(255) NOT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `id_secteur` int(11) NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_utilisateur` (`id_utilisateur`),
+  KEY `id_secteur` (`id_secteur`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `message`
+--
+
+CREATE TABLE IF NOT EXISTS `message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titre` varchar(200) NOT NULL,
+  `contenu` text NOT NULL,
+  `momentEnvoie` datetime NOT NULL,
+  `momentVu` datetime NOT NULL,
+  `momentConfirme` datetime NOT NULL,
+  `id_utilisateur_envoyer` int(11) NOT NULL,
+  `id_utilisateur_recevoir` int(11) NOT NULL,
+  `id_message_type` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_utilisateur_envoyer` (`id_utilisateur_envoyer`),
+  KEY `id_utilisateur_recevoir` (`id_utilisateur_recevoir`),
+  KEY `id_message_type` (`id_message_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `message_type`
+--
+
+CREATE TABLE IF NOT EXISTS `message_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `niveau`
+--
+
+CREATE TABLE IF NOT EXISTS `niveau` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(20) NOT NULL,
+  `id_niveau_suivant` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `objectif`
+--
+
+CREATE TABLE IF NOT EXISTS `objectif` (
+  `id_niveau` int(11) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `script` text NOT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_niveau`,`numero`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `octroyer`
+--
+
+CREATE TABLE IF NOT EXISTS `octroyer` (
+  `id_personnage` int(11) NOT NULL,
+  `id_role` int(11) NOT NULL,
+  `id_communaute` int(11) NOT NULL,
+  `moment` datetime NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  PRIMARY KEY (`id_personnage`,`id_role`,`id_communaute`),
+  KEY `id_utilisateur` (`id_utilisateur`),
+  KEY `id_role` (`id_role`),
+  KEY `octroyer_ibfk_3` (`id_communaute`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -536,8 +832,110 @@ INSERT INTO `pays` (`id`, `code`, `alpha2`, `alpha3`, `nom_en_gb`, `nom_fr_fr`) 
 CREATE TABLE IF NOT EXISTS `personnage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(30) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `id_race` int(11) NOT NULL,
+  `id_univers` int(11) NOT NULL,
+  `id_lieu` int(11) NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  `id_niveau` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_utilisateur` (`id_utilisateur`),
+  KEY `id_race` (`id_race`),
+  KEY `id_univers` (`id_univers`),
+  KEY `id_lieu` (`id_lieu`),
+  KEY `id_niveau` (`id_niveau`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `posseder`
+--
+
+CREATE TABLE IF NOT EXISTS `posseder` (
+  `id_personnage` int(11) NOT NULL,
+  `id_competence` int(11) NOT NULL,
+  `quantite` int(11) NOT NULL,
+  PRIMARY KEY (`id_personnage`,`id_competence`),
+  KEY `id_competence` (`id_competence`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `proposer`
+--
+
+CREATE TABLE IF NOT EXISTS `proposer` (
+  `id_race` int(11) NOT NULL,
+  `id_classe` int(11) NOT NULL,
+  PRIMARY KEY (`id_race`,`id_classe`),
+  KEY `id_classe` (`id_classe`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `race`
+--
+
+CREATE TABLE IF NOT EXISTS `race` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(20) NOT NULL,
+  `description` text,
+  `avatar` varchar(255) DEFAULT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `role`
+--
+
+CREATE TABLE IF NOT EXISTS `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(30) NOT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `id_utilisateur` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_utilisateur` (`id_utilisateur`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `secteur`
+--
+
+CREATE TABLE IF NOT EXISTS `secteur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(30) NOT NULL,
   `avatar` varchar(255) NOT NULL,
-  `actif` tinyint(1) unsigned NOT NULL,
+  `coord_x` int(11) NOT NULL,
+  `coord_y` int(11) NOT NULL,
+  `carte` varchar(255) NOT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `id_univers` int(11) NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_univers` (`id_univers`),
+  KEY `id_utilisateur` (`id_utilisateur`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `univers`
+--
+
+CREATE TABLE IF NOT EXISTS `univers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(20) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `carte` varchar(255) DEFAULT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_utilisateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_utilisateur` (`id_utilisateur`)
@@ -565,22 +963,26 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_confid_pays` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `description` varchar(200) NOT NULL,
   `id_confid_description` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `id_utilisateur_parrainer` int(11) DEFAULT NULL,
+  `id_niveau` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_pays` (`id_pays`),
   KEY `id_confid_nom` (`id_confid_nom`),
   KEY `id_confid_email` (`id_confid_email`),
   KEY `id_confid_ville` (`id_confid_ville`),
   KEY `id_confid_pays` (`id_confid_pays`),
-  KEY `id_confid_description` (`id_confid_description`)
+  KEY `id_confid_description` (`id_confid_description`),
+  KEY `id_utilisateur_parrainer` (`id_utilisateur_parrainer`),
+  KEY `id_niveau` (`id_niveau`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`id`, `identifiant`, `motdepasse`, `pseudo`, `avatar`, `nom`, `id_confid_nom`, `email`, `id_confid_email`, `ville`, `id_confid_ville`, `id_pays`, `id_confid_pays`, `description`, `id_confid_description`) VALUES
-(1, 'root', '', 'Maître', NULL, 'Administrateur', 1, '', 1, NULL, 1, NULL, 1, '', 1),
-(2, 'david.riehl', 'david', 'D.A.R.Y.L.', NULL, 'David RIEHL', 4, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 2, 75, 1, '', 1);
+INSERT INTO `utilisateur` (`id`, `identifiant`, `motdepasse`, `pseudo`, `avatar`, `nom`, `id_confid_nom`, `email`, `id_confid_email`, `ville`, `id_confid_ville`, `id_pays`, `id_confid_pays`, `description`, `id_confid_description`, `id_utilisateur_parrainer`, `id_niveau`) VALUES
+(1, 'root', '', 'Maître', NULL, 'Administrateur', 1, '', 1, NULL, 1, NULL, 1, '', 1, NULL, NULL),
+(2, 'david.riehl', 'david', 'D.A.R.Y.L.', NULL, 'David RIEHL', 4, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 2, 75, 1, '', 1, NULL, NULL);
 
 --
 -- Contraintes pour les tables exportées
@@ -594,6 +996,13 @@ ALTER TABLE `affecter`
   ADD CONSTRAINT `affecter_ibfk_2` FOREIGN KEY (`id_groupe`) REFERENCES `groupe` (`id`);
 
 --
+-- Contraintes pour la table `anecdote`
+--
+ALTER TABLE `anecdote`
+  ADD CONSTRAINT `anecdote_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
+  ADD CONSTRAINT `anecdote_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+
+--
 -- Contraintes pour la table `attribuer`
 --
 ALTER TABLE `attribuer`
@@ -601,21 +1010,142 @@ ALTER TABLE `attribuer`
   ADD CONSTRAINT `attribuer_ibfk_2` FOREIGN KEY (`id_droit`) REFERENCES `droit` (`id`);
 
 --
+-- Contraintes pour la table `aventure`
+--
+ALTER TABLE `aventure`
+  ADD CONSTRAINT `aventure_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `aventure_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`);
+
+--
+-- Contraintes pour la table `communaute`
+--
+ALTER TABLE `communaute`
+  ADD CONSTRAINT `communaute_ibfk_1` FOREIGN KEY (`id_lieu`) REFERENCES `secteur` (`id`),
+  ADD CONSTRAINT `communaute_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+
+--
+-- Contraintes pour la table `conferer`
+--
+ALTER TABLE `conferer`
+  ADD CONSTRAINT `conferer_ibfk_3` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`),
+  ADD CONSTRAINT `conferer_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
+  ADD CONSTRAINT `conferer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`);
+
+--
+-- Contraintes pour la table `consommer`
+--
+ALTER TABLE `consommer`
+  ADD CONSTRAINT `consommer_ibfk_2` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`),
+  ADD CONSTRAINT `consommer_ibfk_1` FOREIGN KEY (`id_action`) REFERENCES `action` (`id`);
+
+--
+-- Contraintes pour la table `exercer`
+--
+ALTER TABLE `exercer`
+  ADD CONSTRAINT `exercer_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
+  ADD CONSTRAINT `exercer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`);
+
+--
+-- Contraintes pour la table `exister`
+--
+ALTER TABLE `exister`
+  ADD CONSTRAINT `exister_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
+  ADD CONSTRAINT `exister_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`);
+
+--
+-- Contraintes pour la table `intervention`
+--
+ALTER TABLE `intervention`
+  ADD CONSTRAINT `intervention_ibfk_4` FOREIGN KEY (`id_action`) REFERENCES `action` (`id`),
+  ADD CONSTRAINT `intervention_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
+  ADD CONSTRAINT `intervention_ibfk_2` FOREIGN KEY (`id_aventure`) REFERENCES `aventure` (`id`),
+  ADD CONSTRAINT `intervention_ibfk_3` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+
+--
+-- Contraintes pour la table `lieu`
+--
+ALTER TABLE `lieu`
+  ADD CONSTRAINT `lieu_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `lieu_ibfk_1` FOREIGN KEY (`id_secteur`) REFERENCES `secteur` (`id`);
+
+--
+-- Contraintes pour la table `message`
+--
+ALTER TABLE `message`
+  ADD CONSTRAINT `message_ibfk_3` FOREIGN KEY (`id_message_type`) REFERENCES `message_type` (`id`),
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`id_utilisateur_envoyer`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`id_utilisateur_recevoir`) REFERENCES `utilisateur` (`id`);
+
+--
+-- Contraintes pour la table `objectif`
+--
+ALTER TABLE `objectif`
+  ADD CONSTRAINT `objectif_ibfk_1` FOREIGN KEY (`id_niveau`) REFERENCES `niveau` (`id`);
+
+--
+-- Contraintes pour la table `octroyer`
+--
+ALTER TABLE `octroyer`
+  ADD CONSTRAINT `octroyer_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `octroyer_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
+  ADD CONSTRAINT `octroyer_ibfk_2` FOREIGN KEY (`id_role`) REFERENCES `role` (`id`),
+  ADD CONSTRAINT `octroyer_ibfk_3` FOREIGN KEY (`id_communaute`) REFERENCES `communaute` (`id`);
+
+--
 -- Contraintes pour la table `personnage`
 --
 ALTER TABLE `personnage`
-  ADD CONSTRAINT `personnage_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `personnage_ibfk_5` FOREIGN KEY (`id_niveau`) REFERENCES `niveau` (`id`),
+  ADD CONSTRAINT `personnage_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
+  ADD CONSTRAINT `personnage_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`),
+  ADD CONSTRAINT `personnage_ibfk_3` FOREIGN KEY (`id_lieu`) REFERENCES `lieu` (`id`),
+  ADD CONSTRAINT `personnage_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+
+--
+-- Contraintes pour la table `posseder`
+--
+ALTER TABLE `posseder`
+  ADD CONSTRAINT `posseder_ibfk_2` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`),
+  ADD CONSTRAINT `posseder_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`);
+
+--
+-- Contraintes pour la table `proposer`
+--
+ALTER TABLE `proposer`
+  ADD CONSTRAINT `proposer_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
+  ADD CONSTRAINT `proposer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`);
+
+--
+-- Contraintes pour la table `role`
+--
+ALTER TABLE `role`
+  ADD CONSTRAINT `role_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+
+--
+-- Contraintes pour la table `secteur`
+--
+ALTER TABLE `secteur`
+  ADD CONSTRAINT `secteur_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `secteur_ibfk_1` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`);
+
+--
+-- Contraintes pour la table `univers`
+--
+ALTER TABLE `univers`
+  ADD CONSTRAINT `univers_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
+  ADD CONSTRAINT `utilisateur_ibfk_8` FOREIGN KEY (`id_niveau`) REFERENCES `niveau` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_confid_nom`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_2` FOREIGN KEY (`id_confid_email`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_3` FOREIGN KEY (`id_confid_ville`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_4` FOREIGN KEY (`id_pays`) REFERENCES `pays` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_5` FOREIGN KEY (`id_confid_pays`) REFERENCES `confidentialite` (`id`),
-  ADD CONSTRAINT `utilisateur_ibfk_6` FOREIGN KEY (`id_confid_description`) REFERENCES `confidentialite` (`id`);
+  ADD CONSTRAINT `utilisateur_ibfk_6` FOREIGN KEY (`id_confid_description`) REFERENCES `confidentialite` (`id`),
+  ADD CONSTRAINT `utilisateur_ibfk_7` FOREIGN KEY (`id_utilisateur_parrainer`) REFERENCES `utilisateur` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
