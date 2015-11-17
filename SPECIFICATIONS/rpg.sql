@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 17 Novembre 2015 à 09:37
+-- Généré le: Mar 17 Novembre 2015 à 18:23
 -- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.14
 
@@ -974,6 +974,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_confid_pays` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `description` varchar(200) NOT NULL,
   `id_confid_description` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_utilisateur_parrainer` int(11) DEFAULT NULL,
   `id_niveau` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -991,9 +992,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 -- Contenu de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`id`, `identifiant`, `motdepasse`, `pseudo`, `avatar`, `nom`, `id_confid_nom`, `email`, `id_confid_email`, `ville`, `id_confid_ville`, `id_pays`, `id_confid_pays`, `description`, `id_confid_description`, `id_utilisateur_parrainer`, `id_niveau`) VALUES
-(1, 'root', '', 'Maître', NULL, 'Administrateur', 1, '', 1, NULL, 1, NULL, 1, '', 1, NULL, NULL),
-(2, 'david.riehl', 'david', 'D.A.R.Y.L.', NULL, 'David RIEHL', 4, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 2, 75, 1, '', 1, NULL, NULL);
+INSERT INTO `utilisateur` (`id`, `identifiant`, `motdepasse`, `pseudo`, `avatar`, `nom`, `id_confid_nom`, `email`, `id_confid_email`, `ville`, `id_confid_ville`, `id_pays`, `id_confid_pays`, `description`, `id_confid_description`, `actif`, `id_utilisateur_parrainer`, `id_niveau`) VALUES
+(1, 'root', '', 'Maître', NULL, 'Administrateur', 1, '', 1, NULL, 1, NULL, 1, '', 1, 1, NULL, NULL),
+(2, 'david.riehl', 'david', 'D.A.R.Y.L.', NULL, 'David RIEHL', 4, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 2, 75, 1, '', 1, 1, NULL, NULL);
 
 --
 -- Contraintes pour les tables exportées
@@ -1038,16 +1039,16 @@ ALTER TABLE `communaute`
 -- Contraintes pour la table `conferer`
 --
 ALTER TABLE `conferer`
-  ADD CONSTRAINT `conferer_ibfk_3` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`),
   ADD CONSTRAINT `conferer_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
-  ADD CONSTRAINT `conferer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`);
+  ADD CONSTRAINT `conferer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`),
+  ADD CONSTRAINT `conferer_ibfk_3` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`);
 
 --
 -- Contraintes pour la table `consommer`
 --
 ALTER TABLE `consommer`
-  ADD CONSTRAINT `consommer_ibfk_2` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`),
-  ADD CONSTRAINT `consommer_ibfk_1` FOREIGN KEY (`id_action`) REFERENCES `action` (`id`);
+  ADD CONSTRAINT `consommer_ibfk_1` FOREIGN KEY (`id_action`) REFERENCES `action` (`id`),
+  ADD CONSTRAINT `consommer_ibfk_2` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`);
 
 --
 -- Contraintes pour la table `exercer`
@@ -1067,25 +1068,25 @@ ALTER TABLE `exister`
 -- Contraintes pour la table `intervention`
 --
 ALTER TABLE `intervention`
-  ADD CONSTRAINT `intervention_ibfk_4` FOREIGN KEY (`id_action`) REFERENCES `action` (`id`),
   ADD CONSTRAINT `intervention_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
   ADD CONSTRAINT `intervention_ibfk_2` FOREIGN KEY (`id_aventure`) REFERENCES `aventure` (`id`),
-  ADD CONSTRAINT `intervention_ibfk_3` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `intervention_ibfk_3` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `intervention_ibfk_4` FOREIGN KEY (`id_action`) REFERENCES `action` (`id`);
 
 --
 -- Contraintes pour la table `lieu`
 --
 ALTER TABLE `lieu`
-  ADD CONSTRAINT `lieu_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `lieu_ibfk_1` FOREIGN KEY (`id_secteur`) REFERENCES `secteur` (`id`);
+  ADD CONSTRAINT `lieu_ibfk_1` FOREIGN KEY (`id_secteur`) REFERENCES `secteur` (`id`),
+  ADD CONSTRAINT `lieu_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `message`
 --
 ALTER TABLE `message`
-  ADD CONSTRAINT `message_ibfk_3` FOREIGN KEY (`id_message_type`) REFERENCES `message_type` (`id`),
   ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`id_utilisateur_envoyer`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`id_utilisateur_recevoir`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`id_utilisateur_recevoir`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `message_ibfk_3` FOREIGN KEY (`id_message_type`) REFERENCES `message_type` (`id`);
 
 --
 -- Contraintes pour la table `objectif`
@@ -1097,27 +1098,27 @@ ALTER TABLE `objectif`
 -- Contraintes pour la table `octroyer`
 --
 ALTER TABLE `octroyer`
-  ADD CONSTRAINT `octroyer_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
   ADD CONSTRAINT `octroyer_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
   ADD CONSTRAINT `octroyer_ibfk_2` FOREIGN KEY (`id_role`) REFERENCES `role` (`id`),
-  ADD CONSTRAINT `octroyer_ibfk_3` FOREIGN KEY (`id_communaute`) REFERENCES `communaute` (`id`);
+  ADD CONSTRAINT `octroyer_ibfk_3` FOREIGN KEY (`id_communaute`) REFERENCES `communaute` (`id`),
+  ADD CONSTRAINT `octroyer_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `personnage`
 --
 ALTER TABLE `personnage`
-  ADD CONSTRAINT `personnage_ibfk_5` FOREIGN KEY (`id_niveau`) REFERENCES `niveau` (`id`),
   ADD CONSTRAINT `personnage_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
   ADD CONSTRAINT `personnage_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`),
   ADD CONSTRAINT `personnage_ibfk_3` FOREIGN KEY (`id_lieu`) REFERENCES `lieu` (`id`),
-  ADD CONSTRAINT `personnage_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `personnage_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `personnage_ibfk_5` FOREIGN KEY (`id_niveau`) REFERENCES `niveau` (`id`);
 
 --
 -- Contraintes pour la table `posseder`
 --
 ALTER TABLE `posseder`
-  ADD CONSTRAINT `posseder_ibfk_2` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`),
-  ADD CONSTRAINT `posseder_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`);
+  ADD CONSTRAINT `posseder_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
+  ADD CONSTRAINT `posseder_ibfk_2` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`);
 
 --
 -- Contraintes pour la table `proposer`
@@ -1136,8 +1137,8 @@ ALTER TABLE `role`
 -- Contraintes pour la table `secteur`
 --
 ALTER TABLE `secteur`
-  ADD CONSTRAINT `secteur_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `secteur_ibfk_1` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`);
+  ADD CONSTRAINT `secteur_ibfk_1` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`),
+  ADD CONSTRAINT `secteur_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `univers`
@@ -1149,14 +1150,14 @@ ALTER TABLE `univers`
 -- Contraintes pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  ADD CONSTRAINT `utilisateur_ibfk_8` FOREIGN KEY (`id_niveau`) REFERENCES `niveau` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_confid_nom`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_2` FOREIGN KEY (`id_confid_email`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_3` FOREIGN KEY (`id_confid_ville`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_4` FOREIGN KEY (`id_pays`) REFERENCES `pays` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_5` FOREIGN KEY (`id_confid_pays`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_6` FOREIGN KEY (`id_confid_description`) REFERENCES `confidentialite` (`id`),
-  ADD CONSTRAINT `utilisateur_ibfk_7` FOREIGN KEY (`id_utilisateur_parrainer`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `utilisateur_ibfk_7` FOREIGN KEY (`id_utilisateur_parrainer`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `utilisateur_ibfk_8` FOREIGN KEY (`id_niveau`) REFERENCES `niveau` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
