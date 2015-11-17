@@ -98,7 +98,7 @@ class Utilisateur {
     public $id_confid_pays;
     
      /**
-     * @property String $description
+     * @property string $description
      * @access public
      */
     public $description;
@@ -108,6 +108,24 @@ class Utilisateur {
      * @access public
      */
     public $id_confid_description;
+    
+     /**
+     * @property int $actif
+     * @access public
+     */
+    public $actif;
+
+    /**
+     * @property int $id_utilisateur_parrainer Foreign Key references Utilisateur->id
+     * @access public
+     */
+    public $id_utilisateur_parrainer;
+    
+    /**
+     * @property int $id_niveau Foreign Key references Niveau->id
+     * @access public
+     */
+    public $id_niveau;
     
    /**
      * Methods

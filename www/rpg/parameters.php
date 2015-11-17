@@ -28,9 +28,12 @@ $PARAM['uploads']['directory']                  = "./uploads";
 /**
  * Utilisateurs Parameters
  */
-$PARAM['utilisateurs']['directory']             = $PARAM['uploads']['directory']. '/' . "utilisateurs";
-$PARAM['utilisateurs']['avatars']['directory']  = $PARAM['utilisateurs']['directory']. '/' . "avatars";
-$PARAM['utilisateurs']['gallerie']['directory'] = $PARAM['utilisateurs']['directory']. '/' . "gallerie";
+$PARAM['utilisateurs']['directory']                     = $PARAM['uploads']['directory']. '/' . "utilisateurs";
+$PARAM['utilisateurs']['avatars']['directory']          = $PARAM['utilisateurs']['directory']. '/' . "avatars";
+$PARAM['utilisateurs']['gallerie']['directory']         = $PARAM['utilisateurs']['directory']. '/' . "gallerie";
+$PARAM['utilisateurs']['default']['confidentialite']    = 1;
+$PARAM['utilisateurs']['default']['pays']               = 75;
+$PARAM['utilisateurs']['default']['niveau']             = 1;
 
 /**
  * Groupes Parameters
@@ -40,7 +43,7 @@ $PARAM['groupes']['avatars']['directory']       = $PARAM['uploads']['directory']
 /**
  * Personnages Parameters
  */
-$PARAM['personnages']['avatars']['directory']    = $PARAM['uploads']['directory']. '/' . "personnages";
+$PARAM['personnages']['avatars']['directory']   = $PARAM['uploads']['directory']. '/' . "personnages";
 
 /**
  * Pictures Parameters

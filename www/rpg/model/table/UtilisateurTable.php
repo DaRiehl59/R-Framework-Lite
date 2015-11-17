@@ -172,5 +172,65 @@ class UtilisateurTable {
         
         return $result;
     }
+
+    /**
+     * mise à jour d'un enregistrement
+     * @param Array $item
+     * @return boolean $result résultat de la requête SQL
+     */
+    public static function update($item){
+        $dbh = Database::connect();
+        
+        $query = "UPDATE `" . self::$table . "` SET" . "\r\n";
+        
+        $id=$item['id'];
+        unset($item['id']);
+        $fields = array_keys($item);
+        $item['id']=$id;
+        unset($id);
+        
+        foreach($fields as $field)
+        {
+            $query .= $field . " = :".$field . "," . "\r\n";
+        }
+        $query  = substr($query, 0, strlen($query) -3) . "\r\n";
+        $query .= "WHERE id = :id;";
+        
+        $sth = $dbh->prepare($query);
+        
+        foreach($item as $field => $value)
+        {
+            $sth->bindParam(':' . $field, $item[$field]);
+        }
+        
+        $result = $sth->execute();
+        
+        $sth->closeCursor();
+        Database::disconnect();
+        
+        return $result;
+    }
+    
+    /**
+     * suppresssion d'un enregistrement
+     * @param int $id
+     * @return boolean $result résultat de la requête SQL
+     */
+    public static function delete($id){
+        $dbh = Database::connect();
+        
+        $query = "DELETE FROM `" . self::$table . "` WHERE" . "\r\n"
+                . "id = :id";
+        
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
+        
+        $result = $sth->execute();
+        
+        $sth->closeCursor();
+        Database::disconnect();
+        
+        return $result;
+    }
 }
 ?>

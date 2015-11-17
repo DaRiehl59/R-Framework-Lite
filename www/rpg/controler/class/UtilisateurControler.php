@@ -19,6 +19,260 @@ require_once 'model/table/PaysTable.php';
 require_once 'view/class/UtilisateurViewer.php';
 
 class UtilisateurControler {
+    public static function read()
+    {
+        global $PARAM;
+        
+        if(isset($_POST['btn_ajouter']))
+        {
+            $item['avatar'] = null;
+            if(isset($_FILES['userfile']))
+            {
+                $directory = $PARAM['utilisateurs']['avatars']['directory'];
+                $item['avatar'] = upload_picture_to_dir($directory);
+            }
+            $item['identifiant'] = filter_input(INPUT_POST, 'identifiant',FILTER_SANITIZE_STRING);
+            $item['motdepasse'] = filter_input(INPUT_POST, 'motdepasse',FILTER_SANITIZE_STRING);
+            $item['pseudo'] = filter_input(INPUT_POST, 'pseudo',FILTER_SANITIZE_STRING);
+            $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
+            $item['id_confid_nom'] = filter_input(INPUT_POST, 'id_confid_nom',FILTER_SANITIZE_NUMBER_INT);
+            $item['email'] = filter_input(INPUT_POST, 'email',FILTER_SANITIZE_STRING);
+            $item['id_confid_email'] = filter_input(INPUT_POST, 'id_confid_email',FILTER_SANITIZE_NUMBER_INT);
+            $item['ville'] = filter_input(INPUT_POST, 'ville',FILTER_SANITIZE_STRING);
+            $item['id_confid_ville'] = filter_input(INPUT_POST, 'id_confid_ville',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_pays'] = filter_input(INPUT_POST, 'id_pays',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_confid_pays'] = filter_input(INPUT_POST, 'id_confid_pays',FILTER_SANITIZE_NUMBER_INT);
+            $item['description'] = filter_input(INPUT_POST, 'description',FILTER_SANITIZE_STRING);
+            $item['id_confid_description'] = filter_input(INPUT_POST, 'id_confid_description',FILTER_SANITIZE_NUMBER_INT);
+            $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
+            $item['id_utilisateur_parrainer'] = filter_input(INPUT_POST, 'id_utilisateur_parrainer',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_niveau'] = filter_input(INPUT_POST, 'id_niveau',FILTER_SANITIZE_NUMBER_INT);
+            
+            $result = UtilisateurTable::insert($item);
+        }
+        
+        if(isset($_POST['btn_update']))
+        {
+            if(!empty($_FILES['userfile']['name']))
+            {
+                $directory = $PARAM['utilisateurs']['avatars']['directory'];
+                $item['avatar'] = upload_picture_to_dir($directory);
+            }
+            $item['id'] = filter_input(INPUT_POST, 'id',FILTER_SANITIZE_NUMBER_INT);
+            $item['identifiant'] = filter_input(INPUT_POST, 'identifiant',FILTER_SANITIZE_STRING);
+            $item['motdepasse'] = filter_input(INPUT_POST, 'motdepasse',FILTER_SANITIZE_STRING);
+            $item['pseudo'] = filter_input(INPUT_POST, 'pseudo',FILTER_SANITIZE_STRING);
+            $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
+            $item['id_confid_nom'] = filter_input(INPUT_POST, 'id_confid_nom',FILTER_SANITIZE_NUMBER_INT);
+            $item['email'] = filter_input(INPUT_POST, 'email',FILTER_SANITIZE_STRING);
+            $item['id_confid_email'] = filter_input(INPUT_POST, 'id_confid_email',FILTER_SANITIZE_NUMBER_INT);
+            $item['ville'] = filter_input(INPUT_POST, 'ville',FILTER_SANITIZE_STRING);
+            $item['id_confid_ville'] = filter_input(INPUT_POST, 'id_confid_ville',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_pays'] = filter_input(INPUT_POST, 'id_pays',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_confid_pays'] = filter_input(INPUT_POST, 'id_confid_pays',FILTER_SANITIZE_NUMBER_INT);
+            $item['description'] = filter_input(INPUT_POST, 'description',FILTER_SANITIZE_STRING);
+            $item['id_confid_description'] = filter_input(INPUT_POST, 'id_confid_description',FILTER_SANITIZE_NUMBER_INT);
+            $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
+            $item['id_utilisateur_parrainer'] = filter_input(INPUT_POST, 'id_utilisateur_parrainer',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_niveau'] = filter_input(INPUT_POST, 'id_niveau',FILTER_SANITIZE_NUMBER_INT);
+            
+            $result = UtilisateurTable::update($item);
+        }
+        
+        if(isset($_POST['btn_delete']))
+        {
+            $id = filter_input(INPUT_POST, 'id',FILTER_SANITIZE_NUMBER_INT);
+            
+
+            $result = UtilisateurTable::delete($id);
+            
+        }
+        
+        $items = UtilisateurTable::select('*');
+        
+        /**
+         * Chargement de la liste des Confidentialités
+         */
+        $items2 = ConfidentialiteTable::select('*');
+        $confidentialites = array();
+        foreach($items2 as $item2)
+        {
+            $confidentialites[$item2->id] = $item2->libelle;
+        }
+        /**
+         * Chargement de la liste des Pays
+         */
+        $items2 = PaysTable::select('*');
+        $pays = array();
+        foreach($items2 as $item2)
+        {
+            $pays[$item2->id] = $item2->nom_fr_fr;
+        }
+        /**
+         * Chargement de la liste des Utilisateurs
+         */
+        $items2 = UtilisateurTable::select('*');
+        $utilisateurs = array();
+        foreach($items2 as $item2)
+        {
+            $utilisateurs[$item2->id] = $item2->nom;
+        }
+        /**
+         * Chargement de la liste des Niveaux
+         */
+        $items2 = UtilisateurTable::select('*');
+        $niveaux = array();
+        foreach($items2 as $item2)
+        {
+            $niveaux[$item2->id] = $item2->nom;
+        }
+        UtilisateurViewer::read($items, $confidentialites, $pays, $utilisateurs, $niveaux);
+    }
+    
+    public static function update()
+    {
+        $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        
+        $item = UtilisateurTable::select_by_id($id);
+        if(is_null($item))
+        {
+            $previous_url = "?c=utilisateur";
+            DefaultViewer::error("Utilisateur inconnu." , $previous_url);
+        }
+        else
+        {
+            /**
+             * Chargement de la liste des Confidentialités
+             */
+            $items2 = ConfidentialiteTable::select('*');
+            $confidentialites = array();
+            foreach($items2 as $item2)
+            {
+                $confidentialites[$item2->id] = $item2->libelle;
+            }
+            /**
+             * Chargement de la liste des Pays
+             */
+            $items2 = PaysTable::select('*');
+            $pays = array();
+            foreach($items2 as $item2)
+            {
+                $pays[$item2->id] = $item2->nom_fr_fr;
+            }
+            /**
+             * Chargement de la liste des Utilisateurs
+             */
+            $items2 = UtilisateurTable::select('*');
+            $utilisateurs = array();
+            foreach($items2 as $item2)
+            {
+                $utilisateurs[$item2->id] = $item2->nom;
+            }
+            /**
+             * Chargement de la liste des Niveaux
+             */
+            $items2 = UtilisateurTable::select('*');
+            $niveaux = array();
+            foreach($items2 as $item2)
+            {
+                $niveaux[$item2->id] = $item2->nom;
+            }
+            UtilisateurViewer::update($item, $confidentialites, $pays, $utilisateurs, $niveaux);
+        }
+    }
+    
+    public static function delete()
+    {
+        $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        
+        $item = UtilisateurTable::select_by_id($id);
+        if(is_null($item))
+        {
+            $previous_url = "?c=utilisateur";
+            DefaultViewer::error("Utilisateur inconnu." , $previous_url);
+        }
+        else
+        {
+            /**
+             * Chargement de la liste des Confidentialités
+             */
+            $items2 = ConfidentialiteTable::select('*');
+            $confidentialites = array();
+            foreach($items2 as $item2)
+            {
+                $confidentialites[$item2->id] = $item2->libelle;
+            }
+            /**
+             * Chargement de la liste des Pays
+             */
+            $items2 = PaysTable::select('*');
+            $pays = array();
+            foreach($items2 as $item2)
+            {
+                $pays[$item2->id] = $item2->nom_fr_fr;
+            }
+            /**
+             * Chargement de la liste des Utilisateurs
+             */
+            $items2 = UtilisateurTable::select('*');
+            $utilisateurs = array();
+            foreach($items2 as $item2)
+            {
+                $utilisateurs[$item2->id] = $item2->nom;
+            }
+            /**
+             * Chargement de la liste des Niveaux
+             */
+            $items2 = UtilisateurTable::select('*');
+            $niveaux = array();
+            foreach($items2 as $item2)
+            {
+                $niveaux[$item2->id] = $item2->nom;
+            }
+            UtilisateurViewer::delete($item, $confidentialites, $pays, $utilisateurs, $niveaux);
+        }
+    }
+    
+    public static function active()
+    {
+        $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        
+        $object = UtilisateurTable::select_by_id($id);
+        if(is_null($object))
+        {
+            $previous_url = "?c=utilisateur";
+            DefaultViewer::error("Utilisateur inconnu." , $previous_url);
+        }
+        else
+        {
+            $item = get_object_vars($object);
+            $item['actif'] = 1;
+            
+            $result = UtilisateurTable::update($item);
+            self::read();
+        }
+    }
+    
+    public static function desactive()
+    {
+        $id = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
+        
+        $object = UtilisateurTable::select_by_id($id);
+        if(is_null($object))
+        {
+            $previous_url = "?c=utilisateur";
+            DefaultViewer::error("Utilisateur inconnu." , $previous_url);
+        }
+        else
+        {
+            $item = get_object_vars($object);
+            $item['actif'] = 0;
+            
+            $result = UtilisateurTable::update($item);
+            self::read();
+        }
+    }
+
     public static function connect()
     {
         $identifiant = filter_input(INPUT_POST, 'identifiant',FILTER_SANITIZE_STRING);
