@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Lun 16 Novembre 2015 à 18:26
+-- Généré le: Mar 17 Novembre 2015 à 09:37
 -- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.14
 
@@ -149,6 +149,11 @@ INSERT INTO `attribuer` (`id_droit`, `id_groupe`) VALUES
 (49, 1),
 (50, 1),
 (51, 1),
+(52, 1),
+(53, 1),
+(54, 1),
+(55, 1),
+(56, 1),
 (5, 9),
 (6, 9),
 (7, 9),
@@ -318,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `droit` (
   `nom` varchar(50) NOT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
 
 --
 -- Contenu de la table `droit`
@@ -374,7 +379,12 @@ INSERT INTO `droit` (`id`, `nom`, `actif`) VALUES
 (48, 'AttribuerControler::link', 1),
 (49, 'GroupeControler::create', 1),
 (50, 'DroitControler::create', 1),
-(51, 'DefaultControler::defaultAction', 1);
+(51, 'DefaultControler::defaultAction', 1),
+(52, 'PersonnageControler::read', 1),
+(53, 'PersonnageControler::update', 1),
+(54, 'PersonnageControler::delete', 1),
+(55, 'PersonnageControler::active', 1),
+(56, 'PersonnageControler::desactive', 1);
 
 -- --------------------------------------------------------
 
@@ -839,6 +849,7 @@ CREATE TABLE IF NOT EXISTS `personnage` (
   `id_utilisateur` int(11) NOT NULL,
   `id_niveau` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `nom` (`nom`),
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_race` (`id_race`),
   KEY `id_univers` (`id_univers`),
