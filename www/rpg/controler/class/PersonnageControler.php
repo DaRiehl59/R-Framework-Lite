@@ -20,7 +20,7 @@ class PersonnageControler {
         if(isset($_POST['btn_ajouter']))
         {
             $item['avatar'] = null;
-            if(isset($_FILES['userfile']))
+            if(!empty($_FILES['userfile']['name']))
             {
                 $directory = $PARAM['personnages']['avatars']['directory'];
                 $item['avatar'] = upload_picture_to_dir($directory);
