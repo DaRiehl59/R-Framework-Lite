@@ -3,6 +3,7 @@
                 <fieldset class="list">
                     <legend>Liste des Droits</legend>
                     <div>
+{include file="html_icon_definitions.tpl"}
                         <table>
                             <tbody>
 {section name=liste_sec0 loop=$items}
@@ -13,7 +14,6 @@
                                         </a>
                                     </td>
                                     <th>
-{include file="html_icon_definitions.tpl"}
                                         <ul class="menu">
                                             <li class="icon">
                                                 <a href="?c=droit&amp;a=update&amp;id={$items[liste_sec0]->id}" title="Editer">
