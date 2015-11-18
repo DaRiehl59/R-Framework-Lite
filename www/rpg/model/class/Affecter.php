@@ -20,7 +20,7 @@ class Affecter {
     public $id_utilisateur;
     
     /**
-     * @property int $id_droit Primary Key, Foreign Key references groupe->id
+     * @property int $id_droit Primary Key, Foreign Key references Groupe->id
      * @access public
      */
     public $id_groupe;
@@ -29,8 +29,8 @@ class Affecter {
      * Methods
      */
     
-    /**
-     * ... to complete
-     */
+    public function __toString() {
+        return "(" . $this->id_utilisateur . "," . $this->id_groupe . ")";
+    }
 }
 ?>

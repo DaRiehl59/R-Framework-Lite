@@ -38,7 +38,7 @@ class Personnage {
     public $actif;
 
     /**
-     * @property int $id_utilisateur
+     * @property int $id_utilisateur Foreign Key references Utilisateur->id
      * @access public
      */
     public $id_utilisateur;

@@ -86,7 +86,7 @@ class Utilisateur {
     public $id_confid_ville;
     
     /**
-     * @property int $id_pays
+     * @property int $id_pays Foreign Key references Pays->id
      * @access public
      */
     public $id_pays;

@@ -29,8 +29,8 @@ class Attribuer {
      * Methods
      */
     
-    /**
-     * ... to complete
-     */
+    public function __toString() {
+        return "(" . $this->id_droit . "," . $this->id_groupe . ")";
+    }
 }
 ?>
