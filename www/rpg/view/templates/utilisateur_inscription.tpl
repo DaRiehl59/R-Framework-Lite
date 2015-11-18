@@ -2,7 +2,7 @@
             <div id="main" class="inscription">
                 <fieldset>
                     <legend>Inscription</legend>
-                    <form action="?c=utilisateur&amp;a=inscription" method="POST">
+                    <form action="?c=utilisateur&amp;a=subscribe" onSubmit="return checkForm(this);" method="POST">
                         <table>
                             <tr>
                                 <th><label for="identifiant">Identifiant<span class="required">*</span>&nbsp;:</label></th>

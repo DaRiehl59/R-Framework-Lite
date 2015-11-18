@@ -69,7 +69,7 @@
                 </fieldset>
                 <fieldset class="insert">
                     <legend>Ajouter un Utilisateur</legend>
-                    <form enctype="multipart/form-data" action="?c=utilisateur&amp;a=read" method="post">
+                    <form enctype="multipart/form-data" action="?c=utilisateur&amp;a=read" onSubmit="return checkForm(this);" method="post">
                         <table>
                             <tbody>
                                 <tr>
@@ -77,8 +77,11 @@
                                     <td><input type="text" id="identifiant" name="identifiant" maxlength="20" required=""></td>
                                 </tr>
                                 <tr>
-                                    <th><label for="motdepasse">Mot de passe<span class="required">*</span>&nbsp;:</label></th>
-                                    <td><input type="password" id="motdepasse" name="motdepasse" maxlength="32" required=""></td>
+                                    <th rowspan="2"><label for="motdepasse">Mot de passe<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="password" id="motdepasse" name="motdepasse" maxlength="32" placeholder="Mot de passe" required=""></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="password" name="motdepasse2" maxlength="32" placeholder="Confirmation" required=""></td>
                                 </tr>
                                 <tr>
                                     <th><label for="pseudo">Pseudo<span class="required">*</span>&nbsp;:</label></th>
@@ -139,7 +142,7 @@
                                 </tr>
                                 <tr>
                                     <th><label for="actif">Actif&nbsp;:</label></th>
-                                    <td><input type="checkbox" id="actif" name="actif" title="Groupe activé" checked="checked"></td>
+                                    <td><input type="checkbox" id="actif" name="actif" title="Connexion autorisée" checked="checked"></td>
                                 </tr>
                                 <tr>
                                     <th><label for="id_utilisateur_parrainer">Parrain&nbsp;:</label></th>

@@ -193,7 +193,7 @@ class UtilisateurControler {
             /**
              * Chargement de la liste des Niveaux
              */
-            $items2 = NiveauTable::select('*');
+            $items2 = Niveau_UtilisateurTable::select('*');
             $niveaux = array();
             foreach($items2 as $item2)
             {
@@ -245,7 +245,7 @@ class UtilisateurControler {
             /**
              * Chargement de la liste des Niveaux
              */
-            $items2 = NiveauTable::select('*');
+            $items2 = Niveau_UtilisateurTable::select('*');
             $niveaux = array();
             foreach($items2 as $item2)
             {

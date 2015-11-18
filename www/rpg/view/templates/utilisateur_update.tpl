@@ -1,27 +1,30 @@
 {include file="html_header.tpl"}{include file="top.tpl"}
-            <div id="main" class="groupe">
+            <div id="main" class="utilisateur">
                 <fieldset class="update">
-                    <legend>Editer un Groupe</legend>
-                    <form enctype="multipart/form-data" action="?c=groupe" method="post">
+                    <legend>Editer un Utilisateur</legend>
+                    <form enctype="multipart/form-data" action="?c=utilisateur&amp;a=read" onSubmit="return checkForm(this);" method="post">
                         <input type="hidden" name="id" value="{$item->id}">
                         <table>
                             <tbody>
                                 <tr>
-                                    <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
-                                    <td><input type="text" id="nom" name="nom" maxlength="20" required="" value="{$item->nom}"></td>
+                                    <th><label for="identifiant">Identifiant<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="text" id="identifiant" name="identifiant" maxlength="20" required="" value="{$item->identifiant}"></td>
                                 </tr>
                                 <tr>
-                                    <th><label for="description">Description&nbsp;:</label></th>
-                                    <td><textarea id="description" name="description" cols="30" rows="3">{$item->description}</textarea></td>
+                                    <th rowspan="2"><label for="motdepasse">Mot de passe&nbsp;:</label></th>
+                                    <td><input type="password" id="motdepasse" name="motdepasse" maxlength="32" placeholder="Mot de passe"></td>
                                 </tr>
                                 <tr>
-                                    <th><label for="maximum">Maximum<span class="required">*</span>&nbsp;:</label></th>
-                                    <td><input type="number" id="maximum" name="maximum" title="nombre maximum de membres" min="0" value="{$item->maximum}" required=""> (0 = illimité)</td>
+                                    <td><input type="password" name="motdepasse2" maxlength="32" placeholder="Confirmation"></td>
+                                </tr>
+                                <tr>
+                                    <th><label for="pseudo">Pseudo<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="text" id="pseudo" name="pseudo" maxlength="20" required="" value="{$item->pseudo}"></td>
                                 </tr>
                                 <tr>
                                     <th><label for="avatar">Avatar<span class="warning">*</span>&nbsp;:</label></th>
                                     <td>
-{if $item->avatar neq ''}
+{if !is_null($item->avatar)}
                                         <img src="{$avatar_directory}/{$item->avatar}" alt="Avatar">
 {/if}
                                         <input type="hidden" name="MAX_FILE_SIZE" value="{$max_file_size}">
@@ -29,17 +32,71 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="connecte">Connecté&nbsp;:</label></th>
-                                    <td><input type="checkbox" id="connecte" name="connecte" title="Groupe pour des utilisateurs connecté" {if $item->connecte} checked="checked"{/if}></td>
+                                    <th><label for="nom">Nom Réel<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="text" id="nom" name="nom" maxlength="20" required="" value="{$item->nom}"></td>
+                                    <td>
+{html_options id=id_confid_nom name=id_confid_nom options=$confidentialites selected=$id_confidentialite}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="sexe">Sexe&nbsp;:</label></th>
+                                    <td>
+{html_radios id=sexe name=sexe options=$sexes selected=$sexe}
+                                    </td>
+                                    <td>
+{html_options id=id_confid_sexe name=id_confid_sexe options=$confidentialites selected=$item->sexe}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="email">Email<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="email" id="email" name="email" maxlength="255" required="" value="{$item->email}"></td>
+                                    <td>
+{html_options id=id_confid_email name=id_confid_email options=$confidentialites selected=$item->id_confid_email}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="ville">Ville&nbsp;:</label></th>
+                                    <td><input type="text" id="ville" name="ville" maxlength="30" value="{$item->ville}"></td>
+                                    <td>
+{html_options id=id_confid_ville name=id_confid_ville options=$confidentialites selected=$id_confidentialite}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="pays">Pays<span class="required">*</span>&nbsp;:</label></th>
+                                    <td>
+{html_options id=id_pays name=id_pays options=$pays selected=$item->id_pays}
+                                    </td>
+                                    <td>
+{html_options id=id_confid_pays name=id_confid_pays options=$confidentialites selected=$item->id_confid_pays}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="description">Description&nbsp;:</label></th>
+                                    <td><textarea id="description" name="description" cols="35" rows="5">{$item->description}</textarea></td>
+                                    <td>
+{html_options id=id_confid_description name=id_confid_description options=$confidentialites selected=$item->id_confid_description}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><label for="actif">Actif&nbsp;:</label></th>
-                                    <td><input type="checkbox" id="actif" name="actif" title="Groupe activé" {if $item->actif} checked="checked"{/if}></td>
+                                    <td><input type="checkbox" id="actif" name="actif" title="Connexion autorisée"{if $item->actif} checked="checked"{/if}></td>
+                                </tr>
+                                <tr>
+                                    <th><label for="id_utilisateur_parrainer">Parrain&nbsp;:</label></th>
+                                    <td>
+{html_options id=id_utilisateur_parrainer name=id_utilisateur_parrainer options=$utilisateurs selected=$item->id_utilisateur_parrainer}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="id_niveau_utilisateur">Niveau<span class="required">*</span>&nbsp;:</label></th>
+                                    <td>
+{html_options id=id_niveau_utilisateur name=id_niveau_utilisateur options=$niveaux selected=$item->id_niveau_utilisateur required=""}
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="2" class="submit">
+                                    <th colspan="3" class="submit">
                                         <input type="submit" name="btn_update" value="Mettre-à-jour">
                                         <input type="submit" name="btn_back" value="Annuler" formnovalidate="">
                                     </th>
