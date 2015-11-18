@@ -3,6 +3,7 @@
                 <fieldset class="list">
                     <legend>Liste des Utilisateurs</legend>
                     <div>
+{include file="html_icon_definitions.tpl"}
                         <table>
                             <tbody>
 {section name=liste_sec0 loop=$items}
@@ -22,7 +23,6 @@
                                         </a>
                                     </td>
                                     <th>
-{include file="html_icon_definitions.tpl"}
                                         <ul class="menu">
                                             <li class="icon">
                                                 <a href="?c=utilisateur&amp;a=update&amp;id={$items[liste_sec0]->id}" title="Editer">
@@ -63,7 +63,7 @@
                 </fieldset>
                 <fieldset class="insert">
                     <legend>Ajouter un Utilisateur</legend>
-                    <form enctype="multipart/form-data" action="?c=utilisateur" method="post">
+                    <form enctype="multipart/form-data" action="?c=utilisateur&amp;a=read" method="post">
                         <table>
                             <tbody>
                                 <tr>
@@ -101,7 +101,7 @@
                                 </tr>
                                 <tr>
                                     <th><label for="ville">Ville&nbsp;:</label></th>
-                                    <td><input type="text" id="ville" name="ville" maxlength="30" required=""></td>
+                                    <td><input type="text" id="ville" name="ville" maxlength="30"></td>
                                     <td>
 {html_options id=id_confid_ville name=id_confid_ville options=$confidentialites selected=$id_confidentialite}
                                     </td>
@@ -133,9 +133,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="id_niveau">Niveau&nbsp;:</label></th>
+                                    <th><label for="id_niveau">Niveau<span class="required">*</span>&nbsp;:</label></th>
                                     <td>
-{html_options id=id_niveau name=id_niveau options=$niveaux selected=$id_niveau}
+{html_options id=id_niveau name=id_niveau options=$niveaux selected=$id_niveau required=""}
                                     </td>
                                 </tr>
                             </tbody>
