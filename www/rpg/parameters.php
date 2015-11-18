@@ -32,8 +32,11 @@ $PARAM['utilisateurs']['directory']                     = $PARAM['uploads']['dir
 $PARAM['utilisateurs']['avatars']['directory']          = $PARAM['utilisateurs']['directory']. '/' . "avatars";
 $PARAM['utilisateurs']['gallerie']['directory']         = $PARAM['utilisateurs']['directory']. '/' . "gallerie";
 $PARAM['utilisateurs']['default']['confidentialite']    = 1;
+$PARAM['utilisateurs']['default']['sexe']               = 'H';
 $PARAM['utilisateurs']['default']['pays']               = 75;
 $PARAM['utilisateurs']['default']['niveau']             = 1;
+$PARAM['utilisateurs']['default']['avatar']['H']        = 'user-man-512.png';
+$PARAM['utilisateurs']['default']['avatar']['F']        = 'user-women-512.png';
 
 /**
  * Groupes Parameters

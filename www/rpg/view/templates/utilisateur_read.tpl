@@ -11,7 +11,13 @@
                                     <td>
                                         <a href="?c=utilisateur&amp;a=update&amp;id={$items[liste_sec0]->id}" title="Editer">
 {if $items[liste_sec0]->avatar neq ''}
-                                            <img src="{$avatar_directory}/{$items[liste_sec0]->avatar}" alt="Avatar">
+                                            <img src="{$avatar_directory}/{$items[liste_sec0]->id}/{$items[liste_sec0]->avatar}" alt="Avatar">
+{elseif $items[liste_sec0]->hasGravatar()}
+                                            <img src="http://www.gravatar.com/avatar/{$items[liste_sec0]->email_hash}/?d=404" alt="Avatar">
+{elseif $items[liste_sec0]->sexe eq 'H'}
+                                            <img src="{$avatar_directory}/{$default_avatar_H}" alt="Avatar">
+{elseif $items[liste_sec0]->sexe eq 'F'}
+                                            <img src="{$avatar_directory}/{$default_avatar_F}" alt="Avatar">
 {else}
                                             &nbsp;
 {/if}
@@ -90,6 +96,15 @@
                                     <td><input type="text" id="nom" name="nom" maxlength="20" required=""></td>
                                     <td>
 {html_options id=id_confid_nom name=id_confid_nom options=$confidentialites selected=$id_confidentialite}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="sexe">Sexe&nbsp;:</label></th>
+                                    <td>
+{html_radios id=sexe name=sexe options=$sexes selected=$sexe}
+                                    </td>
+                                    <td>
+{html_options id=id_confid_sexe name=id_confid_sexe options=$confidentialites selected=$id_confidentialite}
                                     </td>
                                 </tr>
                                 <tr>

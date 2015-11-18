@@ -173,6 +173,71 @@ function get_file_ext($filename)
  * @param string $filename file name  (defaults datetime)
  * @return boolean success
  */
+function picture_filename()
+{
+    $accepted_mime = array(
+            'jpg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+    );
+
+    try
+    {
+        // Undefined | Multiple Files | $_FILES Corruption Attack
+        // If this request falls under any of them, treat it invalid.
+        if (
+            !isset($_FILES['userfile']['error']) ||
+            is_array($_FILES['userfile']['error'])
+        ) {
+            throw new RuntimeException('Invalid parameters.');
+        }
+
+        // Check $_FILES['upfile']['error'] value.
+        switch ($_FILES['userfile']['error']) {
+            case UPLOAD_ERR_OK:
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                throw new RuntimeException('No file sent.');
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                throw new RuntimeException('Exceeded filesize limit.');
+            default:
+                throw new RuntimeException('Unknown errors.');
+        }
+
+        // You should also check filesize here. 
+        if ($_FILES['userfile']['size'] > file_upload_max_size()) {
+            throw new RuntimeException('Exceeded filesize limit.');
+        }
+
+        // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
+        // Check MIME Type by yourself.
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $ext = array_search($finfo->file($_FILES['userfile']['tmp_name']),$accepted_mime,true);
+        if (! $ext) {
+            throw new RuntimeException('Invalid file format.');
+        }
+
+        $filename = sha1_file($_FILES['userfile']['tmp_name']) . '.' . $ext;
+    }
+    catch (RuntimeException $e)
+    {
+        //die($e->getMessage());
+        $filename = false;
+    }
+    
+    return $filename;
+}
+
+
+/**
+ * Upload picture
+ * @author David RIEHL <david.riehl@gmail.com>
+ * @version 1.0
+ * @param string $directory upload directory (defaults from $PARAM)
+ * @param string $filename file name  (defaults datetime)
+ * @return boolean success
+ */
 function upload_picture_to_dir($directory="", $filename="")
 {
     $accepted_mime = array(
@@ -195,7 +260,6 @@ function upload_picture_to_dir($directory="", $filename="")
 function upload_file_to_dir($directory="", $filename="", $accepted_mime=array())
 {
     global $PARAM;
-    $error=false;
 
     try
     {

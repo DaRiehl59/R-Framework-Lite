@@ -18,6 +18,18 @@ class UtilisateurViewer
         $id_confidentialite = $PARAM['utilisateurs']['default']['confidentialite'];
         Viewer::assign('id_confidentialite', $id_confidentialite);
         
+        $sexes = array('H'=>'Homme','F'=>'Femme');
+        Viewer::assign('sexes', $sexes);
+        
+        $sexe = $PARAM['utilisateurs']['default']['sexe'];
+        Viewer::assign('sexe', $sexe);
+        
+        $default_avatar_H = $PARAM['utilisateurs']['default']['avatar']['H'];
+        Viewer::assign('default_avatar_H', $default_avatar_H);
+
+        $default_avatar_F = $PARAM['utilisateurs']['default']['avatar']['F'];
+        Viewer::assign('default_avatar_F', $default_avatar_F);
+
         $id_pays = $PARAM['utilisateurs']['default']['pays'];
         Viewer::assign('id_pays', $id_pays);
 

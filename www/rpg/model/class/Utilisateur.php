@@ -56,6 +56,18 @@ class Utilisateur {
     public $id_confid_nom;
     
     /**
+     * @property string $sexe
+     * @access public
+     */
+    public $sexe;
+    
+    /**
+     * @property int $id_confid_sexe Foreign Key references Confidentialite->id
+     * @access public
+     */
+    public $id_confid_sexe;
+    
+    /**
      * @property string $email
      * @access public
      */
@@ -133,6 +145,18 @@ class Utilisateur {
     
     public function __toString() {
         return "$this->pseudo ($this->nom)";
+    }
+    
+    /**
+     * @access public
+     * @return boolean return true if email_hash match with gravatar
+     */
+    public function hasGravatar()
+    {
+        $url = 'http://www.gravatar.com/avatar/'.$this->email_hash.'/?d=404';
+        $headers = get_headers($url,1);
+        $array = explode(" ", $headers[0]);
+        return $array[1]=='200';
     }
 }
 ?>

@@ -29,17 +29,13 @@ class UtilisateurControler {
         
         if(isset($_POST['btn_ajouter']))
         {
-            $item['avatar'] = null;
-            if(!empty($_FILES['userfile']['name']))
-            {
-                $directory = $PARAM['utilisateurs']['avatars']['directory'];
-                $item['avatar'] = upload_picture_to_dir($directory);
-            }
             $item['identifiant'] = filter_input(INPUT_POST, 'identifiant',FILTER_SANITIZE_STRING);
             $item['motdepasse'] = filter_input(INPUT_POST, 'motdepasse',FILTER_SANITIZE_STRING);
             $item['pseudo'] = filter_input(INPUT_POST, 'pseudo',FILTER_SANITIZE_STRING);
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
             $item['id_confid_nom'] = filter_input(INPUT_POST, 'id_confid_nom',FILTER_SANITIZE_NUMBER_INT);
+            $item['sexe'] = filter_input(INPUT_POST, 'sexe',FILTER_SANITIZE_STRING);
+            $item['id_confid_sexe'] = filter_input(INPUT_POST, 'id_confid_sexe',FILTER_SANITIZE_NUMBER_INT);
             $item['email'] = filter_input(INPUT_POST, 'email',FILTER_SANITIZE_STRING);
             $item['id_confid_email'] = filter_input(INPUT_POST, 'id_confid_email',FILTER_SANITIZE_NUMBER_INT);
             $item['ville'] = filter_input(INPUT_POST, 'ville',FILTER_SANITIZE_STRING);
@@ -52,10 +48,26 @@ class UtilisateurControler {
             $item['id_utilisateur_parrainer'] = filter_input(INPUT_POST, 'id_utilisateur_parrainer',FILTER_SANITIZE_NUMBER_INT);
             $item['id_niveau_utilisateur'] = filter_input(INPUT_POST, 'id_niveau_utilisateur',FILTER_SANITIZE_NUMBER_INT);
             
+            if(empty($_FILES['userfile']['name'])){$item['avatar'] = null;}else{$item['avatar'] = picture_filename();}
             if(empty($item['ville'])){$item['ville'] = null;}
             if(empty($item['id_utilisateur_parrainer'])){$item['id_utilisateur_parrainer'] = null;}
             
             $result = UtilisateurTable::insert($item);
+            if($result)
+            {
+                /**
+                 * Création des dossiers de stockage
+                 */
+                $avatars_directory = $PARAM['utilisateurs']['avatars']['directory'].'/'.$result;
+                mkdir($avatars_directory);
+                $gallerie_directory = $PARAM['utilisateurs']['gallerie']['directory'].'/'.$result;
+                mkdir($gallerie_directory);
+                
+                if(!empty($_FILES['userfile']['name']))
+                {
+                    upload_picture_to_dir($avatars_directory, $item['avatar']);
+                }
+            }
         }
         
         if(isset($_POST['btn_update']))
@@ -71,6 +83,8 @@ class UtilisateurControler {
             $item['pseudo'] = filter_input(INPUT_POST, 'pseudo',FILTER_SANITIZE_STRING);
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
             $item['id_confid_nom'] = filter_input(INPUT_POST, 'id_confid_nom',FILTER_SANITIZE_NUMBER_INT);
+            $item['sexe'] = filter_input(INPUT_POST, 'sexe',FILTER_SANITIZE_STRING);
+            $item['id_confid_sexe'] = filter_input(INPUT_POST, 'id_confid_sexe',FILTER_SANITIZE_NUMBER_INT);
             $item['email'] = filter_input(INPUT_POST, 'email',FILTER_SANITIZE_STRING);
             $item['id_confid_email'] = filter_input(INPUT_POST, 'id_confid_email',FILTER_SANITIZE_NUMBER_INT);
             $item['ville'] = filter_input(INPUT_POST, 'ville',FILTER_SANITIZE_STRING);
