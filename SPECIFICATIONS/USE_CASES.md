@@ -205,8 +205,8 @@ Utilisateur normal
 
 * Gérer son  Profil
 
-    * Consulter son profil                          (UtilisateurControler::read_owner_profil)
-    * Editer son profil                             (UtilisateurControler::update_owner_profil)
+    * Consulter son profil                          (UtilisateurControler::read_profil_owner)
+    * Editer son profil                             (UtilisateurControler::update_profil_owner)
     * Télécharger un avatar                         (UtilisateurControler::upload_avatar)
     * Choisir un avatar                             (UtilisateurControler::select_avatar)
 
