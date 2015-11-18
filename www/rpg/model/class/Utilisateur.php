@@ -122,10 +122,10 @@ class Utilisateur {
     public $id_utilisateur_parrainer;
     
     /**
-     * @property int $id_niveau Foreign Key references Niveau->id
+     * @property int $id_niveau_utilisateur Foreign Key references Niveau_Utilisateur->id
      * @access public
      */
-    public $id_niveau;
+    public $id_niveau_utilisateur;
     
    /**
      * Methods

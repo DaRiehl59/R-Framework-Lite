@@ -1,8 +1,8 @@
 <?php
 /**
- * Classe d'accès à la table `niveau`
+ * Classe d'accès à la table `niveau_personnage`
  *
- * @filesource model/table/NiveauTable.php
+ * @filesource model/table/Niveau_PersonnageTable.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
@@ -10,16 +10,16 @@
 
 require_once 'kernel/Database.php';
 
-require_once 'model/class/Niveau.php';
+require_once 'model/class/Niveau_Personnage.php';
 
-class NiveauTable {
+class Niveau_PersonnageTable {
     
     /**
      * nom de la table
      * @var String $table
      * @access private
      */
-    private static $table = "niveau";
+    private static $table = "niveau_personnage";
     
     /**
      * recherche de tous les enregistrements

@@ -11,12 +11,12 @@
 require_once 'kernel/Database.php';
 
 require_once 'model/class/Confidentialite.php';
-require_once 'model/class/Niveau.php';
+require_once 'model/class/Niveau_Utilisateur.php';
 require_once 'model/class/Pays.php';
 require_once 'model/class/Utilisateur.php';
 
 require_once 'model/table/ConfidentialiteTable.php';
-require_once 'model/table/NiveauTable.php';
+require_once 'model/table/Niveau_UtilisateurTable.php';
 require_once 'model/table/PaysTable.php';
 require_once 'model/table/UtilisateurTable.php';
 
@@ -125,9 +125,8 @@ class UtilisateurControler {
         /**
          * Chargement de la liste des Niveaux
          */
-        $items2 = NiveauTable::select('*');
+        $items2 = Niveau_UtilisateurTable::select('*');
         $niveaux = array();
-        $niveaux[''] = '';
         foreach($items2 as $item2)
         {
             $niveaux[$item2->id] = $item2->nom;

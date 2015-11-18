@@ -1,13 +1,13 @@
 <?php
 /**
- * Classe Niveau
+ * Classe Niveau_Personnage
  *
- * @filesource model/class/Niveau.php
+ * @filesource model/class/Niveau_Personnage.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
  */
-class Niveau {
+class Niveau_Personnage {
     
     /**
      * Properties

@@ -1,13 +1,13 @@
 <?php
 /**
- * Classe Groupe
+ * Classe Niveau_Utilisateur
  *
- * @filesource model/class/Groupe.php
+ * @filesource model/class/Niveau_Utilisateur.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
  */
-class Personnage {
+class Niveau_Utilisateur {
     
     /**
      * Properties
@@ -26,29 +26,23 @@ class Personnage {
     public $nom;
     
     /**
-     * @property string $avatar
+     * @property string $description
      * @access public
      */
-    public $avatar;
-
+    public $description;
+    
     /**
-     * @property string $actif
+     * @property boolean $actif
      * @access public
      */
     public $actif;
-
+    
     /**
-     * @property int $id_utilisateur Foreign Key references Utilisateur->id
+     * @property int $id Foreign Key references Niveau->id
      * @access public
      */
-    public $id_utilisateur;
-
-    /**
-     * @property int $id_niveau_personnage Foreign Key references Niveau_Personnage->id
-     * @access public
-     */
-    public $id_niveau_personnage;
-
+    public $id_niveau_suivre;
+    
     /**
      * Methods
      */
