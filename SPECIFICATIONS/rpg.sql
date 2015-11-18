@@ -2,8 +2,8 @@
 -- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Client: localhost
--- Généré le: Mer 18 Novembre 2015 à 17:24
+-- Client: 127.0.0.1
+-- Généré le: Mer 18 Novembre 2015 à 18:18
 -- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.14
 
@@ -191,9 +191,9 @@ INSERT INTO `attribuer` (`id_droit`, `id_groupe`) VALUES
 (36, 9),
 (51, 9),
 (1, 10),
-(3, 10),
 (4, 10),
-(51, 10);
+(51, 10),
+(60, 10);
 
 -- --------------------------------------------------------
 
@@ -326,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `droit` (
   `nom` varchar(50) NOT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
 
 --
 -- Contenu de la table `droit`
@@ -390,7 +390,8 @@ INSERT INTO `droit` (`id`, `nom`, `actif`) VALUES
 (56, 'PersonnageControler::desactive', 1),
 (57, 'UtilisateurControler::read', 1),
 (58, 'UtilisateurControler::update', 1),
-(59, 'UtilisateurControler::delete', 1);
+(59, 'UtilisateurControler::delete', 1),
+(60, 'UtilisateurControler::subscribe', 1);
 
 -- --------------------------------------------------------
 
