@@ -10,11 +10,15 @@
 
 require_once 'kernel/Database.php';
 
+require_once 'model/class/Confidentialite.php';
+require_once 'model/class/Niveau.php';
+require_once 'model/class/Pays.php';
 require_once 'model/class/Utilisateur.php';
 
-require_once 'model/table/UtilisateurTable.php';
 require_once 'model/table/ConfidentialiteTable.php';
+require_once 'model/table/NiveauTable.php';
 require_once 'model/table/PaysTable.php';
+require_once 'model/table/UtilisateurTable.php';
 
 require_once 'view/class/UtilisateurViewer.php';
 
@@ -113,6 +117,7 @@ class UtilisateurControler {
          */
         $items2 = UtilisateurTable::select('*');
         $utilisateurs = array();
+        $utilisateurs[''] = '';
         foreach($items2 as $item2)
         {
             $utilisateurs[$item2->id] = $item2->nom;
@@ -120,8 +125,9 @@ class UtilisateurControler {
         /**
          * Chargement de la liste des Niveaux
          */
-        $items2 = UtilisateurTable::select('*');
+        $items2 = NiveauTable::select('*');
         $niveaux = array();
+        $niveaux[''] = '';
         foreach($items2 as $item2)
         {
             $niveaux[$item2->id] = $item2->nom;
@@ -171,7 +177,7 @@ class UtilisateurControler {
             /**
              * Chargement de la liste des Niveaux
              */
-            $items2 = UtilisateurTable::select('*');
+            $items2 = NiveauTable::select('*');
             $niveaux = array();
             foreach($items2 as $item2)
             {
@@ -223,7 +229,7 @@ class UtilisateurControler {
             /**
              * Chargement de la liste des Niveaux
              */
-            $items2 = UtilisateurTable::select('*');
+            $items2 = NiveauTable::select('*');
             $niveaux = array();
             foreach($items2 as $item2)
             {
@@ -401,13 +407,32 @@ class UtilisateurControler {
         }
     }
 
-    public static function profil()
+    public static function read_profil()
     {
         $id_utilisateur = filter_input(INPUT_GET, 'id',FILTER_SANITIZE_NUMBER_INT);
         if(empty($id_utilisateur))
         {
             $id_utilisateur = Session::get('utilisateur')['id'];
         }
+        
+        $utilisateur = UtilisateurTable::select_by_id($id_utilisateur);
+        $confidentialite = ConfidentialiteTable::select();
+        $pays = PaysTable::select();
+        
+        if(!is_null($utilisateur)){
+
+            $utilisateur->email_hash = md5(trim($utilisateur->email));
+            UtilisateurViewer::profil($utilisateur, $confidentialite, $pays);
+        }
+        else
+        {
+            DefaultViewer::error("Utilisateur inconnu.");
+        }
+    }
+    
+    public static function read_profil_owner()
+    {
+        $id_utilisateur = Session::get('utilisateur')['id'];
         
         $utilisateur = UtilisateurTable::select_by_id($id_utilisateur);
         $confidentialite = ConfidentialiteTable::select();

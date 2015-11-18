@@ -100,7 +100,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="ville">Ville<span class="required">*</span>&nbsp;:</label></th>
+                                    <th><label for="ville">Ville&nbsp;:</label></th>
                                     <td><input type="text" id="ville" name="ville" maxlength="30" required=""></td>
                                     <td>
 {html_options id=id_confid_ville name=id_confid_ville options=$confidentialites selected=$id_confidentialite}
@@ -117,7 +117,7 @@
                                 </tr>
                                 <tr>
                                     <th><label for="description">Description&nbsp;:</label></th>
-                                    <td><textarea id="description" name="description" cols="30" rows="3"></textarea></td>
+                                    <td><textarea id="description" name="description" cols="35" rows="5"></textarea></td>
                                     <td>
 {html_options id=id_confid_description name=id_confid_description options=$confidentialites selected=$id_confidentialite}
                                     </td>
@@ -129,7 +129,7 @@
                                 <tr>
                                     <th><label for="id_utilisateur_parrainer">Parrain&nbsp;:</label></th>
                                     <td>
-{html_options id=id_utilisateur_parrainer name=id_utilisateur_parrainer options=$utilisateurs selected=$id_utilisateur}
+{html_options id=id_utilisateur_parrainer name=id_utilisateur_parrainer options=$utilisateurs selected=$session_utilisateur['id']}
                                     </td>
                                 </tr>
                                 <tr>
@@ -141,7 +141,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="2" class="submit"><input type="submit" name="btn_ajouter" value="Ajouter"></th>
+                                    <th colspan="3" class="submit"><input type="submit" name="btn_ajouter" value="Ajouter"></th>
                                 </tr>
                             </tfoot>
                         </table>

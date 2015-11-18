@@ -1,0 +1,64 @@
+
+#main.utilisateur{height: 677px;}
+
+#main.utilisateur fieldset{width: 361px; margin: auto; padding: 10px;}
+
+#main.utilisateur fieldset.list{margin-top: 60px;}
+
+#main.utilisateur fieldset.list div{max-height: 261px; overflow-x: auto;}
+#main.utilisateur table{border-spacing: 0; border-collapse: collapse;}
+
+#main.utilisateur fieldset.list tbody tr{border-top: 1px solid black; border-bottom: 1px solid black;}
+#main.utilisateur fieldset.list tbody tr:nth-child(odd){background: whitesmoke;}
+#main.utilisateur fieldset.list tbody tr:nth-child(even){background: lightgray;}
+
+#main.utilisateur fieldset.list tbody tr:hover{background: lightblue;}
+#main.utilisateur fieldset.list tbody tr:hover ul.menu li.icon{border: 1px solid lightblue;}
+
+#main.utilisateur fieldset.list tbody td:nth-child(2){width:189px;}
+
+#main.utilisateur fieldset.list td a{display: block;text-decoration: none; color: inherit;}
+
+#main.utilisateur fieldset.list td img{width: 16px; height: 16px; margin-left:10px; margin-right: 10px;}
+
+#main.utilisateur fieldset.list tr:nth-child(odd) ul.menu li.icon{border: 1px solid whitesmoke;}
+#main.utilisateur fieldset.list tr:nth-child(even) ul.menu li.icon{border: 1px solid lightgray;}
+
+#main.utilisateur fieldset.list tr:nth-child(odd) ul.menu li.icon:hover,
+#main.utilisateur fieldset.list tr:nth-child(even) ul.menu li.icon:hover
+{
+    background: lightgray;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#main.utilisateur fieldset.list ul.menu li.icon:active{
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+#main.utilisateur fieldset.insert th{text-align: left; vertical-align: top; line-height: 20px;}
+#main.utilisateur fieldset.insert th.submit{text-align: right;}
+#main.utilisateur fieldset.insert tbody td:nth-child(3){vertical-align: top;}
+
+#main.utilisateur fieldset.update{margin-top: 60px;}
+#main.utilisateur fieldset.update th{text-align: left; vertical-align: top; line-height: 20px;}
+#main.utilisateur fieldset.update th.submit{text-align: right;}
+#main.utilisateur fieldset.update img{width: 100px; border: 1px solid #AAA;}
+#main.utilisateur fieldset.update input[name="btn_update"]{color: green; border: 1px solid #55DD55;}
+#main.utilisateur fieldset.update input[name="btn_update"]:hover{border: 1px solid green; background: #99FF99; color: darkgreen;}
+
+#main.utilisateur fieldset.delete{margin-top: 60px;}
+#main.utilisateur fieldset.delete th{text-align: left; vertical-align: top; line-height: 20px;}
+#main.utilisateur fieldset.delete th.submit{text-align: right;}
+#main.utilisateur fieldset.delete img{width: 100px; border: 1px solid #AAA;}
+#main.utilisateur fieldset.delete input[name="btn_delete"]{color: red; border: 1px solid #DD5555;}
+#main.utilisateur fieldset.delete input[name="btn_delete"]:hover{border: 1px solid red; background: #FF9999; color: darkred;}
+
+
+#main.utilisateur span.required{color: red;}
+#main.utilisateur span.warning{color: orange;}
