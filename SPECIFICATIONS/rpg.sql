@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 18 Novembre 2015 à 11:22
+-- Généré le: Mer 18 Novembre 2015 à 17:24
 -- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.14
 
@@ -530,31 +530,68 @@ CREATE TABLE IF NOT EXISTS `message_type` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `niveau`
+-- Structure de la table `niveau_personnage`
 --
 
-CREATE TABLE IF NOT EXISTS `niveau` (
+CREATE TABLE IF NOT EXISTS `niveau_personnage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(20) NOT NULL,
   `description` text NOT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `id_niveau_suivant` int(11) NOT NULL,
+  `id_niveau_suivant` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `objectif`
+-- Structure de la table `niveau_utilisateur`
 --
 
-CREATE TABLE IF NOT EXISTS `objectif` (
-  `id_niveau` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `niveau_utilisateur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(20) NOT NULL,
+  `description` text NOT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `id_niveau_suivant` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `niveau_utilisateur`
+--
+
+INSERT INTO `niveau_utilisateur` (`id`, `nom`, `description`, `actif`, `id_niveau_suivant`) VALUES
+(1, 'débutant', '', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `objectif_personnage`
+--
+
+CREATE TABLE IF NOT EXISTS `objectif_personnage` (
+  `id_niveau_personnage` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
   `description` text NOT NULL,
   `script` text NOT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_niveau`,`numero`)
+  PRIMARY KEY (`id_niveau_personnage`,`numero`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `objectif_utilisateur`
+--
+
+CREATE TABLE IF NOT EXISTS `objectif_utilisateur` (
+  `id_niveau_utilisateur` int(11) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `script` text NOT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_niveau_utilisateur`,`numero`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -855,14 +892,14 @@ CREATE TABLE IF NOT EXISTS `personnage` (
   `id_univers` int(11) NOT NULL,
   `id_lieu` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
-  `id_niveau` int(11) DEFAULT NULL,
+  `id_niveau_personnage` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `nom` (`nom`),
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_race` (`id_race`),
   KEY `id_univers` (`id_univers`),
   KEY `id_lieu` (`id_lieu`),
-  KEY `id_niveau` (`id_niveau`)
+  KEY `id_niveau` (`id_niveau_personnage`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -974,6 +1011,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `avatar` varchar(255) DEFAULT NULL,
   `nom` varchar(30) NOT NULL,
   `id_confid_nom` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `sexe` enum('H','F') DEFAULT NULL,
+  `id_confid_sexe` int(11) NOT NULL DEFAULT '1',
   `email` varchar(255) NOT NULL,
   `id_confid_email` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `ville` varchar(30) DEFAULT NULL,
@@ -984,7 +1023,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_confid_description` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_utilisateur_parrainer` int(11) DEFAULT NULL,
-  `id_niveau` int(11) DEFAULT NULL,
+  `id_niveau_utilisateur` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `id_pays` (`id_pays`),
   KEY `id_confid_nom` (`id_confid_nom`),
@@ -993,16 +1032,16 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   KEY `id_confid_pays` (`id_confid_pays`),
   KEY `id_confid_description` (`id_confid_description`),
   KEY `id_utilisateur_parrainer` (`id_utilisateur_parrainer`),
-  KEY `id_niveau` (`id_niveau`)
+  KEY `id_niveau` (`id_niveau_utilisateur`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`id`, `identifiant`, `motdepasse`, `pseudo`, `avatar`, `nom`, `id_confid_nom`, `email`, `id_confid_email`, `ville`, `id_confid_ville`, `id_pays`, `id_confid_pays`, `description`, `id_confid_description`, `actif`, `id_utilisateur_parrainer`, `id_niveau`) VALUES
-(1, 'root', '', 'Maître', NULL, 'Administrateur', 1, '', 1, NULL, 1, NULL, 1, '', 1, 1, NULL, NULL),
-(2, 'david.riehl', 'david', 'D.A.R.Y.L.', NULL, 'David RIEHL', 4, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 2, 75, 1, '', 1, 1, NULL, NULL);
+INSERT INTO `utilisateur` (`id`, `identifiant`, `motdepasse`, `pseudo`, `avatar`, `nom`, `id_confid_nom`, `sexe`, `id_confid_sexe`, `email`, `id_confid_email`, `ville`, `id_confid_ville`, `id_pays`, `id_confid_pays`, `description`, `id_confid_description`, `actif`, `id_utilisateur_parrainer`, `id_niveau_utilisateur`) VALUES
+(1, 'root', '', 'Maître', NULL, 'Administrateur', 1, NULL, 1, '', 1, NULL, 1, NULL, 1, '', 1, 1, NULL, 1),
+(2, 'david.riehl', 'david', 'D.A.R.Y.L.', NULL, 'David RIEHL', 4, 'H', 1, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 2, 75, 1, '', 1, 1, NULL, 1);
 
 --
 -- Contraintes pour les tables exportées
@@ -1097,10 +1136,16 @@ ALTER TABLE `message`
   ADD CONSTRAINT `message_ibfk_3` FOREIGN KEY (`id_message_type`) REFERENCES `message_type` (`id`);
 
 --
--- Contraintes pour la table `objectif`
+-- Contraintes pour la table `objectif_personnage`
 --
-ALTER TABLE `objectif`
-  ADD CONSTRAINT `objectif_ibfk_1` FOREIGN KEY (`id_niveau`) REFERENCES `niveau` (`id`);
+ALTER TABLE `objectif_personnage`
+  ADD CONSTRAINT `objectif_personnage_ibfk_1` FOREIGN KEY (`id_niveau_personnage`) REFERENCES `niveau_personnage` (`id`);
+
+--
+-- Contraintes pour la table `objectif_utilisateur`
+--
+ALTER TABLE `objectif_utilisateur`
+  ADD CONSTRAINT `objectif_utilisateur_ibfk_1` FOREIGN KEY (`id_niveau_utilisateur`) REFERENCES `niveau_utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `octroyer`
@@ -1115,11 +1160,11 @@ ALTER TABLE `octroyer`
 -- Contraintes pour la table `personnage`
 --
 ALTER TABLE `personnage`
+  ADD CONSTRAINT `personnage_ibfk_5` FOREIGN KEY (`id_niveau_personnage`) REFERENCES `niveau_personnage` (`id`),
   ADD CONSTRAINT `personnage_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
   ADD CONSTRAINT `personnage_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`),
   ADD CONSTRAINT `personnage_ibfk_3` FOREIGN KEY (`id_lieu`) REFERENCES `lieu` (`id`),
-  ADD CONSTRAINT `personnage_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `personnage_ibfk_5` FOREIGN KEY (`id_niveau`) REFERENCES `niveau` (`id`);
+  ADD CONSTRAINT `personnage_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `posseder`
@@ -1165,7 +1210,7 @@ ALTER TABLE `utilisateur`
   ADD CONSTRAINT `utilisateur_ibfk_5` FOREIGN KEY (`id_confid_pays`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_6` FOREIGN KEY (`id_confid_description`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_7` FOREIGN KEY (`id_utilisateur_parrainer`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `utilisateur_ibfk_8` FOREIGN KEY (`id_niveau`) REFERENCES `niveau` (`id`);
+  ADD CONSTRAINT `utilisateur_ibfk_8` FOREIGN KEY (`id_niveau_utilisateur`) REFERENCES `niveau_utilisateur` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
