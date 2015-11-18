@@ -30,7 +30,8 @@ class UtilisateurTable {
     public static function connexion($identifiant,$motdepasse){
         $dbh = Database::connect();
         
-        $query = "SELECT * FROM `utilisateur`" . "\r\n"
+        $query = "SELECT * , MD5(TRIM(email)) `email_hash`" . "\r\n"
+                . "FROM `utilisateur`" . "\r\n"
                 . "WHERE identifiant = :identifiant" . "\r\n"
                 . "AND   motdepasse  = :motdepasse;";
         
@@ -106,10 +107,42 @@ class UtilisateurTable {
      * @param int $id
      * @return Object Utilisateur correspondant à id
      */
+    public static function select_all(){
+        $dbh = Database::connect();
+        
+        $query = "SELECT *, MD5(TRIM(email)) `email_hash`" . "\r\n"
+                . "FROM `utilisateur`" . "\r\n"
+                . "ORDER BY pseudo;";
+        
+        $sth = $dbh->prepare($query);
+        $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
+        $sth->execute();
+        
+        if($sth->rowCount())
+        {
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
+        }
+        else
+        {
+            $items = array();
+        }
+        
+        $sth->closeCursor();
+        Database::disconnect();
+        
+        return $items;
+    }
+    
+    /**
+     * chargement des informations d'un utilisateur
+     * @param int $id
+     * @return Object Utilisateur correspondant à id
+     */
     public static function select_by_id($id){
         $dbh = Database::connect();
         
-        $query = "SELECT * FROM `utilisateur`" . "\r\n"
+        $query = "SELECT *, MD5(TRIM(email)) `email_hash`" . "\r\n"
+                . "FROM `utilisateur`" . "\r\n"
                 . "WHERE id = :id;";
         
         $sth = $dbh->prepare($query);

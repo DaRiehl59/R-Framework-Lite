@@ -1,7 +1,7 @@
                 <div id="top_menu">
                     <ul class="main_menu">
                         <li class="profil">
-                            <a href="?c=utilisateur">
+                            <a href="?c=utilisateur&amp;a=profil_owner">
                                 <div class="avatar" style='background: url(http://www.gravatar.com/avatar/{$session_utilisateur['email_hash']}) no-repeat center center / 20px;' alt="profil" title="Profil"></div>
                                 {$session_utilisateur['nom']}
                             </a>

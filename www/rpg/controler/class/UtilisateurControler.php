@@ -95,7 +95,7 @@ class UtilisateurControler {
             
         }
         
-        $items = UtilisateurTable::select('*');
+        $items = UtilisateurTable::select_all();
         
         /**
          * Chargement de la liste des Confidentialités
@@ -293,7 +293,6 @@ class UtilisateurControler {
         if(!is_null($object)){
             
             $utilisateur = get_object_vars($object);
-            $utilisateur['email_hash'] = md5(trim($object->email));
             
             Session::set('utilisateur', $utilisateur);
             Session::set('connected', true);
@@ -423,7 +422,6 @@ class UtilisateurControler {
         
         if(!is_null($utilisateur)){
 
-            $utilisateur->email_hash = md5(trim($utilisateur->email));
             UtilisateurViewer::profil($utilisateur, $confidentialite, $pays);
         }
         else
@@ -442,7 +440,6 @@ class UtilisateurControler {
         
         if(!is_null($utilisateur)){
 
-            $utilisateur->email_hash = md5(trim($utilisateur->email));
             UtilisateurViewer::profil($utilisateur, $confidentialite, $pays);
         }
         else
