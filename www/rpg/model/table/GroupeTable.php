@@ -165,6 +165,15 @@ class GroupeTable {
         
         $result = $sth->execute();
         
+        if($result)
+        {
+            $result = $dbh->lastInsertId();
+        }
+        else
+        {
+            //die(print_r($sth->errorInfo(), true));
+        }
+        
         $sth->closeCursor();
         Database::disconnect();
         
