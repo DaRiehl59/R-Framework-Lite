@@ -30,7 +30,7 @@ class UtilisateurControler {
         if(isset($_POST['btn_ajouter']))
         {
             $item['avatar'] = null;
-            if(isset($_FILES['userfile']))
+            if(!empty($_FILES['userfile']['name']))
             {
                 $directory = $PARAM['utilisateurs']['avatars']['directory'];
                 $item['avatar'] = upload_picture_to_dir($directory);
@@ -50,7 +50,10 @@ class UtilisateurControler {
             $item['id_confid_description'] = filter_input(INPUT_POST, 'id_confid_description',FILTER_SANITIZE_NUMBER_INT);
             $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
             $item['id_utilisateur_parrainer'] = filter_input(INPUT_POST, 'id_utilisateur_parrainer',FILTER_SANITIZE_NUMBER_INT);
-            $item['id_niveau'] = filter_input(INPUT_POST, 'id_niveau',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_niveau_utilisateur'] = filter_input(INPUT_POST, 'id_niveau_utilisateur',FILTER_SANITIZE_NUMBER_INT);
+            
+            if(empty($item['ville'])){$item['ville'] = null;}
+            if(empty($item['id_utilisateur_parrainer'])){$item['id_utilisateur_parrainer'] = null;}
             
             $result = UtilisateurTable::insert($item);
         }

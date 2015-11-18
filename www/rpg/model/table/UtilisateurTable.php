@@ -171,6 +171,11 @@ class UtilisateurTable {
         $sth->closeCursor();
         Database::disconnect();
         
+        if(!$result)
+        {
+            die(print_r($sth->errorInfo(), true));
+        }
+        
         return $result;
     }
 

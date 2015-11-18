@@ -133,9 +133,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="id_niveau">Niveau<span class="required">*</span>&nbsp;:</label></th>
+                                    <th><label for="id_niveau_utilisateur">Niveau<span class="required">*</span>&nbsp;:</label></th>
                                     <td>
-{html_options id=id_niveau name=id_niveau options=$niveaux selected=$id_niveau required=""}
+{html_options id=id_niveau_utilisateur name=id_niveau_utilisateur options=$niveaux selected=$id_niveau_utilisateur required=""}
                                     </td>
                                 </tr>
                             </tbody>

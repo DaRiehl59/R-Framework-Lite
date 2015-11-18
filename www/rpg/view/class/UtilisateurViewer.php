@@ -21,8 +21,8 @@ class UtilisateurViewer
         $id_pays = $PARAM['utilisateurs']['default']['pays'];
         Viewer::assign('id_pays', $id_pays);
 
-        $id_niveau = $PARAM['utilisateurs']['default']['niveau'];
-        Viewer::assign('id_niveau', $id_niveau);
+        $id_niveau_utilisateur = $PARAM['utilisateurs']['default']['niveau'];
+        Viewer::assign('id_niveau_utilisateur', $id_niveau_utilisateur);
         
         $avatar_directory = $PARAM['utilisateurs']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
