@@ -1,5 +1,7 @@
 /www/rpg/plugins/Smarty-3.1.14/templates_c/*
 /logo
 /www/rpg/uploads/personnages/*
-/www/rpg/uploads/utilisateur/avatars/*
-/www/rpg/uploads/utilisateur/galerie/*
+/www/rpg/uploads/utilisateurs/avatars/*
+/www/rpg/uploads/utilisateurs/galerie/*
+!/www/rpg/uploads/utilisateurs/avatars/user-man-512.png
+!/www/rpg/uploads/utilisateurs/avatars/user-women-512.png
