@@ -8,8 +8,9 @@
  * @copyright (c) 2015, D. [R]IEHL
  */
 
-require_once 'model/class/Utilisateur.php';
 require_once 'kernel/Database.php';
+
+require_once 'model/class/Utilisateur.php';
 
 class UtilisateurTable {
     
