@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 17 Novembre 2015 à 18:23
+-- Généré le: Mer 18 Novembre 2015 à 11:22
 -- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.14
 
@@ -154,6 +154,9 @@ INSERT INTO `attribuer` (`id_droit`, `id_groupe`) VALUES
 (54, 1),
 (55, 1),
 (56, 1),
+(57, 1),
+(58, 1),
+(59, 1),
 (5, 9),
 (6, 9),
 (7, 9),
@@ -323,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `droit` (
   `nom` varchar(50) NOT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
 
 --
 -- Contenu de la table `droit`
@@ -335,7 +338,7 @@ INSERT INTO `droit` (`id`, `nom`, `actif`) VALUES
 (4, 'UtilisateurControler::forgotten', 1),
 (5, 'UtilisateurControler::disconnect', 1),
 (6, 'UtilisateurControler::invite', 1),
-(7, 'UtilisateurControler::read_owner_profil', 1),
+(7, 'UtilisateurControler::read_profil_owner', 1),
 (8, 'UtilisateurControler::update_owner_profil', 1),
 (9, 'UtilisateurControler::upload_avatar', 1),
 (10, 'UtilisateurControler::select_avatar', 1),
@@ -384,7 +387,10 @@ INSERT INTO `droit` (`id`, `nom`, `actif`) VALUES
 (53, 'PersonnageControler::update', 1),
 (54, 'PersonnageControler::delete', 1),
 (55, 'PersonnageControler::active', 1),
-(56, 'PersonnageControler::desactive', 1);
+(56, 'PersonnageControler::desactive', 1),
+(57, 'UtilisateurControler::read', 1),
+(58, 'UtilisateurControler::update', 1),
+(59, 'UtilisateurControler::delete', 1);
 
 -- --------------------------------------------------------
 
@@ -530,6 +536,8 @@ CREATE TABLE IF NOT EXISTS `message_type` (
 CREATE TABLE IF NOT EXISTS `niveau` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(20) NOT NULL,
+  `description` text NOT NULL,
+  `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_niveau_suivant` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
