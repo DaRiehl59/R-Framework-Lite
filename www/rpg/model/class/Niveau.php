@@ -26,6 +26,12 @@ class Niveau {
     public $nom;
     
     /**
+     * @property string $description
+     * @access public
+     */
+    public $description;
+    
+    /**
      * @property boolean $actif
      * @access public
      */
