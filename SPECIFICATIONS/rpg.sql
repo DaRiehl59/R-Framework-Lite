@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 20 Novembre 2015 à 11:14
+-- Généré le: Ven 20 Novembre 2015 à 19:21
 -- Version du serveur: 5.5.46-0ubuntu0.14.04.2
 -- Version de PHP: 5.5.9-1ubuntu4.14
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `anecdote` (
   `moment` datetime NOT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_personnage` int(11) NOT NULL,
-  `id_utilisateur` int(11) NOT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_personnage` (`id_personnage`),
   KEY `id_utilisateur` (`id_utilisateur`)
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `aventure` (
   `debut` datetime DEFAULT NULL,
   `fin` datetime DEFAULT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `id_utilisateur` int(11) NOT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
   `id_univers` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_utilisateur` (`id_utilisateur`),
@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `communaute` (
   `avatar` varchar(255) DEFAULT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_lieu` int(11) NOT NULL,
-  `id_utilisateur` int(11) NOT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nom` (`nom`),
   KEY `id_utilisateur` (`id_utilisateur`),
@@ -507,9 +507,9 @@ CREATE TABLE IF NOT EXISTS `intervention` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
   `moment` datetime NOT NULL,
-  `id_personnage` int(11) NOT NULL,
+  `id_personnage` int(11) DEFAULT NULL,
   `id_aventure` int(11) NOT NULL,
-  `id_utilisateur` int(11) NOT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
   `id_action` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_personnage` (`id_personnage`),
@@ -533,7 +533,7 @@ CREATE TABLE IF NOT EXISTS `lieu` (
   `carte` varchar(255) NOT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_secteur` int(11) NOT NULL,
-  `id_utilisateur` int(11) NOT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_secteur` (`id_secteur`)
@@ -552,8 +552,8 @@ CREATE TABLE IF NOT EXISTS `message` (
   `momentEnvoie` datetime NOT NULL,
   `momentVu` datetime NOT NULL,
   `momentConfirme` datetime NOT NULL,
-  `id_utilisateur_envoyer` int(11) NOT NULL,
-  `id_utilisateur_recevoir` int(11) NOT NULL,
+  `id_utilisateur_envoyer` int(11) DEFAULT NULL,
+  `id_utilisateur_recevoir` int(11) DEFAULT NULL,
   `id_message_type` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_utilisateur_envoyer` (`id_utilisateur_envoyer`),
@@ -587,8 +587,16 @@ CREATE TABLE IF NOT EXISTS `niveau_personnage` (
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_niveau_suivant` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `nom` (`nom`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  UNIQUE KEY `nom` (`nom`),
+  KEY `id_niveau_suivant` (`id_niveau_suivant`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `niveau_personnage`
+--
+
+INSERT INTO `niveau_personnage` (`id`, `nom`, `description`, `actif`, `id_niveau_suivant`) VALUES
+(1, 'niveau 1', '', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -603,7 +611,8 @@ CREATE TABLE IF NOT EXISTS `niveau_utilisateur` (
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_niveau_suivant` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `nom` (`nom`)
+  UNIQUE KEY `nom` (`nom`),
+  KEY `id_niveau_suivant` (`id_niveau_suivant`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
@@ -654,7 +663,7 @@ CREATE TABLE IF NOT EXISTS `octroyer` (
   `id_role` int(11) NOT NULL,
   `id_communaute` int(11) NOT NULL,
   `moment` datetime NOT NULL,
-  `id_utilisateur` int(11) NOT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_personnage`,`id_role`,`id_communaute`),
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_role` (`id_role`),
@@ -939,17 +948,17 @@ CREATE TABLE IF NOT EXISTS `personnage` (
   `description` text NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `id_race` int(11) NOT NULL,
-  `id_univers` int(11) NOT NULL,
-  `id_utilisateur` int(11) NOT NULL,
-  `id_niveau_personnage` int(11) NOT NULL DEFAULT '1',
+  `id_race` int(11) DEFAULT NULL,
+  `id_univers` int(11) DEFAULT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
+  `id_niveau_personnage` int(11) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `nom` (`nom`),
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_race` (`id_race`),
   KEY `id_univers` (`id_univers`),
   KEY `id_niveau` (`id_niveau_personnage`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Déclencheurs `personnage`
@@ -1036,7 +1045,7 @@ CREATE TABLE IF NOT EXISTS `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(30) NOT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `id_utilisateur` int(11) NOT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nom` (`nom`),
   KEY `id_utilisateur` (`id_utilisateur`)
@@ -1057,7 +1066,7 @@ CREATE TABLE IF NOT EXISTS `secteur` (
   `carte` varchar(255) NOT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_univers` int(11) NOT NULL,
-  `id_utilisateur` int(11) NOT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_univers` (`id_univers`),
   KEY `id_utilisateur` (`id_utilisateur`)
@@ -1076,7 +1085,7 @@ CREATE TABLE IF NOT EXISTS `univers` (
   `avatar` varchar(255) DEFAULT NULL,
   `carte` varchar(255) DEFAULT NULL,
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `id_utilisateur` int(11) NOT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nom` (`nom`),
   KEY `id_utilisateur` (`id_utilisateur`)
@@ -1112,7 +1121,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_confid_description` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `actif` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `id_utilisateur_parrainer` int(11) DEFAULT NULL,
-  `id_niveau_utilisateur` int(11) NOT NULL DEFAULT '1',
+  `id_niveau_utilisateur` int(11) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `identifiant` (`identifiant`),
   UNIQUE KEY `pseudo` (`pseudo`),
@@ -1134,7 +1143,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 INSERT INTO `utilisateur` (`id`, `identifiant`, `motdepasse`, `pseudo`, `avatar`, `nom`, `id_confid_nom`, `prenom`, `id_confid_prenom`, `naissance`, `id_confid_naissance`, `sexe`, `id_confid_sexe`, `email`, `id_confid_email`, `ville`, `id_confid_ville`, `id_pays`, `id_confid_pays`, `description`, `id_confid_description`, `actif`, `id_utilisateur_parrainer`, `id_niveau_utilisateur`) VALUES
 (1, 'root', '', 'Maître', NULL, 'Administrateur', 1, '', 1, '0000-00-00', 1, NULL, 1, '', 1, NULL, 1, NULL, 1, '', 1, 1, NULL, 1),
-(2, 'david.riehl', 'david', 'D.A.R.Y.L.', NULL, 'David RIEHL', 4, '', 1, '0000-00-00', 1, 'H', 1, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 2, 75, 1, '', 1, 1, NULL, 1);
+(2, 'david.riehl', '', 'D.A.R.Y.L.', NULL, 'RIEHL', 4, 'David', 4, '1980-10-26', 4, 'H', 3, 'david.riehl@ac-lille.fr', 3, 'Valenciennes', 3, 75, 1, '', 1, 1, 1, 1);
 
 --
 -- Déclencheurs `utilisateur`
@@ -1159,165 +1168,177 @@ DELIMITER ;
 -- Contraintes pour la table `affecter`
 --
 ALTER TABLE `affecter`
-  ADD CONSTRAINT `affecter_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `affecter_ibfk_2` FOREIGN KEY (`id_groupe`) REFERENCES `groupe` (`id`);
+  ADD CONSTRAINT `affecter_ibfk_2` FOREIGN KEY (`id_groupe`) REFERENCES `groupe` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `affecter_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `anecdote`
 --
 ALTER TABLE `anecdote`
-  ADD CONSTRAINT `anecdote_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
-  ADD CONSTRAINT `anecdote_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `anecdote_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `anecdote_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `attribuer`
 --
 ALTER TABLE `attribuer`
-  ADD CONSTRAINT `attribuer_ibfk_1` FOREIGN KEY (`id_groupe`) REFERENCES `groupe` (`id`),
-  ADD CONSTRAINT `attribuer_ibfk_2` FOREIGN KEY (`id_droit`) REFERENCES `droit` (`id`);
+  ADD CONSTRAINT `attribuer_ibfk_1` FOREIGN KEY (`id_groupe`) REFERENCES `groupe` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `attribuer_ibfk_2` FOREIGN KEY (`id_droit`) REFERENCES `droit` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `aventure`
 --
 ALTER TABLE `aventure`
-  ADD CONSTRAINT `aventure_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `aventure_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`);
+  ADD CONSTRAINT `aventure_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `aventure_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL;
 
 --
 -- Contraintes pour la table `communaute`
 --
 ALTER TABLE `communaute`
-  ADD CONSTRAINT `communaute_ibfk_1` FOREIGN KEY (`id_lieu`) REFERENCES `secteur` (`id`),
-  ADD CONSTRAINT `communaute_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `communaute_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `communaute_ibfk_1` FOREIGN KEY (`id_lieu`) REFERENCES `secteur` (`id`);
 
 --
 -- Contraintes pour la table `conferer`
 --
 ALTER TABLE `conferer`
-  ADD CONSTRAINT `conferer_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
-  ADD CONSTRAINT `conferer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`),
-  ADD CONSTRAINT `conferer_ibfk_3` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`);
+  ADD CONSTRAINT `conferer_ibfk_3` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `conferer_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `conferer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `consommer`
 --
 ALTER TABLE `consommer`
-  ADD CONSTRAINT `consommer_ibfk_1` FOREIGN KEY (`id_action`) REFERENCES `action` (`id`),
-  ADD CONSTRAINT `consommer_ibfk_2` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`);
+  ADD CONSTRAINT `consommer_ibfk_2` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `consommer_ibfk_1` FOREIGN KEY (`id_action`) REFERENCES `action` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `exercer`
 --
 ALTER TABLE `exercer`
-  ADD CONSTRAINT `exercer_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
-  ADD CONSTRAINT `exercer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`);
+  ADD CONSTRAINT `exercer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `exercer_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `exister`
 --
 ALTER TABLE `exister`
-  ADD CONSTRAINT `exister_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
-  ADD CONSTRAINT `exister_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`);
+  ADD CONSTRAINT `exister_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `exister_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `intervention`
 --
 ALTER TABLE `intervention`
-  ADD CONSTRAINT `intervention_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
-  ADD CONSTRAINT `intervention_ibfk_2` FOREIGN KEY (`id_aventure`) REFERENCES `aventure` (`id`),
-  ADD CONSTRAINT `intervention_ibfk_3` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `intervention_ibfk_4` FOREIGN KEY (`id_action`) REFERENCES `action` (`id`);
+  ADD CONSTRAINT `intervention_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `intervention_ibfk_2` FOREIGN KEY (`id_aventure`) REFERENCES `aventure` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `intervention_ibfk_3` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `intervention_ibfk_4` FOREIGN KEY (`id_action`) REFERENCES `action` (`id`) ON DELETE SET NULL;
 
 --
 -- Contraintes pour la table `lieu`
 --
 ALTER TABLE `lieu`
-  ADD CONSTRAINT `lieu_ibfk_1` FOREIGN KEY (`id_secteur`) REFERENCES `secteur` (`id`),
-  ADD CONSTRAINT `lieu_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `lieu_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `lieu_ibfk_1` FOREIGN KEY (`id_secteur`) REFERENCES `secteur` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `message`
 --
 ALTER TABLE `message`
-  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`id_utilisateur_envoyer`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`id_utilisateur_recevoir`) REFERENCES `utilisateur` (`id`),
+  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`id_utilisateur_recevoir`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`id_utilisateur_envoyer`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `message_ibfk_3` FOREIGN KEY (`id_message_type`) REFERENCES `message_type` (`id`);
+
+--
+-- Contraintes pour la table `niveau_personnage`
+--
+ALTER TABLE `niveau_personnage`
+  ADD CONSTRAINT `niveau_personnage_ibfk_1` FOREIGN KEY (`id_niveau_suivant`) REFERENCES `niveau_personnage` (`id`) ON DELETE SET NULL;
+
+--
+-- Contraintes pour la table `niveau_utilisateur`
+--
+ALTER TABLE `niveau_utilisateur`
+  ADD CONSTRAINT `niveau_utilisateur_ibfk_1` FOREIGN KEY (`id_niveau_suivant`) REFERENCES `niveau_utilisateur` (`id`) ON DELETE SET NULL;
 
 --
 -- Contraintes pour la table `objectif_personnage`
 --
 ALTER TABLE `objectif_personnage`
-  ADD CONSTRAINT `objectif_personnage_ibfk_1` FOREIGN KEY (`id_niveau_personnage`) REFERENCES `niveau_personnage` (`id`);
+  ADD CONSTRAINT `objectif_personnage_ibfk_1` FOREIGN KEY (`id_niveau_personnage`) REFERENCES `niveau_personnage` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `objectif_utilisateur`
 --
 ALTER TABLE `objectif_utilisateur`
-  ADD CONSTRAINT `objectif_utilisateur_ibfk_1` FOREIGN KEY (`id_niveau_utilisateur`) REFERENCES `niveau_utilisateur` (`id`);
+  ADD CONSTRAINT `objectif_utilisateur_ibfk_1` FOREIGN KEY (`id_niveau_utilisateur`) REFERENCES `niveau_utilisateur` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `octroyer`
 --
 ALTER TABLE `octroyer`
-  ADD CONSTRAINT `octroyer_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
-  ADD CONSTRAINT `octroyer_ibfk_2` FOREIGN KEY (`id_role`) REFERENCES `role` (`id`),
-  ADD CONSTRAINT `octroyer_ibfk_3` FOREIGN KEY (`id_communaute`) REFERENCES `communaute` (`id`),
-  ADD CONSTRAINT `octroyer_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `octroyer_ibfk_4` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `octroyer_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `octroyer_ibfk_2` FOREIGN KEY (`id_role`) REFERENCES `role` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `octroyer_ibfk_3` FOREIGN KEY (`id_communaute`) REFERENCES `communaute` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `personnage`
 --
 ALTER TABLE `personnage`
-  ADD CONSTRAINT `personnage_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
-  ADD CONSTRAINT `personnage_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`),
-  ADD CONSTRAINT `personnage_ibfk_3` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `personnage_ibfk_4` FOREIGN KEY (`id_niveau_personnage`) REFERENCES `niveau_personnage` (`id`);
+  ADD CONSTRAINT `personnage_ibfk_4` FOREIGN KEY (`id_niveau_personnage`) REFERENCES `niveau_personnage` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `personnage_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `personnage_ibfk_2` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `personnage_ibfk_3` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL;
 
 --
 -- Contraintes pour la table `posseder`
 --
 ALTER TABLE `posseder`
-  ADD CONSTRAINT `posseder_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`),
-  ADD CONSTRAINT `posseder_ibfk_2` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`);
+  ADD CONSTRAINT `posseder_ibfk_2` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `posseder_ibfk_1` FOREIGN KEY (`id_personnage`) REFERENCES `personnage` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `proposer`
 --
 ALTER TABLE `proposer`
-  ADD CONSTRAINT `proposer_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`),
-  ADD CONSTRAINT `proposer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`);
+  ADD CONSTRAINT `proposer_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `proposer_ibfk_1` FOREIGN KEY (`id_race`) REFERENCES `race` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `role`
 --
 ALTER TABLE `role`
-  ADD CONSTRAINT `role_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `role_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL;
 
 --
 -- Contraintes pour la table `secteur`
 --
 ALTER TABLE `secteur`
-  ADD CONSTRAINT `secteur_ibfk_1` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`),
-  ADD CONSTRAINT `secteur_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `secteur_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `secteur_ibfk_1` FOREIGN KEY (`id_univers`) REFERENCES `univers` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `univers`
 --
 ALTER TABLE `univers`
-  ADD CONSTRAINT `univers_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `univers_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL;
 
 --
 -- Contraintes pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
+  ADD CONSTRAINT `utilisateur_ibfk_8` FOREIGN KEY (`id_niveau_utilisateur`) REFERENCES `niveau_utilisateur` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_confid_nom`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_2` FOREIGN KEY (`id_confid_email`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_3` FOREIGN KEY (`id_confid_ville`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_4` FOREIGN KEY (`id_pays`) REFERENCES `pays` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_5` FOREIGN KEY (`id_confid_pays`) REFERENCES `confidentialite` (`id`),
   ADD CONSTRAINT `utilisateur_ibfk_6` FOREIGN KEY (`id_confid_description`) REFERENCES `confidentialite` (`id`),
-  ADD CONSTRAINT `utilisateur_ibfk_7` FOREIGN KEY (`id_utilisateur_parrainer`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `utilisateur_ibfk_8` FOREIGN KEY (`id_niveau_utilisateur`) REFERENCES `niveau_utilisateur` (`id`);
+  ADD CONSTRAINT `utilisateur_ibfk_7` FOREIGN KEY (`id_utilisateur_parrainer`) REFERENCES `utilisateur` (`id`) ON DELETE SET NULL;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
