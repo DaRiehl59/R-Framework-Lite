@@ -34,9 +34,13 @@ class UtilisateurControler {
             $item['pseudo'] = filter_input(INPUT_POST, 'pseudo',FILTER_SANITIZE_STRING);
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
             $item['id_confid_nom'] = filter_input(INPUT_POST, 'id_confid_nom',FILTER_SANITIZE_NUMBER_INT);
+            $item['prenom'] = filter_input(INPUT_POST, 'prenom',FILTER_SANITIZE_STRING);
+            $item['id_confid_prenom'] = filter_input(INPUT_POST, 'id_confid_prenom',FILTER_SANITIZE_NUMBER_INT);
+            $item['naissance'] = filter_input(INPUT_POST, 'naissance',FILTER_SANITIZE_STRING);
+            $item['id_confid_naissance'] = filter_input(INPUT_POST, 'id_confid_naissance',FILTER_SANITIZE_NUMBER_INT);
             $item['sexe'] = filter_input(INPUT_POST, 'sexe',FILTER_SANITIZE_STRING);
             $item['id_confid_sexe'] = filter_input(INPUT_POST, 'id_confid_sexe',FILTER_SANITIZE_NUMBER_INT);
-            $item['email'] = filter_input(INPUT_POST, 'email',FILTER_SANITIZE_STRING);
+            $item['email'] = filter_input(INPUT_POST, 'email',FILTER_SANITIZE_EMAIL);
             $item['id_confid_email'] = filter_input(INPUT_POST, 'id_confid_email',FILTER_SANITIZE_NUMBER_INT);
             $item['ville'] = filter_input(INPUT_POST, 'ville',FILTER_SANITIZE_STRING);
             $item['id_confid_ville'] = filter_input(INPUT_POST, 'id_confid_ville',FILTER_SANITIZE_NUMBER_INT);
@@ -83,9 +87,13 @@ class UtilisateurControler {
             $item['pseudo'] = filter_input(INPUT_POST, 'pseudo',FILTER_SANITIZE_STRING);
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
             $item['id_confid_nom'] = filter_input(INPUT_POST, 'id_confid_nom',FILTER_SANITIZE_NUMBER_INT);
+            $item['prenom'] = filter_input(INPUT_POST, 'prenom',FILTER_SANITIZE_STRING);
+            $item['id_confid_prenom'] = filter_input(INPUT_POST, 'id_confid_prenom',FILTER_SANITIZE_NUMBER_INT);
+            $item['naissance'] = filter_input(INPUT_POST, 'naissance',FILTER_SANITIZE_STRING);
+            $item['id_confid_naissance'] = filter_input(INPUT_POST, 'id_confid_naissance',FILTER_SANITIZE_NUMBER_INT);
             $item['sexe'] = filter_input(INPUT_POST, 'sexe',FILTER_SANITIZE_STRING);
             $item['id_confid_sexe'] = filter_input(INPUT_POST, 'id_confid_sexe',FILTER_SANITIZE_NUMBER_INT);
-            $item['email'] = filter_input(INPUT_POST, 'email',FILTER_SANITIZE_STRING);
+            $item['email'] = filter_input(INPUT_POST, 'email',FILTER_SANITIZE_EMAIL);
             $item['id_confid_email'] = filter_input(INPUT_POST, 'id_confid_email',FILTER_SANITIZE_NUMBER_INT);
             $item['ville'] = filter_input(INPUT_POST, 'ville',FILTER_SANITIZE_STRING);
             $item['id_confid_ville'] = filter_input(INPUT_POST, 'id_confid_ville',FILTER_SANITIZE_NUMBER_INT);
@@ -95,7 +103,7 @@ class UtilisateurControler {
             $item['id_confid_description'] = filter_input(INPUT_POST, 'id_confid_description',FILTER_SANITIZE_NUMBER_INT);
             $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
             $item['id_utilisateur_parrainer'] = filter_input(INPUT_POST, 'id_utilisateur_parrainer',FILTER_SANITIZE_NUMBER_INT);
-            $item['id_niveau'] = filter_input(INPUT_POST, 'id_niveau',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_niveau_utilisateur'] = filter_input(INPUT_POST, 'id_niveau_utilisateur',FILTER_SANITIZE_NUMBER_INT);
             
             $result = UtilisateurTable::update($item);
         }
@@ -148,6 +156,7 @@ class UtilisateurControler {
         {
             $niveaux[$item2->id] = $item2->nom;
         }
+        
         UtilisateurViewer::read($items, $confidentialites, $pays, $utilisateurs, $niveaux);
     }
     
