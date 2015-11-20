@@ -37,6 +37,7 @@ $PARAM['utilisateurs']['default']['pays']               = 75;
 $PARAM['utilisateurs']['default']['niveau']             = 1;
 $PARAM['utilisateurs']['default']['avatar']['H']        = 'user-man-512.png';
 $PARAM['utilisateurs']['default']['avatar']['F']        = 'user-women-512.png';
+$PARAM['utilisateurs']['min_age']                       = '15 years';
 
 /**
  * Groupes Parameters

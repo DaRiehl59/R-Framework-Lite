@@ -9,7 +9,11 @@
  */
 
 require_once 'kernel/Database.php';
+
 require_once 'model/table/PersonnageTable.php';
+require_once 'model/table/RaceTable.php';
+require_once 'model/table/UniversTable.php';
+
 require_once 'view/class/PersonnageViewer.php';
 
 class PersonnageControler {
@@ -26,7 +30,10 @@ class PersonnageControler {
                 $item['avatar'] = upload_picture_to_dir($directory);
             }
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
+            $item['description'] = filter_input(INPUT_POST, 'description',FILTER_SANITIZE_STRING);
             $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
+            $item['id_race'] = filter_input(INPUT_POST, 'id_race',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_univers'] = filter_input(INPUT_POST, 'id_univers',FILTER_SANITIZE_NUMBER_INT);
             $item['id_utilisateur'] = Session::get('utilisateur')['id'];
             
             $result = PersonnageTable::insert($item);
@@ -41,8 +48,11 @@ class PersonnageControler {
             }
             $item['id'] = filter_input(INPUT_POST, 'id',FILTER_SANITIZE_NUMBER_INT);
             $item['nom'] = filter_input(INPUT_POST, 'nom',FILTER_SANITIZE_STRING);
+            $item['description'] = filter_input(INPUT_POST, 'description',FILTER_SANITIZE_STRING);
             $item['actif'] = (filter_input(INPUT_POST, 'actif',FILTER_SANITIZE_STRING) == "on")?1:0;
-            $item['id_utilisateur'] = filter_input(INPUT_POST, 'id_utilisateur',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_race'] = filter_input(INPUT_POST, 'id_race',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_univers'] = filter_input(INPUT_POST, 'id_univers',FILTER_SANITIZE_NUMBER_INT);
+            $item['id_utilisateur'] = Session::get('utilisateur')['id'];
             
             $result = PersonnageTable::update($item);
         }
@@ -51,14 +61,13 @@ class PersonnageControler {
         {
             $id = filter_input(INPUT_POST, 'id',FILTER_SANITIZE_NUMBER_INT);
             
-
             $result = PersonnageTable::delete($id);
-            
         }
         
         $items = PersonnageTable::select('*');
-        $items2 = UtilisateurTable::select('*');
+        
         $utilisateurs = array();
+        $items2 = UtilisateurTable::select('*');
         foreach($items2 as $item2)
         {
             $utilisateurs[$item2->id] = $item2->nom;
@@ -71,7 +80,36 @@ class PersonnageControler {
         {
             $id_utilisateur = null;
         }
-        PersonnageViewer::read($items, $utilisateurs, $id_utilisateur);
+        
+        $univers = array();
+        $items2 = UniversTable::select('*');
+        $univers[''] = 'choisir un univers';
+        foreach($items2 as $item2)
+        {
+            if($item2->actif)
+            {
+                $univers[$item2->id] = $item2->nom;
+            }
+        }
+
+        $races = array();
+        if(isset($_GET['id_univers']))
+        {
+            $id_univers = filter_input(INPUT_GET, 'id_univers',FILTER_SANITIZE_NUMBER_INT);
+            $items2 = RaceTable::select_by_id_univers($id_univers);
+            foreach($items2 as $item2)
+            {
+                if($item2->actif)
+                {
+                    $races[$item2->id] = $item2->nom;
+                }
+            }
+        }
+        else
+        {
+            $id_univers = null;
+        }
+        PersonnageViewer::read($items, $utilisateurs, $id_utilisateur, $univers, $id_univers, $races);
     }
     
     public static function update()
@@ -92,7 +130,44 @@ class PersonnageControler {
             {
                 $utilisateurs[$item2->id] = $item2->nom;
             }
-            PersonnageViewer::update($item, $utilisateurs);
+            
+            $univers = array();
+            $items2 = UniversTable::select('*');
+            foreach($items2 as $item2)
+            {
+                if($item2->actif)
+                {
+                    $univers[$item2->id] = $item2->nom;
+                }
+            }
+
+            $races = array();
+            if(isset($_GET['id_univers']))
+            {
+                $id_univers = filter_input(INPUT_GET, 'id_univers',FILTER_SANITIZE_NUMBER_INT);
+                $items2 = RaceTable::select_by_id_univers($id_univers);
+                foreach($items2 as $item2)
+                {
+                    if($item2->actif)
+                    {
+                        $races[$item2->id] = $item2->nom;
+                    }
+                }
+            }
+            else
+            {
+                $items2 = RaceTable::select_by_id_univers($item->id_univers);
+                foreach($items2 as $item2)
+                {
+                    if($item2->actif)
+                    {
+                        $races[$item2->id] = $item2->nom;
+                    }
+                }
+                $id_univers = null;
+            }
+            
+            PersonnageViewer::update($item, $utilisateurs, $univers, $id_univers, $races);
         }
     }
     
@@ -108,13 +183,27 @@ class PersonnageControler {
         }
         else
         {
-            $items2 = UtilisateurTable::select('*');
             $utilisateurs = array();
+            $items2 = UtilisateurTable::select('*');
             foreach($items2 as $item2)
             {
                 $utilisateurs[$item2->id] = $item2->nom;
             }
-            PersonnageViewer::delete($item, $utilisateurs);
+            
+            $univers = array();
+            $items2 = UniversTable::select('*');
+            foreach($items2 as $item2)
+            {
+                $univers[$item2->id] = $item2->nom;
+            }
+
+            $races = array();
+            $items2 = RaceTable::select_by_id_univers($item->id_univers);
+            foreach($items2 as $item2)
+            {
+                $races[$item2->id] = $item2->nom;
+            }
+            PersonnageViewer::delete($item, $utilisateurs, $univers, $races);
         }
     }
     

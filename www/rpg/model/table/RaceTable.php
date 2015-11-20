@@ -1,8 +1,8 @@
 <?php
 /**
- * Classe d'accès à la table `attribuer`
+ * Classe d'accès à la table `race`
  *
- * @filesource model/table/AttribuerTable.php
+ * @filesource model/table/RaceTable.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
@@ -10,18 +10,16 @@
 
 require_once 'kernel/Database.php';
 
-require_once 'model/class/Droit.php';
-require_once 'model/class/Attribuer.php';
-require_once 'model/class/Groupe.php';
+require_once 'model/class/Race.php';
 
-class AttribuerTable {
+class RaceTable {
     
     /**
      * nom de la table
      * @var String $table
      * @access private
      */
-    private static $table = "attribuer";
+    private static $table = "race";
     
     /**
      * recherche de tous les enregistrements
@@ -47,7 +45,8 @@ class AttribuerTable {
             $query .= "" . $field . ", ";
         }
         $query = substr($query, 0,  strlen($query) - 2);
-        $query .= " FROM `" . self::$table . "`;";
+        $query .= " FROM `" . self::$table . "`" . "\r\n"
+                . "ORDER BY nom ASC;";
         
         $sth = $dbh->prepare($query);
         $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
@@ -55,51 +54,73 @@ class AttribuerTable {
         
         if($sth->rowCount())
         {
-            $results = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
         }
         else
         {
-            $results = null;
+            $items = array();
         }
         
         $sth->closeCursor();
         Database::disconnect();
         
-        return $results;
+        return $items;
     }
     
     /**
-     * recherche des éléments attribués à un id
-     * @param string $classname
-     * @param string $FK_name
-     * @param mixed $FK_value
-     * @return array élément correspondant à la valeur de id
+     * recherche d'un enregistrement par son id
+     * @param int $id
+     * @return Object élément correspondant à la valeur de id
      */
-    public static function get_linked_items($classname,$FK_name,$FK_value){
+    public static function select_by_id($id){
         $dbh = Database::connect();
         
-        $fields = get_object_vars(new Attribuer());
-        unset($fields[$FK_name]);
-        $result_FK_name = array_keys($fields)[0];
-        
-        $query  = "SELECT *" . "\r\n"
-                . "FROM `" . $classname . "`" . "\r\n"
-                . "WHERE `id` IN" . "\r\n"
-                . "(" . "\r\n"
-                . "    SELECT `" . $result_FK_name . "`" . "\r\n"
-                . "    FROM `" . self::$table . "`" . "\r\n"
-                . "    WHERE `" . $FK_name . "` = :FK_name" . "\r\n"
-                . ");";
+        $query = "SELECT * FROM `" . self::$table . "`" . "\r\n"
+                . "WHERE id = :id;";
         
         $sth = $dbh->prepare($query);
-        $sth->bindParam(':FK_name', $FK_value);
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
         
-        $sth->setFetchMode(PDO::FETCH_CLASS, $classname);
+        $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
+        $sth->execute();
+        
+        if($sth->rowCount() == 1)
+        {
+            $item = $sth->fetch(PDO::FETCH_CLASS);
+        }
+        else
+        {
+            $item = null;
+        }
+        
+        $sth->closeCursor();
+        Database::disconnect();
+        
+        return $item;
+    }
+
+    /**
+     * recherche d'un enregistrement par son id
+     * @param int $id
+     * @return Object élément correspondant à la valeur de id
+     */
+    public static function select_by_id_univers($id_univers){
+        $dbh = Database::connect();
+        
+        $query = "SELECT * FROM `" . self::$table . "`" . "\r\n"
+                . "INNER JOIN exister ON exister.id_race = race.id" . "\r\n"
+                . "WHERE id_univers = :id_univers" . "\r\n"
+                . "ORDER BY nom ASC;";
+        
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(':id_univers', $id_univers, PDO::PARAM_INT);
+        
+        $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
         $sth->execute();
         
         if($sth->rowCount())
         {
-            $items = $sth->fetchAll(PDO::FETCH_CLASS, $classname);
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
         }
         else
         {
@@ -148,6 +169,15 @@ class AttribuerTable {
         
         $result = $sth->execute();
         
+        if($result)
+        {
+            $result = $dbh->lastInsertId();
+        }
+        else
+        {
+            //die(print_r($sth->errorInfo(), true));
+        }
+        
         $sth->closeCursor();
         Database::disconnect();
         
@@ -155,18 +185,34 @@ class AttribuerTable {
     }
 
     /**
-     * suppresssion d'un enregistrement
-     * @param int $id_droit
+     * mise à jour d'un enregistrement
+     * @param Array $item
      * @return boolean $result résultat de la requête SQL
      */
-    public static function delete_by_id_droit($id_droit){
+    public static function update($item){
         $dbh = Database::connect();
         
-        $query = "DELETE FROM `" . self::$table . "` WHERE" . "\r\n"
-                . "id_droit = :id_droit";
+        $query = "UPDATE `" . self::$table . "` SET" . "\r\n";
+        
+        $id=$item['id'];
+        unset($item['id']);
+        $fields = array_keys($item);
+        $item['id']=$id;
+        unset($id);
+        
+        foreach($fields as $field)
+        {
+            $query .= $field . " = :".$field . "," . "\r\n";
+        }
+        $query  = substr($query, 0, strlen($query) -3) . "\r\n";
+        $query .= "WHERE id = :id;";
         
         $sth = $dbh->prepare($query);
-        $sth->bindParam(':id_droit', $id_droit, PDO::PARAM_INT);
+        
+        foreach($item as $field => $value)
+        {
+            $sth->bindParam(':' . $field, $item[$field]);
+        }
         
         $result = $sth->execute();
         
@@ -178,37 +224,18 @@ class AttribuerTable {
     
     /**
      * suppresssion d'un enregistrement
-     * @param int $id_groupe
-     * @return boolean $result résultat de la requête SQL
-     */
-    public static function delete_by_id_groupe($id_groupe){
-        $dbh = Database::connect();
-        
-        $query = "DELETE FROM `" . self::$table . "` WHERE" . "\r\n"
-                . "id_groupe = :id_groupe";
-        
-        $sth = $dbh->prepare($query);
-        $sth->bindParam(':id_groupe', $id_groupe, PDO::PARAM_INT);
-        
-        $result = $sth->execute();
-        
-        $sth->closeCursor();
-        Database::disconnect();
-        
-        return $result;
-    }
-    
-    /**
-     * purge de la table
      * @param int $id
      * @return boolean $result résultat de la requête SQL
      */
-    public static function truncate(){
+    public static function delete($id){
         $dbh = Database::connect();
         
-        $query = "DELETE FROM `" . self::$table . "`";
+        $query = "DELETE FROM `" . self::$table . "` WHERE" . "\r\n"
+                . "id = :id";
         
         $sth = $dbh->prepare($query);
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
+        
         $result = $sth->execute();
         
         $sth->closeCursor();
