@@ -1,13 +1,13 @@
 <?php
 /**
- * Classe Groupe
+ * Classe Univers
  *
- * @filesource model/class/Groupe.php
+ * @filesource model/class/Univers.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
  */
-class Personnage {
+class Univers {
     
     /**
      * Properties
@@ -38,23 +38,17 @@ class Personnage {
     public $avatar;
 
     /**
-     * @property string $actif
+     * @property string $carte
+     * @access public
+     */
+    public $carte;
+
+    /**
+     * @property boolean $actif
      * @access public
      */
     public $actif;
-
-    /**
-     * @property int $id_utilisateur Foreign Key references Utilisateur->id
-     * @access public
-     */
-    public $id_utilisateur;
-
-    /**
-     * @property int $id_niveau_personnage Foreign Key references Niveau_Personnage->id
-     * @access public
-     */
-    public $id_niveau_personnage;
-
+    
     /**
      * Methods
      */

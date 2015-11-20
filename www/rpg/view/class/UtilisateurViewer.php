@@ -36,6 +36,9 @@ class UtilisateurViewer
         $id_niveau_utilisateur = $PARAM['utilisateurs']['default']['niveau'];
         Viewer::assign('id_niveau_utilisateur', $id_niveau_utilisateur);
         
+        $naissance_max = strtotime('-'.$PARAM['utilisateurs']['min_age']);
+        Viewer::assign('naissance_max', $naissance_max);
+        
         $avatar_directory = $PARAM['utilisateurs']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
         
@@ -69,6 +72,18 @@ class UtilisateurViewer
         Viewer::assign('utilisateurs', $utilisateurs);
         Viewer::assign('niveaux', $niveaux);
         
+        $sexes = array('H'=>'Homme','F'=>'Femme');
+        Viewer::assign('sexes', $sexes);
+        
+        $default_avatar_H = $PARAM['utilisateurs']['default']['avatar']['H'];
+        Viewer::assign('default_avatar_H', $default_avatar_H);
+
+        $default_avatar_F = $PARAM['utilisateurs']['default']['avatar']['F'];
+        Viewer::assign('default_avatar_F', $default_avatar_F);
+
+        $naissance_max = strtotime('-'.$PARAM['utilisateurs']['min_age']);
+        Viewer::assign('naissance_max', $naissance_max);
+        
         $avatar_directory = $PARAM['utilisateurs']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
         
@@ -101,6 +116,18 @@ class UtilisateurViewer
         Viewer::assign('pays', $pays);
         Viewer::assign('utilisateurs', $utilisateurs);
         Viewer::assign('niveaux', $niveaux);
+        
+        $sexes = array('H'=>'Homme','F'=>'Femme');
+        Viewer::assign('sexes', $sexes);
+        
+        $default_avatar_H = $PARAM['utilisateurs']['default']['avatar']['H'];
+        Viewer::assign('default_avatar_H', $default_avatar_H);
+
+        $default_avatar_F = $PARAM['utilisateurs']['default']['avatar']['F'];
+        Viewer::assign('default_avatar_F', $default_avatar_F);
+
+        $naissance_max = strtotime('-'.$PARAM['utilisateurs']['min_age']);
+        Viewer::assign('naissance_max', $naissance_max);
         
         $avatar_directory = $PARAM['utilisateurs']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);

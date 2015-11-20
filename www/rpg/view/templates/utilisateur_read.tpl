@@ -25,7 +25,7 @@
                                     </td>
                                     <td>
                                         <a href="?c=utilisateur&amp;a=update&amp;id={$items[liste_sec0]->id}" title="Editer">
-                                            {$items[liste_sec0]->nom}
+                                            {$items[liste_sec0]->pseudo} ({$items[liste_sec0]->nom}{if $items[liste_sec0]->nom neq '' and $items[liste_sec0]->prenom neq ''} {/if}{$items[liste_sec0]->prenom})
                                         </a>
                                     </td>
                                     <th>
@@ -37,14 +37,14 @@
                                             </li>
 {if $items[liste_sec0]->actif eq 0}
                                             <li class="icon">
-                                                <a href="?c=utilisateur&amp;a=active&amp;id={$items[liste_sec0]->id}" title="Activer ce droit">
+                                                <a href="?c=utilisateur&amp;a=active&amp;id={$items[liste_sec0]->id}" title="Débloquer l'utilisateur">
                                                     <div class="icon" name="unlock"></div>
                                                 </a>
                                             </li>
 {/if}
 {if $items[liste_sec0]->actif eq 1}
                                             <li class="icon">
-                                                <a href="?c=utilisateur&amp;a=desactive&amp;id={$items[liste_sec0]->id}" title="Désactiver ce droit">
+                                                <a href="?c=utilisateur&amp;a=desactive&amp;id={$items[liste_sec0]->id}" title="Bloquer l'utilisateur">
                                                     <div class="icon" name="lock"></div>
                                                 </a>
                                             </li>
@@ -95,10 +95,24 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="nom">Nom Réel<span class="required">*</span>&nbsp;:</label></th>
-                                    <td><input type="text" id="nom" name="nom" maxlength="20" required=""></td>
+                                    <th><label for="prenom">Prénom<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="text" id="prenom" name="prenom" maxlength="30" required=""></td>
+                                    <td>
+{html_options id=id_confid_prenom name=id_confid_prenom options=$confidentialites selected=$id_confidentialite}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="text" id="nom" name="nom" maxlength="30" required=""></td>
                                     <td>
 {html_options id=id_confid_nom name=id_confid_nom options=$confidentialites selected=$id_confidentialite}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="naissance">Naissance<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="date" id="naissance" name="naissance" max="{($naissance_max)|date_format:"%Y-%m-%d"}" required=""></td>
+                                    <td>
+{html_options id=id_confid_naissance name=id_confid_naissance options=$confidentialites selected=$id_confidentialite}
                                     </td>
                                 </tr>
                                 <tr>

@@ -2,7 +2,7 @@
 
 class PersonnageViewer
 {
-    public static function read($items, $utilisateurs, $id_utilisateur)
+    public static function read($items, $utilisateurs, $id_utilisateur, $univers, $id_univers, $races)
     {
         global $PARAM;
         
@@ -11,6 +11,9 @@ class PersonnageViewer
         Viewer::assign('items', $items);
         Viewer::assign('utilisateurs', $utilisateurs);
         Viewer::assign('id_utilisateur', $id_utilisateur);
+        Viewer::assign('univers', $univers);
+        Viewer::assign('id_univers', $id_univers);
+        Viewer::assign('races', $races);
         
         $avatar_directory = $PARAM['personnages']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
@@ -33,7 +36,7 @@ class PersonnageViewer
         Viewer::display('personnage_read.tpl');
     }
     
-    public static function update($item, $utilisateurs)
+    public static function update($item, $utilisateurs, $univers, $id_univers, $races)
     {
         global $PARAM;
         
@@ -41,6 +44,9 @@ class PersonnageViewer
         
         Viewer::assign('item', $item);
         Viewer::assign('utilisateurs', $utilisateurs);
+        Viewer::assign('univers', $univers);
+        Viewer::assign('id_univers', $id_univers);
+        Viewer::assign('races', $races);
         
         $avatar_directory = $PARAM['personnages']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);
@@ -63,7 +69,7 @@ class PersonnageViewer
         Viewer::display('personnage_update.tpl');
     }
     
-    public static function delete($item, $utilisateurs)
+    public static function delete($item, $utilisateurs, $univers, $races)
     {
         global $PARAM;
         
@@ -71,6 +77,8 @@ class PersonnageViewer
         
         Viewer::assign('item', $item);
         Viewer::assign('utilisateurs', $utilisateurs);
+        Viewer::assign('univers', $univers);
+        Viewer::assign('races', $races);
         
         $avatar_directory = $PARAM['personnages']['avatars']['directory'];
         Viewer::assign('avatar_directory', $avatar_directory);

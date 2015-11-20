@@ -31,14 +31,14 @@
                                             </li>
 {if $items[liste_sec0]->actif eq 0}
                                             <li class="icon">
-                                                <a href="?c=personnage&amp;a=active&amp;id={$items[liste_sec0]->id}" title="Activer ce droit">
+                                                <a href="?c=personnage&amp;a=active&amp;id={$items[liste_sec0]->id}" title="Activer ce personnage">
                                                     <div class="icon" name="unlock"></div>
                                                 </a>
                                             </li>
 {/if}
 {if $items[liste_sec0]->actif eq 1}
                                             <li class="icon">
-                                                <a href="?c=personnage&amp;a=desactive&amp;id={$items[liste_sec0]->id}" title="Désactiver ce droit">
+                                                <a href="?c=personnage&amp;a=desactive&amp;id={$items[liste_sec0]->id}" title="Désactiver ce personnage">
                                                     <div class="icon" name="lock"></div>
                                                 </a>
                                             </li>
@@ -64,12 +64,28 @@
                                 <tr>
                                     <th><label for="id_utilisateur">Propriétaire<span class="required">*</span>&nbsp;:</label></th>
                                     <td>
-{html_options id=id_utilisateur name=id_utilisateur options=$utilisateurs selected=$id_utilisateur}
+{html_options id=id_utilisateur name=id_utilisateur options=$utilisateurs selected=$id_utilisateur required=""}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="id_univers">Univers<span class="required">*</span>&nbsp;:</label></th>
+                                    <td>
+{html_options id=id_univers name=id_univers options=$univers selected=$id_univers required="" onChange="if(this.value != '')this.form.action='?c=personnage&amp;a=create&amp;id_univers='+this.value; this.form.submit();"}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="id_race">Race<span class="required">*</span>&nbsp;:</label></th>
+                                    <td>
+{html_options id=id_race name=id_race options=$races required=""}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
                                     <td><input type="text" id="nom" name="nom" maxlength="20" required=""></td>
+                                </tr>
+                                <tr>
+                                    <th><label for="description">Description&nbsp;:</label></th>
+                                    <td><textarea id="description" name="description" cols="30" rows="5"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th><label for="avatar">Avatar<span class="warning">*</span>&nbsp;:</label></th>

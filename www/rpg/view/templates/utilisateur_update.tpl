@@ -24,27 +24,47 @@
                                 <tr>
                                     <th><label for="avatar">Avatar<span class="warning">*</span>&nbsp;:</label></th>
                                     <td>
-{if !is_null($item->avatar)}
-                                        <img src="{$avatar_directory}/{$item->avatar}" alt="Avatar">
+{if $item->avatar neq ''}
+                                            <img src="{$avatar_directory}/{$item->id}/{$item->avatar}" alt="Avatar">
+{elseif $item->hasGravatar()}
+                                            <img src="http://www.gravatar.com/avatar/{$item->email_hash}/?d=404" alt="Avatar">
+{elseif $item->sexe eq 'H'}
+                                            <img src="{$avatar_directory}/{$default_avatar_H}" alt="Avatar">
+{elseif $item->sexe eq 'F'}
+                                            <img src="{$avatar_directory}/{$default_avatar_F}" alt="Avatar">
 {/if}
                                         <input type="hidden" name="MAX_FILE_SIZE" value="{$max_file_size}">
                                         <input type="file" id="avatar" name="userfile">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="nom">Nom Réel<span class="required">*</span>&nbsp;:</label></th>
-                                    <td><input type="text" id="nom" name="nom" maxlength="20" required="" value="{$item->nom}"></td>
+                                    <th><label for="prenom">Prénom<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="text" id="prenom" name="prenom" maxlength="30" required="" value="{$item->prenom}"></td>
                                     <td>
-{html_options id=id_confid_nom name=id_confid_nom options=$confidentialites selected=$id_confidentialite}
+{html_options id=id_confid_prenom name=id_confid_prenom options=$confidentialites selected=$item->id_confid_prenom}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="text" id="nom" name="nom" maxlength="30" required="" value="{$item->nom}"></td>
+                                    <td>
+{html_options id=id_confid_nom name=id_confid_nom options=$confidentialites selected=$item->id_confid_nom}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="naissance">Naissance<span class="required">*</span>&nbsp;:</label></th>
+                                    <td><input type="date" id="naissance" name="naissance" max="{($naissance_max)|date_format:"%Y-%m-%d"}" required="" value="{$item->naissance}"></td>
+                                    <td>
+{html_options id=id_confid_naissance name=id_confid_naissance options=$confidentialites selected=$item->id_confid_naissance}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th><label for="sexe">Sexe&nbsp;:</label></th>
                                     <td>
-{html_radios id=sexe name=sexe options=$sexes selected=$sexe}
+{html_radios id=sexe name=sexe options=$sexes selected=$item->sexe}
                                     </td>
                                     <td>
-{html_options id=id_confid_sexe name=id_confid_sexe options=$confidentialites selected=$item->sexe}
+{html_options id=id_confid_sexe name=id_confid_sexe options=$confidentialites selected=$item->id_confid_sexe}
                                     </td>
                                 </tr>
                                 <tr>
@@ -58,7 +78,7 @@
                                     <th><label for="ville">Ville&nbsp;:</label></th>
                                     <td><input type="text" id="ville" name="ville" maxlength="30" value="{$item->ville}"></td>
                                     <td>
-{html_options id=id_confid_ville name=id_confid_ville options=$confidentialites selected=$id_confidentialite}
+{html_options id=id_confid_ville name=id_confid_ville options=$confidentialites selected=$item->id_confid_ville}
                                     </td>
                                 </tr>
                                 <tr>
