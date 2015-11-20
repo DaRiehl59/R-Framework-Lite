@@ -330,7 +330,7 @@ class UtilisateurControler {
             $classname = "groupe";
             $FK_name = "id_utilisateur";
             $FK_value = $utilisateur['id'];
-            $groupe_objects = AffecterTable::get_items($classname, $FK_name, $FK_value);
+            $groupe_objects = AffecterTable::get_linked_items($classname, $FK_name, $FK_value);
             if(!empty($groupe_objects))
             {
                 foreach ($groupe_objects as $groupe_object)
@@ -346,7 +346,7 @@ class UtilisateurControler {
                         $classname = 'droit';
                         $FK_name = 'id_groupe';
                         $FK_value = $groupe_object->id;
-                        $droit_objects = AttribuerTable::get_items($classname, $FK_name, $FK_value);
+                        $droit_objects = AttribuerTable::get_linked_items($classname, $FK_name, $FK_value);
                         if(!empty($droit_objects))
                         {
                             foreach ($droit_objects as $droit_object)

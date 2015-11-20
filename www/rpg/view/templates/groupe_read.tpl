@@ -31,20 +31,20 @@
                                             </li>
 {if $items[liste_sec0]->actif eq 0}
                                             <li class="icon">
-                                                <a href="?c=groupe&amp;a=active&amp;id={$items[liste_sec0]->id}" title="Activer ce droit">
+                                                <a href="?c=groupe&amp;a=active&amp;id={$items[liste_sec0]->id}" title="Activer ce groupe">
                                                     <div class="icon" name="unlock"></div>
                                                 </a>
                                             </li>
 {/if}
 {if $items[liste_sec0]->actif eq 1}
                                             <li class="icon">
-                                                <a href="?c=groupe&amp;a=desactive&amp;id={$items[liste_sec0]->id}" title="Désactiver ce droit">
+                                                <a href="?c=groupe&amp;a=desactive&amp;id={$items[liste_sec0]->id}" title="Désactiver ce groupe">
                                                     <div class="icon" name="lock"></div>
                                                 </a>
                                             </li>
 {/if}
                                             <li class="icon">
-                                                <a href="?c=affecter&amp;id={$items[liste_sec0]->id}" title="Affecter un membre">
+                                                <a href="?c=affecter&amp;id_groupe={$items[liste_sec0]->id}" title="Affecter un membre">
                                                     <div class="icon" name="assign"></div>
                                                 </a>
                                             </li>

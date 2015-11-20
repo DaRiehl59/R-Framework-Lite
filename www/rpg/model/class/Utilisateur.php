@@ -168,7 +168,9 @@ class Utilisateur {
      */
     
     public function __toString() {
-        return "$this->pseudo ($this->nom)";
+        
+        $str=(empty($this->prenom) || empty($this->nom))?"":" ";
+        return $this->pseudo . " (" . $this->prenom . $str . $this->nom . ")";
     }
     
     /**

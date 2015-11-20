@@ -1,22 +1,22 @@
 {include file="html_header.tpl"}{include file="top.tpl"}
             <div id="main" class="affecter">
                 <fieldset class="global">
-                    <legend>Affectation dans un groupe</legend>
+                    <legend>{$link_name} à un {$itemname}</legend>
                     <h1>
-{if $groupe->avatar neq ''}
-                        <img src="{$avatar_directory}/{$groupe->avatar}" alt="Avatar">
+{if isset($item->avatar) and $item->avatar neq ''}
+                        <img src="{$avatar_directory}/{$item->avatar}" alt="Avatar">
 {/if}
-                        {$groupe->nom}
+                        {$item}
                     </h1>
-                    <form action="?c=affecter&amp;id={$groupe->id}" method="post">
+                    <form action="?c=affecter&amp;{$FK_name}={$item->id}" method="post">
                         <table>
                             <tbody>
                                 <tr>
                                     <td>
                                         <fieldset class="members">
-                                            <legend>Membres ({$members|@count})</legend>
-                                            <select name="selected_members_id[]" multiple="" size="10">
-{html_options values=$members_ids output=$members}
+                                            <legend>{$linked} ({$linked_items|@count})</legend>
+                                            <select name="selected_linked_items[]" multiple="" size="10">
+{html_options options=$linked_items}
                                             </select>
                                         </fieldset>
                                     </td>
@@ -26,15 +26,15 @@
                                                 <input type="image" src="{$theme}/arrow_left.png" name="btn_ajouter" title="Ajouter">
                                             </li>
                                             <li class="icon32">
-                                                <input type="image" src="{$theme}/arrow_right.png" name="btn_enlever" title="Enlever">
+                                                <input type="image" src="{$theme}/arrow_right.png" name="btn_enlever" title="Retirer">
                                             </li>
                                         </ul>
                                     </th>
                                     <td>
                                         <fieldset class="others">
-                                            <legend>Non Membres ({$others|@count})</legend>
-                                            <select name="selected_others_id[]" multiple="" size="10">
-{html_options values=$others_ids output=$others}
+                                            <legend>{$unlinked} ({$unlinked_items|@count})</legend>
+                                            <select name="selected_unlinked_items[]" multiple="" size="10">
+{html_options options=$unlinked_items}
                                             </select>
                                         </fieldset>
                                     </td>
@@ -43,7 +43,7 @@
                             <tfoot>
                                 <tr>
                                     <th colspan="3">
-                                        <input type="submit" formnovalidate="" formaction="?c=groupe" name="btn_back" value="Retour">
+                                        <input type="submit" formnovalidate="" formaction="?c={$back_controler}&amp;a=read" name="btn_back" value="Retour">
                                     </th>
                                 </tr>
                             </tfoot>
