@@ -75,7 +75,7 @@ class AttribuerTable {
      * @param mixed $FK_value
      * @return array élément correspondant à la valeur de id
      */
-    public static function get_items($classname,$FK_name,$FK_value){
+    public static function get_linked_items($classname,$FK_name,$FK_value){
         $dbh = Database::connect();
         
         $fields = get_object_vars(new Attribuer());
