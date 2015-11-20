@@ -45,7 +45,8 @@ class RaceTable {
             $query .= "" . $field . ", ";
         }
         $query = substr($query, 0,  strlen($query) - 2);
-        $query .= " FROM `" . self::$table . "`;";
+        $query .= " FROM `" . self::$table . "`" . "\r\n"
+                . "ORDER BY nom ASC;";
         
         $sth = $dbh->prepare($query);
         $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
@@ -96,6 +97,40 @@ class RaceTable {
         Database::disconnect();
         
         return $item;
+    }
+
+    /**
+     * recherche d'un enregistrement par son id
+     * @param int $id
+     * @return Object élément correspondant à la valeur de id
+     */
+    public static function select_by_id_univers($id_univers){
+        $dbh = Database::connect();
+        
+        $query = "SELECT * FROM `" . self::$table . "`" . "\r\n"
+                . "INNER JOIN exister ON exister.id_race = race.id" . "\r\n"
+                . "WHERE id_univers = :id_univers" . "\r\n"
+                . "ORDER BY nom ASC;";
+        
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(':id_univers', $id_univers, PDO::PARAM_INT);
+        
+        $sth->setFetchMode( PDO::FETCH_CLASS, self::$table);
+        $sth->execute();
+        
+        if($sth->rowCount())
+        {
+            $items = $sth->fetchAll(PDO::FETCH_CLASS, self::$table);
+        }
+        else
+        {
+            $items = array();
+        }
+        
+        $sth->closeCursor();
+        Database::disconnect();
+        
+        return $items;
     }
 
     /**

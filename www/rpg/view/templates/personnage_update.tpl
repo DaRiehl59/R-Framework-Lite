@@ -13,8 +13,47 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th><label for="id_univers">Univers<span class="required">*</span>&nbsp;:</label></th>
+                                    <td>
+{if isset($id_univers)}
+{html_options id=id_univers name=id_univers options=$univers selected=$id_univers required="" onChange="
+if(this.value != '')
+{
+    if(this.value != '{$item->id_univers}')
+        this.form.action='?c=personnage&amp;a=update&amp;id={$item->id}&amp;id_univers='+this.value;
+    else
+        this.form.action='?c=personnage&amp;a=update&amp;id={$item->id}';
+}
+this.form.submit();"
+}
+{else}
+{html_options id=id_univers name=id_univers options=$univers selected=$item->id_univers required="" onChange="
+if(this.value != '')
+{
+    this.form.action='?c=personnage&amp;a=update&amp;id={$item->id}&amp;id_univers='+this.value;
+}
+this.form.submit();"
+}
+{/if}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="id_race">Race<span class="required">*</span>&nbsp;:</label></th>
+                                    <td>
+{if isset($id_univers)}
+{html_options id=id_race name=id_race options=$races required=""}
+{else}
+{html_options id=id_race name=id_race options=$races selected=$item->id_race required=""}
+{/if}
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th><label for="nom">Nom<span class="required">*</span>&nbsp;:</label></th>
                                     <td><input type="text" id="nom" name="nom" maxlength="20" required="" value="{$item->nom}"></td>
+                                </tr>
+                                <tr>
+                                    <th><label for="description">Description&nbsp;:</label></th>
+                                    <td><textarea id="description" name="description" cols="30" rows="5">{$item->description}</textarea></td>
                                 </tr>
                                 <tr>
                                     <th><label for="avatar">Avatar<span class="warning">*</span>&nbsp;:</label></th>

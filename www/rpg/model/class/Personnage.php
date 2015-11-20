@@ -26,6 +26,12 @@ class Personnage {
     public $nom;
     
     /**
+     * @property string $description
+     * @access public
+     */
+    public $description;
+    
+    /**
      * @property string $avatar
      * @access public
      */
