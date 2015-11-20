@@ -56,6 +56,30 @@ class Utilisateur {
     public $id_confid_nom;
     
     /**
+     * @property string $prenom
+     * @access public
+     */
+    public $prenom;
+    
+    /**
+     * @property int $id_confid_prenom Foreign Key references Confidentialite->id
+     * @access public
+     */
+    public $id_confid_prenom;
+    
+    /**
+     * @property date $naissance
+     * @access public
+     */
+    public $naissance;
+    
+    /**
+     * @property int $id_confid_naissance Foreign Key references Confidentialite->id
+     * @access public
+     */
+    public $id_confid_naissance;
+    
+    /**
      * @property string $sexe
      * @access public
      */
