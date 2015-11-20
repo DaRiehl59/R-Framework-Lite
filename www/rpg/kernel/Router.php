@@ -57,18 +57,27 @@ class Router {
         
         if(!isset($ROUTES[self::$controler]))
         {
-            Viewer::error("Router Error : no route for `" . self::$controler . "` controler.");
+            Viewer::error("La page demandée n'existe pas.");
+//            Viewer::error("Controler : `". self::$controler . "`, Action : `" . self::$action ."`");
             $error = true;
         }
-        if(!isset($ROUTES[self::$controler][self::$action]))
+        else
         {
-            Viewer::error("Router Error : no route for `" . self::$action ."` action " . " in `". self::$controler . "` controler.");
-            $error = true;
-        }
-        if(!Security::check($ROUTES[self::$controler][self::$action]))
-        {
-            Viewer::error("Router Error : no route for `" . self::$action ."` action " . " in `". self::$controler . "` controler.");
-            $error = true;
+            if(!isset($ROUTES[self::$controler][self::$action]))
+            {
+                Viewer::error("La page demandée n'existe pas.");
+//                Viewer::error("Controler : `". self::$controler . "`, Action : `" . self::$action ."`");
+                $error = true;
+            }
+            else
+            {
+                if(!Security::check($ROUTES[self::$controler][self::$action]))
+                {
+                    Viewer::error("La page demandée n'existe pas.");
+//                    Viewer::error("Controler : `". self::$controler . "`, Action : `" . self::$action ."`");
+                    $error = true;
+                }
+            }
         }
         
         if($error)
