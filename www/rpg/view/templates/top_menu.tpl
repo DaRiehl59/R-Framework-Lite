@@ -33,6 +33,7 @@
                                     </a>
                                 </li>
 {/section}
+                                <li><a href="?c=utilisateur&amp;a=read">Gérer les Utilisateurs</a></li>
                                 <li><a href="?c=personnage">Gérer les Personages</a></li>
                                 <li><a href="?c=groupe">Gérer les Groupes</a></li>
                                 <li><a href="?c=droit">Gérer les Droits</a></li>
