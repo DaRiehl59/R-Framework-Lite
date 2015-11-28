@@ -1,13 +1,13 @@
 <?php
 /**
- * Classe Pays
+ * Group Class
  *
- * @filesource model/class/Pays.php
+ * @filesource model/class/Group.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
  */
-class Pays {
+class Group {
     
     /**
      * Properties
@@ -20,42 +20,41 @@ class Pays {
     public $id;
     
     /**
-     * @property int $code
+     * @property string $name
      * @access public
      */
-    public $code;
+    public $name;
     
     /**
-     * @property string $alpha2
+     * @property string $description
      * @access public
      */
-    public $alpha2;
+    public $description;
     
     /**
-     * @property string $alpha3
+     * @property string $avatar
      * @access public
      */
-    public $alpha3;
-    
+    public $avatar;
+
     /**
-     * @property string $nom_fr_fr
+     * @property boolean $connected
      * @access public
      */
-    public $nom_fr_fr;
-    
+    public $connected;
+
     /**
-     * @property string $nom_en_gb
+     * @property boolean $activate
      * @access public
      */
-    public $nom_en_gb;
-    
+    public $activate;
     
     /**
      * Methods
      */
     
     public function __toString() {
-        return $this->nom_fr_fr;
+        return $this->name;
     }
 }
 ?>

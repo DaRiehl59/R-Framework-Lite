@@ -6,6 +6,7 @@
  * @copyright (c) 2015, D. [R]IEHL
  */
 
+#require_once('proxy.php');
 require_once('parameters.php');
 require_once('functions.php');
 require_once('routes.php');

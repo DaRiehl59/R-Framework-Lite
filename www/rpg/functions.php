@@ -335,6 +335,11 @@ function upload_file_to_dir($directory="", $filename="", $accepted_mime=array())
     return $filename;
 }
 
+function get_http_response_code($url) {
+    $headers = get_headers($url);
+    return substr($headers[0], 9, 3);
+}
+
 /**
  * Drupal GPL 2 Functions
  */

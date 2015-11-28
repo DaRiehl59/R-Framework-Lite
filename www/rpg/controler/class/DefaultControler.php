@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Classe Controler par défaut
+ * Default Controler Class
  *
- * @filesource controler/class/UtilisateurControler.php
+ * @filesource controler/class/DefaultControler.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL

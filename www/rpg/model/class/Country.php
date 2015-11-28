@@ -1,13 +1,13 @@
 <?php
 /**
- * Classe Groupe
+ * Country Class
  *
- * @filesource model/class/Groupe.php
+ * @filesource model/class/Country.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
  */
-class Groupe {
+class Country {
     
     /**
      * Properties
@@ -20,47 +20,42 @@ class Groupe {
     public $id;
     
     /**
-     * @property string $nom
+     * @property int $code
      * @access public
      */
-    public $nom;
+    public $code;
     
     /**
-     * @property string $description
+     * @property string $alpha2
      * @access public
      */
-    public $description;
+    public $alpha2;
     
     /**
-     * @property int $maximum
+     * @property string $alpha3
      * @access public
      */
-    public $maximum;
+    public $alpha3;
     
     /**
-     * @property string $avatar
+     * @property string $nom_en_gb
      * @access public
      */
-    public $avatar;
-
+    public $name_en_gb;
+    
     /**
-     * @property boolean $connecte
+     * @property string $nom_fr_fr
      * @access public
      */
-    public $connecte;
-
-    /**
-     * @property boolean $actif
-     * @access public
-     */
-    public $actif;
+    public $name_fr_fr;
+    
     
     /**
      * Methods
      */
     
     public function __toString() {
-        return $this->nom;
+        return $this->nom_fr_fr;
     }
 }
 ?>

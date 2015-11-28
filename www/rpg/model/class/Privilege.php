@@ -1,13 +1,13 @@
 <?php
 /**
- * Classe Droit
+ * Privilege Class
  *
- * @filesource model/class/Droit.php
+ * @filesource model/class/Privilege.php
  * @author David RIEHL <david.riehl@gmail.com>
  * @version 1.0
  * @copyright (c) 2015, D. [R]IEHL
  */
-class Droit {
+class Privilege {
     
     /**
      * Properties
@@ -20,23 +20,23 @@ class Droit {
     public $id;
     
     /**
-     * @property string $nom
+     * @property string $name
      * @access public
      */
-    public $nom;
+    public $name;
     
     /**
-     * @property boolean $actif
+     * @property boolean $activate
      * @access public
      */
-    public $actif;
+    public $activate;
     
     /**
      * Methods
      */
     
     public function __toString() {
-        return $this->nom;
+        return $this->name;
     }
 }
 ?>
